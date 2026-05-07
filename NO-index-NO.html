@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Italia 2026</title>
-    
-    <link rel="icon" type="image/png" href="icono-italia.png">
-    <link rel="apple-touch-icon" href="icono-italia.png">
-
     <style>
         :root {
             --bg: #f0f2f5;
@@ -50,7 +46,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        /* Estado del botón seleccionado */
+        /* NUEVO: Estado seleccionado */
         .btn.selected {
             background: var(--accent);
             color: #fff;
@@ -135,24 +131,33 @@
                 <div class="btn" onclick="toggle('bus', this)">🚌 Buses</div>
 
                 <div id="tren" class="menu">
-                    <div class="item"><span class="tag">02/07</span><a href="tren-02-07.jpg" target="_blank" class="link-main">Verona ➔ Florencia</a></div>
-                    <div class="item"><span class="tag">03/07</span><a href="tren-03-07-A.jpg" target="_blank" class="link-main">Florencia ➔ Bolonia</a></div>
-                    <div class="item"><span class="tag">03/07</span><a href="tren-03-07-B.jpg" target="_blank" class="link-main">Bolonia ➔ Rimini</a></div>
-                    <div class="item"><span class="tag">04/07</span><a href="tren-04-07.jpg" target="_blank" class="link-main">Bolonia ➔ Rimini</a></div>
-                    <div class="item"><span class="tag">13/07</span><a href="tren-13-07-A.jpg" target="_blank" class="link-main">Rimini ➔ Bolonia</a></div>
-                    <div class="item"><span class="tag">13/07</span><a href="tren-13-07-B.jpg" target="_blank" class="link-main">Bolonia ➔ Florencia</a></div>
-                    <div class="item"><span class="tag">14/07</span><a href="tren-14-07.jpg" target="_blank" class="link-main">Florencia ➔ Roma</a></div>
+                    <div class="item"><span class="tag">02/07</span><a href="tren-02-07.jpg" target="_blank" class="link-main">Verona ➔ Florencia - Arturo</a></div>
+                    <div class="item"><span class="tag">03/07</span><a href="tren-03-07-A.jpg" target="_blank" class="link-main">Florencia ➔ Bolonia - Arturo</a></div>
+                    <div class="item"><span class="tag">03/07</span><a href="tren-03-07-B.jpg" target="_blank" class="link-main">Bolonia ➔ Rimini - Arturo</a></div>
+                    <div class="item"><span class="tag">04/07</span><a href="tren-04-07.jpg" target="_blank" class="link-main">Bolonia ➔ Rimini - Daniel/Pablo</a></div>
+                    <div class="item"><span class="tag">13/07</span><a href="tren-13-07-A.jpg" target="_blank" class="link-main">Rimini ➔ Bolonia - Arturo</a></div>
+		    <div class="item"><span class="tag">13/07</span><a href="tren-13-07-A2.jpg" target="_blank" class="link-main">Rimini ➔ Bolonia - Daniel/Pablo</a></div>
+
+                    <div class="item"><span class="tag">13/07</span><a href="tren-13-07-B1.jpg" target="_blank" class="link-main">Bolonia ➔ Florencia - Arturo/Daniel/Pablo</a></div>
+		     
+                    <div class="item"><span class="tag">14/07</span><a href="tren-14-07-1.jpg" target="_blank" class="link-main">Florencia ➔ Roma - Arturo</a></div>
+		      <div class="item"><span class="tag">14/07</span><a href="tren-14-07-2.jpg" target="_blank" class="link-main">Florencia ➔ Roma - Daniel/Pablo</a></div>
+
                 </div>
 
                 <div id="bus" class="menu">
                     <div class="item"><span class="tag">30/06 - Arturo</span><a href="bus-30-06-arturo.jpg" target="_blank" class="link-main">León ➔ Valladolid</a></div>
                     <div class="item"><span class="tag">01/07 - Arturo</span><a href="bus-01-07-arturo.jpg" target="_blank" class="link-main">Vall. ➔ Barajas</a></div>
-                    <div class="item"><span class="tag">03/07 - Pablo</span><a href="bus-03-07-pablo.jpg" target="_blank" class="link-main">León ➔ Valladolid</a></div>
                     <div class="item"><span class="tag">03/07 - Daniel</span><a href="bus-03-07-daniel.jpg" target="_blank" class="link-main">León ➔ Valladolid</a></div>
-                    <div class="item"><span class="tag">04/07 - Pablo</span><a href="bus-04-07-pablo.jpg" target="_blank" class="link-main">Vall. ➔ Barajas</a></div>
+                    <div class="item"><span class="tag">03/07 - Pablo</span><a href="bus-03-07-pablo.jpg" target="_blank" class="link-main">León ➔ Valladolid</a></div>
                     <div class="item"><span class="tag">04/07 - Daniel</span><a href="bus-04-07-daniel.jpg" target="_blank" class="link-main">Vall. ➔ Barajas</a></div>
-                    <div class="item"><span class="tag">15/07 - Todos</span><a href="bus-15-07-todos.jpg" target="_blank" class="link-main">Barajas ➔ Valladolid</a></div>
-                    <div class="item"><span class="tag">16/07 - Todos</span><a href="bus-16-07-todos.jpg" target="_blank" class="link-main">Valladolid ➔ León</a></div>
+                    <div class="item"><span class="tag">04/07 - Pablo</span><a href="bus-04-07-pablo.jpg" target="_blank" class="link-main">Vall. ➔ Barajas</a></div>
+                    <div class="item"><span class="tag">15/07 - Arturo</span><a href="bus-15-07-arturo.jpg" target="_blank" class="link-main">Barajas ➔ Valladolid</a></div>
+		     <div class="item"><span class="tag">15/07 - Daniel</span><a href="bus-15-07-daniel.jpg" target="_blank" class="link-main">Barajas ➔ Valladolid</a></div>
+ 		     <div class="item"><span class="tag">15/07 - Pablo</span><a href="bus-15-07-Pablo.jpg" target="_blank" class="link-main">Barajas ➔ Valladolid</a></div>
+                    <div class="item"><span class="tag">16/07 - Arturo</span><a href="bus-16-07-arturo.jpg" target="_blank" class="link-main">Valladolid ➔ León</a></div>
+		    <div class="item"><span class="tag">16/07 - Daniel</span><a href="bus-16-07-daniel.jpg" target="_blank" class="link-main">Valladolid ➔ León</a></div>
+		    <div class="item"><span class="tag">16/07 - Pablo</span><a href="bus-16-07-pablo.jpg" target="_blank" class="link-main">Valladolid ➔ León</a></div>
                 </div>
             </div>
         </div>
@@ -225,11 +230,11 @@
             const el = document.getElementById(id);
             const active = el.classList.contains('active');
             
-            // Cerrar todos los menús y quitar la marca de todos los botones
+            // Limpiar todos los menús y todos los botones marcados
             document.querySelectorAll('.menu').forEach(m => m.classList.remove('active'));
             document.querySelectorAll('.btn').forEach(b => b.classList.remove('selected'));
             
-            // Si el menú no estaba abierto, lo abre y marca el botón
+            // Si el menú no estaba ya abierto, lo abrimos y marcamos el botón
             if (!active) {
                 el.classList.add('active');
                 btn.classList.add('selected');
