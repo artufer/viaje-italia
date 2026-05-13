@@ -18,8 +18,10 @@
         .input-pass { 
             padding: 15px; font-size: 1.2rem; border-radius: 12px; border: 1px solid #ccc; 
             width: 100%; max-width: 200px; text-align: center; margin-bottom: 10px; 
-            letter-spacing: 5px; -webkit-text-security: disc;
+            letter-spacing: 5px;
         }
+        input[type="password"] { -webkit-text-security: disc !important; }
+
         .btn-pass { 
             background: var(--accent); color: white; border: none; padding: 15px 30px; 
             border-radius: 12px; font-weight: bold; width: 100%; max-width: 200px;
@@ -29,8 +31,28 @@
 
         /* Estilos App */
         .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        
+        .main-header { text-align: center; margin-top: 10px; margin-bottom: 15px; }
+        .main-header h1 { font-size: 1.3rem; font-weight: 900; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        /* Contadores en Tiempo Real */
+        .countdowns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .countdown-box {
+            background: linear-gradient(135deg, var(--accent), #5856d6);
+            color: white; border-radius: 15px; padding: 12px 8px; text-align: center;
+            box-shadow: 0 4px 12px rgba(0,122,255,0.2);
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .cd-name { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cd-date { font-size: 0.55rem; opacity: 0.9; font-weight: 500; }
+        .timer-val { font-size: 0.85rem; font-weight: 900; margin-top: 5px; font-variant-numeric: tabular-nums; }
+
         .section { background: var(--card); border-radius: 20px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        h1 { font-size: 1.1rem; text-align: center; margin-bottom: 20px; font-weight: 800; }
         
         .tipo-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
         .btn-tipo { background: #eeeff4; border: none; border-radius: 12px; padding: 10px 2px; font-weight: bold; cursor: pointer; font-size: 0.65rem; color: var(--text); }
@@ -50,26 +72,44 @@
         .t-title { font-weight: 800; font-size: 0.85rem; margin-bottom: 8px; display: block; }
         .t-detalles { font-size: 0.75rem; color: #444; margin-bottom: 12px; line-height: 1.4; }
         
-        .acciones { display: flex; flex-direction: column; gap: 8px; }
-        .grid-imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 5px; margin-bottom: 5px; }
-        .btn-action { display: block; padding: 12px; border-radius: 10px; text-align: center; text-decoration: none; font-size: 0.7rem; font-weight: bold; color: white; border: none; }
+        .acciones { display: flex; gap: 8px; width: 100%; }
+        .btn-action { 
+            flex: 1; padding: 10px 5px; border-radius: 10px; text-align: center; 
+            text-decoration: none; font-size: 0.62rem; font-weight: bold; 
+            color: white; border: none; white-space: nowrap;
+        }
     </style>
 </head>
 <body>
 
-    <!-- BLOQUEO -->
     <div id="bloqueo">
         <h2 style="font-size: 1rem; margin-bottom: 20px;">🔒 Acceso Restringido</h2>
-        <input type="number" id="pass1" class="input-pass" placeholder="0000" pattern="[0-9]*" inputmode="numeric">
-        <input type="number" id="pass2" class="input-pass" placeholder="0000" pattern="[0-9]*" inputmode="numeric">
+        <input type="password" id="pass1" class="input-pass" placeholder="" pattern="[0-9]*" inputmode="numeric">
+        <input type="password" id="pass2" class="input-pass" placeholder="" pattern="[0-9]*" inputmode="numeric">
         <button class="btn-pass" onclick="verificar()">ENTRAR</button>
         <p id="error" style="color: red; font-size: 0.7rem; margin-top: 10px; display: none;">Código incorrecto</p>
     </div>
 
-    <!-- APP -->
     <div id="contenido-real">
         <div class="container">
-            <h1>🇮🇹 Viaje Italia 2026</h1>
+            <div class="main-header">
+                <h1>🇮🇹 Viaje Verano Italia 🇮🇹</h1>
+            </div>
+
+            <!-- CONTADORES SOLICITADOS -->
+            <div class="countdowns-container">
+                <div class="countdown-box">
+                    <div class="cd-name">Arturo</div>
+                    <div class="cd-date">30 de Junio</div>
+                    <div id="timer-arturo" class="timer-val">...</div>
+                </div>
+                <div class="countdown-box" style="background: linear-gradient(135deg, #34c759, #248a3d);">
+                    <div class="cd-name">Daniel y Pablo</div>
+                    <div class="cd-date">3 de Julio</div>
+                    <div id="timer-pablo-daniel" class="timer-val">...</div>
+                </div>
+            </div>
+            
             <div class="section">
                 <div class="tipo-nav">
                     <button class="btn-tipo" id="bt-buses" onclick="selTipo('buses')">🚌 Buses</button>
@@ -84,9 +124,35 @@
     </div>
 
     <script>
-        // CONFIGURACIÓN DE CLAVES ACTUALIZADA
         const CODIGO_1 = "1452"; 
         const CODIGO_2 = "3698";
+
+        function updateCountdowns() {
+            const now = new Date().getTime();
+            
+            // Arturo: 30 de Junio 2026[cite: 1]
+            const dateArt = new Date('June 30, 2026 20:30:00').getTime();
+            const gapArt = dateArt - now;
+            
+            // Pablo y Daniel: 3 de Julio 2026[cite: 1]
+            const datePD = new Date('July 3, 2026 22:30:00').getTime();
+            const gapPD = datePD - now;
+
+            function format(gap) {
+                if (gap <= 0) return "¡EN VIAJE! ✈️";
+                const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((gap % (1000 * 60)) / 1000);
+                return `${d}d ${h}h ${m}m ${s}s`;
+            }
+
+            document.getElementById('timer-arturo').innerText = format(gapArt);
+            document.getElementById('timer-pablo-daniel').innerText = format(gapPD);
+        }
+        // Actualización cada segundo para tiempo real[cite: 1]
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns();
 
         function verificar() {
             if(document.getElementById('pass1').value === CODIGO_1 && document.getElementById('pass2').value === CODIGO_2) {
@@ -200,16 +266,16 @@
         function card(i, label) {
             const urlMap = `https://www.google.com/maps/search/?api=1&query=${coords[i.m]}`;
             const imgs = i.img;
-            
             let btnImgs = '';
+            
             if(imgs.length > 1) {
-                btnImgs = `<div class="grid-imgs">`;
-                imgs.forEach((img, index) => {
-                    btnImgs += `<a href="${img}" target="_blank" class="btn-action" style="background:var(--accent)">IMAGEN ${index + 1}</a>`;
+                btnImgs = `<div class="grid-imgs" style="display:flex; gap:4px; flex-grow:1;">`;
+                imgs.forEach((img, idx) => { 
+                    btnImgs += `<a href="${img}" target="_blank" class="btn-action" style="background:var(--accent)">IMG ${idx+1}</a>`; 
                 });
                 btnImgs += `</div>`;
             } else {
-                btnImgs = `<a href="${imgs[0]}" target="_blank" class="btn-action" style="background:var(--accent); margin-bottom:5px;">${label}</a>`;
+                btnImgs = `<a href="${imgs[0]}" target="_blank" class="btn-action" style="background:var(--accent)">${label}</a>`;
             }
 
             return `
@@ -227,10 +293,7 @@
                 </div>`;
         }
 
-        function actS() {
-            const btns = document.querySelectorAll('.btn-sub');
-            btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.classList.remove('active')); b.classList.add('active'); }));
-        }
+        function actS() { const btns = document.querySelectorAll('.btn-sub'); btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.classList.remove('active')); b.classList.add('active'); })); }
     </script>
 </body>
 </html>
