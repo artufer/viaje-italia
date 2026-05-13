@@ -5,117 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Viaje Italia 2026</title>
     <style>
-        :root { --bg: #f2f2f7; --card: #ffffff; --accent: #007aff; --text: #1c1c1e; --gray: #8e8e93; --green: #34c759; }
+        :root { 
+            --bg: #f2f2f7; --card: #ffffff; --accent: #007aff; 
+            --accent-dark: #005ecb; --text: #1c1c1e; --gray: #8e8e93; 
+            --green: #34c759; --green-dark: #248a3d; --orange: #ff9500;
+        }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; }
         
-        /* Pantalla de Bloqueo */
-        #bloqueo { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); z-index: 9999; display: flex; 
-            flex-direction: column; align-items: center; justify-content: center; padding: 20px;
-        }
-        .input-pass { 
-            padding: 15px; font-size: 1.2rem; border-radius: 12px; border: 1px solid #ccc; 
-            width: 100%; max-width: 200px; text-align: center; margin-bottom: 10px; 
-            letter-spacing: 5px;
-        }
-        input[type="password"] { -webkit-text-security: disc !important; }
-
-        .btn-pass { 
-            background: var(--accent); color: white; border: none; padding: 15px 30px; 
-            border-radius: 12px; font-weight: bold; width: 100%; max-width: 200px;
-        }
-
-        #contenido-real { display: none; }
-
-        /* Estilos App */
-        .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        #bloqueo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .input-pass { padding: 15px; font-size: 1.2rem; border-radius: 12px; border: 1px solid #ccc; width: 100%; max-width: 200px; text-align: center; margin-bottom: 10px; letter-spacing: 5px; }
+        .btn-pass { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 12px; font-weight: bold; width: 100%; max-width: 200px; }
         
-        .main-header { text-align: center; margin-top: 10px; margin-bottom: 15px; }
-        .main-header h1 { font-size: 1.3rem; font-weight: 900; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        #contenido-real { display: none; }
+        .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        .main-header { text-align: center; margin-bottom: 15px; }
+        .main-header h1 { font-size: 1.3rem; font-weight: 900; }
 
-        /* Contadores en Tiempo Real */
-        .countdowns-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .countdown-box {
-            background: linear-gradient(135deg, var(--accent), #5856d6);
-            color: white; border-radius: 15px; padding: 12px 8px; text-align: center;
-            box-shadow: 0 4px 12px rgba(0,122,255,0.2);
-            display: flex; flex-direction: column; gap: 2px;
-        }
-        .cd-name { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .cd-date { font-size: 0.55rem; opacity: 0.9; font-weight: 500; }
+        .countdowns-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .countdown-box { color: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 2px; }
+        .cb-arturo { background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC); }
+        .cb-grupo { background: linear-gradient(135deg, #FF512F, #F09819); }
         .timer-val { font-size: 0.85rem; font-weight: 900; margin-top: 5px; font-variant-numeric: tabular-nums; }
 
-        .section { background: var(--card); border-radius: 20px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        
-        .tipo-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
-        .btn-tipo { background: #eeeff4; border: none; border-radius: 12px; padding: 10px 2px; font-weight: bold; cursor: pointer; font-size: 0.65rem; color: var(--text); }
-        .btn-tipo.active { background: var(--accent); color: white; }
-        .btn-full { grid-column: span 3; margin-top: 6px; padding: 12px; }
+        .section { background: var(--card); border-radius: 24px; padding: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .tipo-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+        .btn-tipo { background: #f2f2f7; border: none; border-radius: 14px; padding: 12px 4px; font-weight: 700; font-size: 0.65rem; color: var(--text); }
+        .btn-tipo.active { background: var(--text); color: white; }
+        .btn-full { grid-column: span 3; margin-top: 4px; }
 
-        #sub-nav { display: none; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; padding: 5px; background: #eeeff4; border-radius: 15px; }
+        #sub-nav { display: none; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; padding: 6px; background: #f2f2f7; border-radius: 16px; }
         #sub-nav.cuatro-col { grid-template-columns: repeat(4, 1fr); }
-        .btn-sub { background: white; border: none; border-radius: 10px; padding: 10px; font-size: 0.62rem; font-weight: 800; color: var(--accent); cursor: pointer; text-transform: uppercase; }
-        .btn-sub.active { background: var(--accent); color: white; }
+        .btn-sub { background: white; border: none; border-radius: 12px; padding: 10px; font-size: 0.62rem; font-weight: 800; color: var(--gray); }
+        .btn-sub.active-pasajero { background: var(--accent); color: white; }
+        .btn-sub.active-ciudad { background: var(--orange); color: white; }
         
-        .card { background: #fff; border: 1px solid #efeff4; border-radius: 15px; padding: 15px; margin-bottom: 12px; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .t-info { font-size: 0.7rem; color: var(--gray); font-weight: 600; }
-        .t-matricula { font-size: 0.65rem; color: var(--accent); font-weight: 800; text-align: right; text-transform: uppercase; }
+        .card { background: #fff; border: 1px solid #f2f2f7; border-radius: 20px; padding: 18px; margin-bottom: 14px; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .t-info { font-size: 0.72rem; color: var(--gray); font-weight: 600; }
+        .t-matricula { font-size: 0.65rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
+        .t-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; display: block; }
+        .t-detalles { font-size: 0.85rem; color: #636366; margin-bottom: 8px; line-height: 1.4; }
+        .t-tel { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-bottom: 16px; display: block; text-decoration: none; }
 
-        .t-title { font-weight: 800; font-size: 0.85rem; margin-bottom: 8px; display: block; }
-        .t-detalles { font-size: 0.75rem; color: #444; margin-bottom: 12px; line-height: 1.4; }
+        .hotel-center .t-title, .hotel-center .t-detalles, .hotel-center .t-tel { text-align: center; width: 100%; display: block; }
+
+        .acciones { display: flex; gap: 6px; width: 100%; align-items: center; margin-top: 10px; }
+        .btn-action { border-radius: 12px; text-align: center; text-decoration: none; font-size: 0.62rem; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 10px 2px; flex: 1; min-width: 0; }
+        .btn-blue { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
+        .btn-green { background: linear-gradient(135deg, var(--green), var(--green-dark)); }
         
-        .acciones { display: flex; gap: 8px; width: 100%; }
-        .btn-action { 
-            flex: 1; padding: 10px 5px; border-radius: 10px; text-align: center; 
-            text-decoration: none; font-size: 0.62rem; font-weight: bold; 
-            color: white; border: none; white-space: nowrap;
-        }
+        .acciones.dual .btn-blue { flex: 2; font-size: 0.75rem; }
     </style>
 </head>
 <body>
-
+    <!-- El resto del HTML se mantiene igual -->
     <div id="bloqueo">
         <h2 style="font-size: 1rem; margin-bottom: 20px;">🔒 Acceso Restringido</h2>
-        <input type="password" id="pass1" class="input-pass" placeholder="" pattern="[0-9]*" inputmode="numeric">
-        <input type="password" id="pass2" class="input-pass" placeholder="" pattern="[0-9]*" inputmode="numeric">
+        <input type="password" id="pass1" class="input-pass" placeholder="Cod 1">
+        <input type="password" id="pass2" class="input-pass" placeholder="Cod 2">
         <button class="btn-pass" onclick="verificar()">ENTRAR</button>
-        <p id="error" style="color: red; font-size: 0.7rem; margin-top: 10px; display: none;">Código incorrecto</p>
     </div>
 
     <div id="contenido-real">
         <div class="container">
-            <div class="main-header">
-                <h1>🇮🇹 Viaje Verano Italia 🇮🇹</h1>
-            </div>
-
-            <!-- CONTADORES SOLICITADOS -->
+            <div class="main-header"><h1>🇮🇹 Viaje Italia 2026</h1></div>
             <div class="countdowns-container">
-                <div class="countdown-box">
-                    <div class="cd-name">Arturo</div>
-                    <div class="cd-date">30 de Junio</div>
-                    <div id="timer-arturo" class="timer-val">...</div>
-                </div>
-                <div class="countdown-box" style="background: linear-gradient(135deg, #34c759, #248a3d);">
-                    <div class="cd-name">Daniel y Pablo</div>
-                    <div class="cd-date">3 de Julio</div>
-                    <div id="timer-pablo-daniel" class="timer-val">...</div>
-                </div>
+                <div class="countdown-box cb-arturo"><div>Arturo</div><div id="timer-arturo" class="timer-val">0d 0h 0m 0s</div></div>
+                <div class="countdown-box cb-grupo"><div>Daniel y Pablo</div><div id="timer-pablo-daniel" class="timer-val">0d 0h 0m 0s</div></div>
             </div>
-            
             <div class="section">
                 <div class="tipo-nav">
                     <button class="btn-tipo" id="bt-buses" onclick="selTipo('buses')">🚌 Buses</button>
                     <button class="btn-tipo" id="bt-vuelos" onclick="selTipo('vuelos')">🛫 Vuelos</button>
                     <button class="btn-tipo" id="bt-trenes" onclick="selTipo('trenes')">🚆 Trenes</button>
-                    <button class="btn-tipo btn-full" id="bt-hoteles" onclick="selTipo('hoteles')">🏠 Alojamientos</button>
+                    <button class="btn-tipo btn-full" id="bt-hoteles" onclick="selTipo('hoteles')">🏨 Alojamientos</button>
                 </div>
                 <div id="sub-nav"></div>
                 <div id="lista"></div>
@@ -124,176 +88,143 @@
     </div>
 
     <script>
-        const CODIGO_1 = "1452"; 
-        const CODIGO_2 = "3698";
+        // ... (Funciones de verificación y timers iguales) ...
+        const CODIGO_1 = "1452"; const CODIGO_2 = "3698";
+        function verificar() {
+            if(document.getElementById('pass1').value === CODIGO_1 && document.getElementById('pass2').value === CODIGO_2) {
+                document.getElementById('bloqueo').style.display = 'none';
+                document.getElementById('contenido-real').style.display = 'block';
+                updateCountdowns();
+                setInterval(updateCountdowns, 1000);
+            }
+        }
 
         function updateCountdowns() {
             const now = new Date().getTime();
-            
-            // Arturo: 30 de Junio 2026[cite: 1]
-            const dateArt = new Date('June 30, 2026 20:30:00').getTime();
-            const gapArt = dateArt - now;
-            
-            // Pablo y Daniel: 3 de Julio 2026[cite: 1]
-            const datePD = new Date('July 3, 2026 22:30:00').getTime();
-            const gapPD = datePD - now;
-
-            function format(gap) {
-                if (gap <= 0) return "¡EN VIAJE! ✈️";
+            const dateArt = new Date('2026-06-30T20:30:00').getTime();
+            const datePD = new Date('2026-07-04T05:55:00').getTime();
+            const calc = (target) => {
+                const gap = target - now;
+                if (gap <= 0) return "¡VIAJANDO!";
                 const d = Math.floor(gap / (1000 * 60 * 60 * 24));
                 const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((gap % (1000 * 60)) / 1000);
                 return `${d}d ${h}h ${m}m ${s}s`;
-            }
-
-            document.getElementById('timer-arturo').innerText = format(gapArt);
-            document.getElementById('timer-pablo-daniel').innerText = format(gapPD);
+            };
+            document.getElementById('timer-arturo').innerText = calc(dateArt);
+            document.getElementById('timer-pablo-daniel').innerText = calc(datePD);
         }
-        // Actualización cada segundo para tiempo real[cite: 1]
-        setInterval(updateCountdowns, 1000);
-        updateCountdowns();
-
-        function verificar() {
-            if(document.getElementById('pass1').value === CODIGO_1 && document.getElementById('pass2').value === CODIGO_2) {
-                document.getElementById('bloqueo').style.display = 'none';
-                document.getElementById('contenido-real').style.display = 'block';
-                sessionStorage.setItem('acceso', 'ok');
-            } else { document.getElementById('error').style.display = 'block'; }
-        }
-
-        if(sessionStorage.getItem('acceso') === 'ok') {
-            document.getElementById('bloqueo').style.display = 'none';
-            document.getElementById('contenido-real').style.display = 'block';
-        }
-
-        let modoGlobal = '';
-        const coords = {
-            'LEON': '42.5915,-5.5785', 'VLL': '41.6433,-4.7301', 'MAD_T1': '40.4647,-3.5702', 'MAD_T2': '40.4674,-3.5705', 'MAD_T4': '40.4915,-3.5921',
-            'VER_CEN': '45.4289,10.9822', 'FLO_SMN': '43.7765,11.2478', 'BOL_CEN': '44.5058,11.3431', 'RIM_CEN': '44.0641,12.5741', 'MIRAMARE': '44.0322,12.6119', 'ROM_FCO': '41.7946,12.2514',
-            'H_ROSSI': '45.4293,10.9774', 'H_PLUS': '43.7816,11.2558', 'H_GIGLIO': '44.0305,12.6231', 'H_ARCHI': '43.7782,11.2508', 'H_LUCIA': '41.8951,12.4780'
-        };
 
         const db = {
             vuelos: {
                 arturo: [
-                    {f:'01/07', h:'10:35', t:'MAD T1 ✈️ VERONA', d:'Directo', comp:'Ryanair', cod:'FR8992', m:'MAD_T1', img:['art_vuelo_ida.jpg']},
-                    {f:'15/07', h:'17:10', t:'ROMA FCO ✈️ MAD T2', d:'Directo', comp:'Wizz Air', cod:'W4 6013', m:'ROM_FCO', img:['art_vuelo_vta.jpg']}
+                    {f:'01/07', h:'10:35', t:'MADRID ✈️ VERONA', d:'', comp:'RYANAIR FR8992', m:'40.4679409,-3.5694153', img:['art_vuelo_ida.jpg']},
+                    {f:'15/07', h:'17:10', t:'ROMA ✈️ MADRID', d:'', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['art_vuelo_vta.jpg']}
                 ],
                 pablo: [
-                    {f:'04/07', h:'05:55', t:'MAD T2 ✈️ ROMA FCO', d:'Escala', comp:'ITA Airways', cod:'AZ59', m:'MAD_T2', img:['pab_vuelo_ida.jpg']},
-                    {f:'04/07', h:'09:00', t:'ROMA FCO ✈️ BOLONIA', d:'Conexión', comp:'ITA Airways', cod:'AZ1311', m:'ROM_FCO', img:['pab_vuelo_con.jpg']},
-                    {f:'15/07', h:'17:10', t:'ROMA FCO ✈️ MAD T2', d:'Directo', comp:'Wizz Air', cod:'W4 6013', m:'ROM_FCO', img:['pab_vuelo_vta.jpg']}
+                    {f:'04/07', h:'05:55', t:'MADRID ✈️ ROMA', d:'', comp:'ITA AIRWAYS AZ59', m:'40.4679409,-3.5694153', img:['pab_vuelo_ida.jpg']},
+                    {f:'04/07', h:'--', t:'ROMA ✈️ BOLONIA', d:'', comp:'Vuelo conexión', m:'41.7946,12.2514', img:['pab_vuelo_con.jpg']},
+                    {f:'15/07', h:'17:10', t:'ROMA ✈️ MADRID', d:'', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['pab_vuelo_vta.jpg']}
                 ],
                 daniel: [
-                    {f:'04/07', h:'05:55', t:'MAD T2 ✈️ ROMA FCO', d:'Escala', comp:'ITA Airways', cod:'AZ59', m:'MAD_T2', img:['dan_vuelo_ida.jpg']},
-                    {f:'04/07', h:'09:00', t:'ROMA FCO ✈️ BOLONIA', d:'Conexión', comp:'ITA Airways', cod:'AZ1311', m:'ROM_FCO', img:['dan_vuelo_con.jpg']},
-                    {f:'15/07', h:'17:10', t:'ROMA FCO ✈️ MAD T2', d:'Directo', comp:'Wizz Air', cod:'W4 6013', m:'ROM_FCO', img:['dan_vuelo_vta.jpg']}
+                    {f:'04/07', h:'05:55', t:'MADRID ✈️ ROMA', d:'', comp:'ITA AIRWAYS AZ59', m:'40.4679409,-3.5694153', img:['dan_vuelo_ida.jpg']},
+                    {f:'04/07', h:'--', t:'ROMA ✈️ BOLONIA', d:'', comp:'Vuelo conexión', m:'41.7946,12.2514', img:['dan_vuelo_con.jpg']},
+                    {f:'15/07', h:'17:10', t:'ROMA ✈️ MADRID', d:'', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['dan_vuelo_vta.jpg']}
                 ]
             },
             trenes: {
                 arturo: [
-                    {f:'02/07', h:'07:53', t:'VERONA 🚄 FLORENCIA', d:'Alta Velocidad', comp:'Trenitalia', cod:'FR 8513', m:'VER_CEN', img:['art_tr_1.jpg']},
-                    {f:'03/07', h:'07:39', t:'FLORENCIA 🚄 BOLONIA', d:'Alta Velocidad', comp:'Italo', cod:'8900', m:'FLO_SMN', img:['art_tr_2.jpg']},
-                    {f:'03/07', h:'08:39', t:'BOLONIA 🚄 RIMINI', d:'Regional', comp:'Trenitalia', cod:'18111', m:'BOL_CEN', img:['art_tr_3.jpg']},
-                    {f:'13/07', h:'06:38', t:'RIMINI 🚄 BOLONIA', d:'Regional', comp:'Trenitalia', cod:'3936', m:'RIM_CEN', img:['art_tr_4.jpg']},
-                    {f:'13/07', h:'08:17', t:'BOLONIA 🚄 FLORENCIA', d:'Alta Velocidad', comp:'Italo', cod:'8951', m:'BOL_CEN', img:['art_tr_5.jpg']},
-                    {f:'14/07', h:'06:57', t:'FLORENCIA 🚄 ROMA', d:'Alta Velocidad', comp:'Italo', cod:'9907', m:'FLO_SMN', img:['art_tr_6.jpg']}
+                    {f:'02/07', h:'07:53 - 09:24', t:'VERONA 🚄 FLORENCIA', d:'', comp:'TRENITALIA FR8513', m:'43.7765,11.2478', img:['art_tr_1.jpg']},
+                    {f:'03/07', h:'07:39 - 08:18', t:'FLORENCIA 🚄 BOLONIA', d:'', comp:'ITALOTRENO 8900', m:'44.5058,11.3430', img:['art_tr_2.jpg']},
+                    {f:'03/07', h:'08:39 - 10:14', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'TTPER 18111', m:'44.0645,12.5735', img:['art_tr_3.jpg']},
+                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['art_tr_4.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALOTRENO 8954', m:'43.7765,11.2478', img:['art_tr_5.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALOTRENO 9907', m:'41.9007,12.5013', img:['art_tr_6.jpg']}
                 ],
                 pablo: [
-                    {f:'04/07', h:'11:12', t:'BOLONIA 🚄 RIMINI', d:'Regionale Veloce', comp:'Trenitalia', cod:'RV 1775', m:'BOL_CEN', img:['pab_tr_1.jpg']},
-                    {f:'13/07', h:'06:38', t:'RIMINI 🚄 BOLONIA', d:'Regional', comp:'Trenitalia', cod:'3936', m:'RIM_CEN', img:['pab_tr_2.jpg']},
-                    {f:'13/07', h:'08:17', t:'BOLONIA 🚄 FLORENCIA', d:'Alta Velocidad', comp:'Italo', cod:'8951', m:'BOL_CEN', img:['pab_tr_3.jpg']},
-                    {f:'14/07', h:'07:43', t:'FLORENCIA 🚄 ROMA', d:'Alta Velocidad', comp:'Italo', cod:'9907', m:'FLO_SMN', img:['pab_tr_4.jpg']}
+                    {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REGIONALE 1775', m:'44.0645,12.5735', img:['pab_tr_1.jpg']},
+                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['pab_tr_2.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALOTRENO 8954', m:'43.7765,11.2478', img:['pab_tr_3.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALOTRENO 9907', m:'41.9007,12.5013', img:['pab_tr_4.jpg']}
                 ],
                 daniel: [
-                    {f:'04/07', h:'11:12', t:'BOLONIA 🚄 RIMINI', d:'Regionale Veloce', comp:'Trenitalia', cod:'RV 1775', m:'BOL_CEN', img:['dan_tr_1.jpg']},
-                    {f:'13/07', h:'06:38', t:'RIMINI 🚄 BOLONIA', d:'Regional', comp:'Trenitalia', cod:'3936', m:'RIM_CEN', img:['dan_tr_2.jpg']},
-                    {f:'13/07', h:'08:17', t:'BOLONIA 🚄 FLORENCIA', d:'Alta Velocidad', comp:'Italo', cod:'8951', m:'BOL_CEN', img:['dan_tr_3.jpg']},
-                    {f:'14/07', h:'07:43', t:'FLORENCIA 🚄 ROMA', d:'Alta Velocidad', comp:'Italo', cod:'9907', m:'FLO_SMN', img:['dan_tr_4.jpg']}
+                    {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REGIONALE 1775', m:'44.0645,12.5735', img:['dan_tr_1.jpg']},
+                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['dan_tr_2.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALOTRENO 8954', m:'43.7765,11.2478', img:['dan_tr_3.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALOTRENO 9907', m:'41.9007,12.5013', img:['dan_tr_4.jpg']}
                 ]
             },
             buses: {
                 arturo: [
-                    {f:'30/06', h:'20:30', t:'León 🚌 Valladolid', d:'Interurbano', comp:'ALSA Bus 1', cod:'Asiento 33', m:'LEON', img:['art_bus_1.jpg']},
-                    {f:'01/07', h:'00:30', t:'VLL 🚌 Barajas T4', d:'Transfer', comp:'ALSA Bus 2', cod:'Asiento 2', m:'VLL', img:['art_bus_2.jpg']},
-                    {f:'15/07', h:'21:45', t:'Barajas T4 🚌 VLL', d:'Transfer', comp:'ALSA Bus 6', cod:'Asiento 28', m:'MAD_T4', img:['art_bus_5.jpg']},
-                    {f:'16/07', h:'00:45', t:'VLL 🚌 León', d:'Interurbano', comp:'ALSA Bus 5', cod:'Asiento 28', m:'VLL', img:['art_bus_6.jpg']}
+                    {f:'30/06', h:'20:30', t:'LEÓN 🚌 VALLADOLID', d:'', comp:'ALSA Bus 1 As. 33', m:'42.5934825,-5.5791463', img:['art_bus_1.jpg']},
+                    {f:'01/07', h:'00:30', t:'VALLADOLID 🚌 BARAJAS', d:'', comp:'ALSA Bus 2 As. 2', m:'41.6433,-4.7301', img:['art_bus_2.jpg']},
+                    {f:'16/07', h:'21:45', t:'BARAJAS 🚌 VALLADOLID', d:'', comp:'ALSA Bus 5 As. 33', m:'40.4977968,-3.5972339', img:['art_bus_3.jpg']},
+                    {f:'16/07', h:'23:59', t:'VALLADOLID 🚌 LEÓN', d:'', comp:'ALSA Bus 5 As. 28', m:'41.6433,-4.7301', img:['art_bus_4.jpg']}
                 ],
                 pablo: [
-                    {f:'03/07', h:'22:30', t:'León 🚌 Valladolid', d:'Interurbano', comp:'ALSA Bus 1', cod:'Asiento 33', m:'LEON', img:['pab_bus_1.jpg']},
-                    {f:'04/07', h:'00:30', t:'VLL 🚌 Barajas T4', d:'Transfer', comp:'ALSA Bus 2', cod:'Asiento 32', m:'VLL', img:['pab_bus_2.jpg']},
-                    {f:'15/07', h:'21:45', t:'Barajas T4 🚌 VLL', d:'Transfer', comp:'ALSA Bus 6', cod:'Asiento 27', m:'MAD_T4', img:['pab_bus_3.jpg']},
-                    {f:'16/07', h:'00:45', t:'VLL 🚌 León', d:'Interurbano', comp:'ALSA Bus 5', cod:'Asiento 31', m:'VLL', img:['pab_bus_4.jpg']}
+                    {f:'03/07', h:'20:30', t:'LEÓN 🚌 VALLADOLID', d:'', comp:'ALSA Bus 1 As. 33', m:'42.5934825,-5.5791463', img:['pab_bus_1.jpg']},
+                    {f:'04/07', h:'00:30', t:'VALLADOLID 🚌 BARAJAS', d:'', comp:'ALSA Bus 5 As. 31', m:'41.6433,-4.7301', img:['pab_bus_4.jpg']},
+                    {f:'16/07', h:'21:45', t:'BARAJAS 🚌 VALLADOLID', d:'', comp:'ALSA Bus 2 As. 31', m:'40.4977968,-3.5972339', img:['pab_bus_2.jpg']},
+                    {f:'16/07', h:'23:59', t:'VALLADOLID 🚌 LEÓN', d:' ', comp:'ALSA Bus 6 As. 27', m:'41.6433,-4.7301', img:['pab_bus_3.jpg']}
                 ],
                 daniel: [
-                    {f:'03/07', h:'22:30', t:'León 🚌 Valladolid', d:'Interurbano', comp:'ALSA Bus 1', cod:'Asiento 34', m:'LEON', img:['dan_bus_1.jpg']},
-                    {f:'04/07', h:'00:30', t:'VLL 🚌 Barajas T4', d:'Transfer', comp:'ALSA Bus 2', cod:'Asiento 31', m:'VLL', img:['dan_bus_2.jpg']},
-                    {f:'15/07', h:'21:45', t:'Barajas T4 🚌 VLL', d:'Transfer', comp:'ALSA Bus 6', cod:'Asiento 33', m:'MAD_T4', img:['dan_bus_3.jpg']},
-                    {f:'16/07', h:'00:45', t:'VLL 🚌 León', d:'Interurbano', comp:'ALSA Bus 5', cod:'Asiento 27', m:'VLL', img:['dan_bus_4.jpg']}
+                    {f:'03/07', h:'20:30', t:'LEÓN 🚌 VALLADOLID', d:'', comp:'ALSA Bus 1 As. 34', m:'42.5934825,-5.5791463', img:['dan_bus_1.jpg']},
+                    {f:'04/07', h:'00:30', t:'VALLADOLID 🚌 BARAJAS', d:'', comp:'ALSA Bus 2 As. 32', m:'41.6433,-4.7301', img:['dan_bus_2.jpg']},
+                    {f:'16/07', h:'21:45', t:'BARAJAS 🚌 VALLADOLID', d:'', comp:'ALSA Bus 6 As. 33', m:'40.4977968,-3.5972339', img:['dan_bus_3.jpg']},
+                    {f:'16/07', h:'23:59', t:'VALLADOLID 🚌 LEÓN', d:'', comp:'ALSA Bus 5 As. 27', m:'41.6433,-4.7301', img:['dan_bus_4.jpg']}
                 ]
             },
             hoteles: {
-                verona: [{f:'01/07', h:'Verona', t:'🏨 Nuovo Hotel Rossi', d:'Via delle Coste, 2', comp:'Booking', cod:'CONFIRMADO', m:'H_ROSSI', img:['h_verona.jpg']}],
+                verona: [{f:'01/07-02/07', h:'Check-in', t:'Nuovo Hotel Rossi', d:'Via delle Coste, 2, 37138 Verona', comp:'HOTEL', tel:'+39 045 569022', m:'45.4293,10.9774', img:['h_verona.jpg']}],
                 florencia: [
-                    {f:'02/07', h:'Flo I', t:'🏨 Hostel Plus Florence', d:'Via S. Caterina d\'Alex, 15', comp:'Booking', cod:'CONFIRMADO', m:'H_PLUS', img:['h_flo_1.jpg']},
-                    {f:'13/07', h:'Flo II', t:'🏨 Hostel Archi Rossi', d:'Via Faenza, 94R', comp:'Booking', cod:'CONFIRMADO', m:'H_ARCHI', img:['h_flo_2_1.jpg', 'h_flo_2_2.jpg', 'h_flo_2_3.jpg']}
+                    {f:'02/07-03/07', h:'Check-in', t:'Plus Florence', d:'Via Santa Caterina D\'Alessandria, 15', comp:'HOSTEL', tel:'+39 055 6286347', m:'43.7816,11.2558', img:['h_plus.jpg']},
+                    {f:'13/07-14/07', h:'Check-in', t:'Hostel Archi Rossi', d:'Via Faenza, 94R, 50123 Firenze', comp:'HOSTEL', tel:'+39 055 290804', m:'43.7782,11.2508', img:['hotel_archi_1.jpg', 'hotel_archi_2.jpg', 'hotel_archi_3.jpg']}
                 ],
-                rimini: [{f:'03/07-12/07', h:'Rímini', t:'🏨 Hotel Giglio Miramare', d:'V.le P.cipe di Piemonte, 18', comp:'Booking', cod:'CONFIRMADO', m:'H_GIGLIO', img:['h_rimini_1.jpg', 'h_rimini_2.jpg']}],
-                roma: [{f:'14/07-15/07', h:'Roma', t:'🏨 Casa Santa Lucia', d:'Largo S. Lucia Filippini, 20', comp:'Booking', cod:'CONFIRMADO', m:'H_LUCIA', img:['h_roma.jpg']}]
+                rimini: [{f:'03/07-12/07', h:'Check-in', t:'Hotel Giglio Miramare', d:'Viale Principe di Piemonte, 18', comp:'HOTEL', tel:'+39 0541 372073', m:'44.0305,12.6231', img:['h_rimini_1.jpg', 'h_rimini_2.jpg']}],
+                roma: [{f:'14/07-15/07', h:'Check-in', t:'Casa Per Ferie Santa Lucia', d:'Largo di Santa Lucia Filippini, 20', comp:'CONVENTO', tel:'+39 06 6791612', m:'41.8951,12.4780', img:['h_roma.jpg']}]
             }
         };
 
         function selTipo(m) {
-            modoGlobal = m;
             document.querySelectorAll('.btn-tipo').forEach(b => b.classList.remove('active'));
             document.getElementById('bt-'+m).classList.add('active');
             const sub = document.getElementById('sub-nav');
-            sub.style.display = 'grid';
-            document.getElementById('lista').innerHTML = '';
+            sub.style.display = 'grid'; document.getElementById('lista').innerHTML = '';
             if(m==='hoteles'){
                 sub.classList.add('cuatro-col');
-                sub.innerHTML = `<button class="btn-sub" onclick="renH('verona')">Verona</button><button class="btn-sub" onclick="renH('florencia')">Florencia</button><button class="btn-sub" onclick="renH('rimini')">Rímini</button><button class="btn-sub" onclick="renH('roma')">Roma</button>`;
+                sub.innerHTML = `<button class="btn-sub" onclick="renH(this,'verona')">Verona</button><button class="btn-sub" onclick="renH(this,'florencia')">Florencia</button><button class="btn-sub" onclick="renH(this,'rimini')">Rímini</button><button class="btn-sub" onclick="renH(this,'roma')">Roma</button>`;
             } else {
                 sub.classList.remove('cuatro-col');
-                sub.innerHTML = `<button class="btn-sub" onclick="renP('arturo')">Arturo</button><button class="btn-sub" onclick="renP('pablo')">Pablo</button><button class="btn-sub" onclick="renP('daniel')">Daniel</button>`;
+                sub.innerHTML = `<button class="btn-sub" onclick="renP(this,'${m}','arturo')">Arturo</button><button class="btn-sub" onclick="renP(this,'${m}','pablo')">Pablo</button><button class="btn-sub" onclick="renP(this,'${m}','daniel')">Daniel</button>`;
             }
         }
 
-        function renH(c){ actS(); document.getElementById('lista').innerHTML = ''; db.hoteles[c].forEach(i => document.getElementById('lista').innerHTML += card(i,'RESERVA')); }
-        function renP(p){ actS(); document.getElementById('lista').innerHTML = ''; db[modoGlobal][p].forEach(i => document.getElementById('lista').innerHTML += card(i,'BILLETE')); }
-        
-        function card(i, label) {
-            const urlMap = `https://www.google.com/maps/search/?api=1&query=${coords[i.m]}`;
-            const imgs = i.img;
-            let btnImgs = '';
-            
-            if(imgs.length > 1) {
-                btnImgs = `<div class="grid-imgs" style="display:flex; gap:4px; flex-grow:1;">`;
-                imgs.forEach((img, idx) => { 
-                    btnImgs += `<a href="${img}" target="_blank" class="btn-action" style="background:var(--accent)">IMG ${idx+1}</a>`; 
+        function renH(btn, c){ clearSub(); btn.classList.add('active-ciudad'); render(db.hoteles[c], true); }
+        function renP(btn, t, p){ clearSub(); btn.classList.add('active-pasajero'); render(db[t][p], false); }
+        function clearSub() { document.querySelectorAll('.btn-sub').forEach(b => b.classList.remove('active-pasajero','active-ciudad')); }
+
+        function render(data, isH) {
+            let h = '';
+            data.forEach(i => {
+                let btnImgs = '';
+                const totalBtns = i.img.length + 1;
+                i.img.forEach((img, idx) => {
+                    const label = i.img.length > 1 ? 'DOC '+(idx+1) : 'BILLETE';
+                    btnImgs += `<a href="${img}" target="_blank" class="btn-action btn-blue"><span>🎫</span> ${label}</a>`;
                 });
-                btnImgs += `</div>`;
-            } else {
-                btnImgs = `<a href="${imgs[0]}" target="_blank" class="btn-action" style="background:var(--accent)">${label}</a>`;
-            }
+                const classAcciones = totalBtns === 2 ? 'acciones dual' : 'acciones';
 
-            return `
-                <div class="card">
-                    <div class="card-header">
-                        <div class="t-info">📅 ${i.f}   ⏰ ${i.h}</div>
-                        <div class="t-matricula">${i.comp} · ${i.cod}</div>
-                    </div>
-                    <strong class="t-title">${i.t}</strong>
-                    <div class="t-detalles">${i.d}</div>
-                    <div class="acciones">
-                        ${btnImgs}
-                        <a href="${urlMap}" target="_blank" class="btn-action" style="background:var(--green)">MAPA</a>
-                    </div>
+                h += `<div class="card ${isH ? 'hotel-center' : ''}">
+                    <div class="card-header"><span class="t-info">🗓️ ${i.f} • ⏰ ${i.h}</span><span class="t-matricula">${i.comp}</span></div>
+                    <strong class="t-title">${isH ? '🏨 ' : ''}${i.t}</strong>
+                    ${i.d ? `<div class="t-detalles">${i.d}</div>` : ''}
+                    ${isH ? `<a href="tel:${i.tel}" class="t-tel">📞 ${i.tel}</a>` : ''}
+                    <div class="${classAcciones}">${btnImgs}<a href="https://www.google.com/maps/search/?api=1&query=${i.m}" target="_blank" class="btn-action btn-green"><span>📍</span> MAPA</a></div>
                 </div>`;
+            });
+            document.getElementById('lista').innerHTML = h;
         }
-
-        function actS() { const btns = document.querySelectorAll('.btn-sub'); btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.classList.remove('active')); b.classList.add('active'); })); }
     </script>
 </body>
 </html>
