@@ -9,57 +9,52 @@
             --bg: #f2f2f7; --card: #ffffff; --accent: #007aff; 
             --accent-dark: #005ecb; --text: #1c1c1e; --gray: #8e8e93; 
             --green: #34c759; --green-dark: #248a3d; --orange: #ff9500;
+            --red: #ff3b30;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; }
         
         #bloqueo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        .inputs-container { display: flex; gap: 10px; margin-bottom: 25px; width: 100%; max-width: 280px; }
+        .inputs-container { display: flex; gap: 10px; margin-bottom: 10px; width: 100%; max-width: 280px; }
         .input-pass { padding: 15px; font-size: 1.4rem; border-radius: 12px; border: 2px solid #d1d1d6; width: 50%; text-align: center; letter-spacing: 4px; background: white; color: var(--text); }
         .input-pass.active { border-color: var(--accent); background: #f0f7ff; outline: none; }
         
+        #error-msg { color: var(--red); font-size: 0.8rem; font-weight: 700; height: 20px; margin-bottom: 15px; visibility: hidden; text-transform: uppercase; }
+
         .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 260px; margin-bottom: 25px; }
         .btn-num { background: white; border: none; border-radius: 15px; padding: 18px 0; font-size: 1.5rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.08); color: var(--text); cursor: pointer; }
+        /* Ahora las teclas ABC comparten el mismo estilo que las numéricas */
         .btn-num:active { background: #e5e5ea; transform: scale(0.96); }
-        .btn-del { grid-column: 3; background: #ff3b30; color: white; font-size: 1.2rem; }
+        .btn-del { grid-column: 3; background: var(--red); color: white; font-size: 1.2rem; }
         .btn-pass { background: var(--accent); color: white; border: none; padding: 16px; border-radius: 14px; font-weight: 800; font-size: 1rem; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,122,255,0.3); }
         
         #contenido-real { display: none; }
         .container { width: 100%; max-width: 450px; margin: 0 auto; }
         .main-header { text-align: center; margin-bottom: 15px; }
         .main-header h1 { font-size: 1.3rem; font-weight: 900; }
-
         .countdowns-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .countdown-box { color: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 2px; }
         .cb-arturo { background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC); }
         .cb-grupo { background: linear-gradient(135deg, #FF512F, #F09819); }
         .timer-val { font-size: 0.85rem; font-weight: 900; margin-top: 5px; font-variant-numeric: tabular-nums; }
-
         .section { background: var(--card); border-radius: 24px; padding: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .tipo-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
         .btn-tipo { background: #f2f2f7; border: none; border-radius: 14px; padding: 12px 4px; font-weight: 700; font-size: 0.65rem; color: var(--text); }
         .btn-tipo.active { background: var(--text); color: white; }
         .btn-full { grid-column: span 3; margin-top: 4px; }
-
         #sub-nav { display: none; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; padding: 6px; background: #f2f2f7; border-radius: 16px; }
         #sub-nav.cuatro-col { grid-template-columns: repeat(4, 1fr); }
         .btn-sub { background: white; border: none; border-radius: 12px; padding: 10px; font-size: 0.62rem; font-weight: 800; color: var(--gray); }
         .btn-sub.active-pasajero { background: var(--accent); color: white; }
         .btn-sub.active-ciudad { background: var(--orange); color: white; }
-        
         .card { background: #fff; border: 1px solid #f2f2f7; border-radius: 20px; padding: 18px; margin-bottom: 14px; }
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
         .t-info { font-size: 0.72rem; color: var(--gray); font-weight: 600; }
         .t-matricula { font-size: 0.65rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
-        
         .hotel-card { text-align: center; }
-        .hotel-card .t-title { display: block; margin: 10px 0; }
-        .hotel-card .t-detalles { display: block; margin-bottom: 5px; }
-
         .t-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; display: block; }
         .t-detalles { font-size: 0.85rem; color: #636366; margin-bottom: 8px; line-height: 1.4; }
         .t-tel { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-bottom: 16px; display: block; text-decoration: none; }
-
         .acciones { display: flex; gap: 6px; width: 100%; align-items: center; margin-top: 10px; flex-wrap: wrap; }
         .btn-action { border-radius: 12px; text-align: center; text-decoration: none; font-size: 0.62rem; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 10px 2px; flex: 1; min-width: 80px; }
         .btn-blue { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
@@ -69,24 +64,31 @@
 <body>
 
     <div id="bloqueo">
-        <h2 style="font-size: 1rem; margin-bottom: 20px; font-weight: 800;">🔒 ACCESO RESTRINGIDO</h2>
+        <h2 style="font-size: 1rem; margin-bottom: 10px; font-weight: 800;">🔒 TECLEA TUS CLAVES DE ACCESO</h2>
         <div class="inputs-container">
             <input type="password" id="pass1" class="input-pass active" placeholder="----" readonly onclick="setActive(1)">
             <input type="password" id="pass2" class="input-pass" placeholder="----" readonly onclick="setActive(2)">
         </div>
+        
+        <div id="error-msg">⚠️ CÓDIGO INCORRECTO</div>
+
         <div class="numpad">
-            <button class="btn-num" onclick="addNum('7')">7</button>
-            <button class="btn-num" onclick="addNum('8')">8</button>
-            <button class="btn-num" onclick="addNum('9')">9</button>
-            <button class="btn-num" onclick="addNum('4')">4</button>
-            <button class="btn-num" onclick="addNum('5')">5</button>
-            <button class="btn-num" onclick="addNum('6')">6</button>
-            <button class="btn-num" onclick="addNum('1')">1</button>
-            <button class="btn-num" onclick="addNum('2')">2</button>
-            <button class="btn-num" onclick="addNum('3')">3</button>
+            <button class="btn-num" onclick="addChar('A')">A</button>
+            <button class="btn-num" onclick="addChar('B')">B</button>
+            <button class="btn-num" onclick="addChar('C')">C</button>
+            
+            <button class="btn-num" onclick="addChar('7')">7</button>
+            <button class="btn-num" onclick="addChar('8')">8</button>
+            <button class="btn-num" onclick="addChar('9')">9</button>
+            <button class="btn-num" onclick="addChar('4')">4</button>
+            <button class="btn-num" onclick="addChar('5')">5</button>
+            <button class="btn-num" onclick="addChar('6')">6</button>
+            <button class="btn-num" onclick="addChar('1')">1</button>
+            <button class="btn-num" onclick="addChar('2')">2</button>
+            <button class="btn-num" onclick="addChar('3')">3</button>
             <div style="grid-column: 1;"></div>
-            <button class="btn-num" onclick="addNum('0')">0</button>
-            <button class="btn-num btn-del" onclick="delNum()">⌫</button>
+            <button class="btn-num" onclick="addChar('0')">0</button>
+            <button class="btn-num btn-del" onclick="delChar()">⌫</button>
         </div>
         <button class="btn-pass" onclick="verificar()">ACCEDER</button>
     </div>
@@ -113,50 +115,44 @@
 
     <script>
         let currentActive = 1;
+
         function setActive(n) {
             currentActive = n;
             document.getElementById('pass1').classList.toggle('active', n === 1);
             document.getElementById('pass2').classList.toggle('active', n === 2);
+            hideError();
         }
-        function addNum(num) {
+
+        function addChar(val) {
+            hideError();
             const input = document.getElementById('pass' + currentActive);
             if(input.value.length < 4) {
-                input.value += num;
+                input.value += val;
                 if(input.value.length === 4 && currentActive === 1) setActive(2);
             }
         }
-        function delNum() {
+
+        function delChar() {
+            hideError();
             const input = document.getElementById('pass' + currentActive);
             if(input.value.length === 0 && currentActive === 2) { setActive(1); return; }
             input.value = input.value.slice(0, -1);
         }
+
+        function showError() { document.getElementById('error-msg').style.visibility = 'visible'; }
+        function hideError() { document.getElementById('error-msg').style.visibility = 'hidden'; }
+
         function verificar() {
             if(document.getElementById('pass1').value === "1452" && document.getElementById('pass2').value === "3698") {
                 document.getElementById('bloqueo').style.display = 'none';
                 document.getElementById('contenido-real').style.display = 'block';
                 setInterval(updateCountdowns, 1000);
             } else {
-                alert("Código incorrecto");
-                document.getElementById('pass1').value = ""; document.getElementById('pass2').value = "";
+                showError();
+                document.getElementById('pass1').value = ""; 
+                document.getElementById('pass2').value = "";
                 setActive(1);
             }
-        }
-
-        function updateCountdowns() {
-            const now = new Date().getTime();
-            const dateArt = new Date('2026-06-30T20:30:00').getTime();
-            const datePD = new Date('2026-07-04T05:55:00').getTime();
-            const calc = (t) => {
-                const gap = t - now;
-                if (gap <= 0) return "¡VIAJANDO!";
-                const d = Math.floor(gap / 86400000);
-                const h = Math.floor((gap % 86400000) / 3600000);
-                const m = Math.floor((gap % 3600000) / 60000);
-                const s = Math.floor((gap % 60000) / 1000);
-                return `${d}d ${h}h ${m}m ${s}s`;
-            };
-            document.getElementById('timer-arturo').innerText = calc(dateArt);
-            document.getElementById('timer-pablo-daniel').innerText = calc(datePD);
         }
 
         const db = {
@@ -229,6 +225,23 @@
             }
         };
 
+        function updateCountdowns() {
+            const now = new Date().getTime();
+            const dateArt = new Date('2026-06-30T20:30:00').getTime();
+            const datePD = new Date('2026-07-04T05:55:00').getTime();
+            const calc = (t) => {
+                const gap = t - now;
+                if (gap <= 0) return "¡VIAJANDO!";
+                const d = Math.floor(gap / 86400000);
+                const h = Math.floor((gap % 86400000) / 3600000);
+                const m = Math.floor((gap % 3600000) / 60000);
+                const s = Math.floor((gap % 60000) / 1000);
+                return `${d}d ${h}h ${m}m ${s}s`;
+            };
+            document.getElementById('timer-arturo').innerText = calc(dateArt);
+            document.getElementById('timer-pablo-daniel').innerText = calc(datePD);
+        }
+
         function selTipo(m) {
             document.querySelectorAll('.btn-tipo').forEach(b => b.classList.remove('active'));
             document.getElementById('bt-'+m).classList.add('active');
@@ -242,6 +255,7 @@
                 sub.innerHTML = `<button class="btn-sub" onclick="renP(this,'${m}','arturo')">Arturo</button><button class="btn-sub" onclick="renP(this,'${m}','pablo')">Pablo</button><button class="btn-sub" onclick="renP(this,'${m}','daniel')">Daniel</button>`;
             }
         }
+
         function renH(btn, c){ clearSub(); btn.classList.add('active-ciudad'); render(db.hoteles[c] || [], true, c); }
         function renP(btn, t, p){ clearSub(); btn.classList.add('active-pasajero'); render(db[t][p] || [], false); }
         function clearSub() { document.querySelectorAll('.btn-sub').forEach(b => b.classList.remove('active-pasajero','active-ciudad')); }
@@ -253,17 +267,12 @@
                 i.img.forEach((img, idx) => {
                     let label = 'BILLETE';
                     if(isH) {
-                        if(ciudad === 'rimini') {
-                            label = idx === 0 ? 'RESERVA' : 'RECIBO';
-                        } else if(ciudad === 'florencia' && i.t.includes('Archi Rossi')) {
+                        if(ciudad === 'rimini') label = idx === 0 ? 'RESERVA' : 'RECIBO';
+                        else if(ciudad === 'florencia' && i.t.includes('Archi Rossi')) {
                             const labels = ['RESERVA', 'HABITACIÓN', 'RECIBO'];
                             label = labels[idx] || 'DOCUMENTO';
-                        } else {
-                            label = 'RESERVA';
-                        }
-                    } else if(i.img.length > 1) {
-                        label = 'BILLETE ' + (idx + 1);
-                    }
+                        } else label = 'RESERVA';
+                    } else if(i.img.length > 1) label = 'BILLETE ' + (idx + 1);
                     btns += `<a href="${img}" target="_blank" class="btn-action btn-blue">🎫 ${label}</a>`;
                 });
                 h += `<div class="card ${isH ? 'hotel-card' : ''}">
