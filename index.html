@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Viaje Italia 2026 - Verificado</title>
+    <title>Viaje Italia 2026 - Clima Estable</title>
     <style>
         :root { 
             --bg: #f2f2f7; --card: #ffffff; --accent: #007aff; 
@@ -34,9 +34,10 @@
         .main-header { text-align: center; margin-bottom: 15px; }
         .main-header h1 { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; }
         
-        /* CLIMA REAL */
+        /* CLIMA */
         .weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 15px; padding: 0 10px; }
-        .weather-item { font-size: 0.72rem; color: #636366; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; background: rgba(255,255,255,0.6); padding: 5px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.03); min-height: 28px; }
+        .weather-item { font-size: 0.72rem; color: #636366; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; background: rgba(255,255,255,0.6); padding: 5px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.03); min-height: 28px; cursor: pointer; }
+        .weather-item:active { background-color: rgba(230,230,235,0.8); }
 
         .countdowns-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .countdown-box { color: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 2px; }
@@ -62,6 +63,10 @@
         .t-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; display: block; }
         .t-detalles { font-size: 0.85rem; color: #636366; margin-bottom: 8px; line-height: 1.4; }
         .t-tel { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-bottom: 16px; display: block; text-decoration: none; }
+        
+        /* Modificadores exclusivos para centrar campos de hoteles */
+        .txt-center { text-align: center; }
+
         .acciones { display: flex; gap: 6px; width: 100%; align-items: center; margin-top: 10px; flex-wrap: wrap; }
         .btn-action { border-radius: 12px; text-align: center; text-decoration: none; font-size: 0.62rem; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 10px 2px; flex: 1; min-width: 80px; }
         .btn-blue { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
@@ -104,10 +109,10 @@
             <div class="main-header">
                 <h1>🇮🇹 Viaje Italia 2026</h1>
                 <div class="weather-grid" id="weather-box">
-                    <div class="weather-item" id="w-verona">Verona: ...</div>
-                    <div class="weather-item" id="w-florencia">Florencia: ...</div>
-                    <div class="weather-item" id="w-roma">Roma: ...</div>
-                    <div class="weather-item" id="w-rimini">Rímini: ...</div>
+                    <div class="weather-item" id="w-verona" onclick="verPrevision('Verona')">Verona: ...</div>
+                    <div class="weather-item" id="w-florencia" onclick="verPrevision('Florence')">Florencia: ...</div>
+                    <div class="weather-item" id="w-roma" onclick="verPrevision('Rome')">Roma: ...</div>
+                    <div class="weather-item" id="w-rimini" onclick="verPrevision('Rimini')">Rímini: ...</div>
                 </div>
             </div>
             <div class="countdowns-container">
@@ -164,22 +169,32 @@
 
         async function fetchWeather() {
             const cities = [
-                {id: 'w-verona', name: 'Verona', lat: 45.43, lon: 10.99},
-                {id: 'w-florencia', name: 'Florencia', lat: 43.77, lon: 11.25},
-                {id: 'w-roma', name: 'Roma', lat: 41.89, lon: 12.51},
-                {id: 'w-rimini', name: 'Rímini', lat: 44.06, lon: 12.56}
+                {id: 'w-verona', name: 'Verona', q: 'Verona'},
+                {id: 'w-florencia', name: 'Florencia', q: 'Florence'},
+                {id: 'w-roma', name: 'Roma', q: 'Rome'},
+                {id: 'w-rimini', name: 'Rímini', q: 'Rimini'}
             ];
             for(let c of cities) {
                 try {
-                    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,weather_code,is_day&timezone=auto`);
+                    const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=832b842911244fa2bc2150338231805&q=${c.q}&lang=es`);
+                    if(!res.ok) throw new Error();
                     const data = await res.json();
-                    const temp = Math.round(data.current.temperature_2m);
-                    const code = data.current.weather_code;
-                    const isDay = data.current.is_day;
-                    let icon = code >= 1 && code <= 3 ? (isDay ? "🌤️" : "☁️") : code >= 51 ? "🌧️" : "☀️";
+                    const temp = Math.round(data.current.temp_c);
+                    const text = data.current.condition.text.toLowerCase();
+                    let icon = "☀️";
+                    if(text.includes("lluvia") || text.includes("llovizna")) icon = "🌧️";
+                    else if(text.includes("nube") || text.includes("cubierto") || text.includes("niebla")) icon = "☁️";
+                    else if(text.includes("despejado") || text.includes("sol")) icon = "☀️";
+                    else icon = "🌤️";
                     document.getElementById(c.id).innerText = `${c.name}: ${icon} ${temp}°C`;
-                } catch(e) { document.getElementById(c.id).innerText = `${c.name}: --°C`; }
+                } catch(e) { 
+                    document.getElementById(c.id).innerText = `${c.name}: --°C`; 
+                }
             }
+        }
+
+        function verPrevision(ciudad) {
+            window.open(`https://www.weather-forecast.com/locations/${ciudad}/forecasts/latest`, '_blank');
         }
 
         function verificar() {
@@ -187,7 +202,7 @@
                 document.getElementById('bloqueo').style.display = 'none';
                 document.getElementById('contenido-real').style.display = 'block';
                 setInterval(updateCountdowns, 1000);
-                fetchWeather();
+                setTimeout(fetchWeather, 100);
             } else {
                 showError();
                 document.getElementById('pass1_real').value = ""; document.getElementById('pass2_real').value = "";
@@ -196,7 +211,7 @@
             }
         }
 
-        /* --- BASE DE DATOS VERIFICADA Y CORREGIDA --- */
+        /* --- BASE DE DATOS ORIGINAL VERIFICADA --- */
         const db = {
             vuelos: {
                 arturo: [
@@ -219,20 +234,20 @@
                     {f:'02/07', h:'07:53 - 09:24', t:'VERONA 🚄 FLORENCIA', d:'', comp:'FR 8513', m:'43.7765,11.2478', img:['art_tr_1.jpg']},
                     {f:'03/07', h:'07:39 - 08:18', t:'FLORENCIA 🚄 BOLONIA', d:'', comp:'ITALO 8900', m:'44.5058,11.3430', img:['art_tr_2.jpg']},
                     {f:'03/07', h:'08:39 - 10:14', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'TTPER 18111', m:'44.0645,12.5735', img:['art_tr_3.jpg']},
-                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['art_tr_4.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['art_tr_4.jpg']},
                     {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALO 8954', m:'43.7765,11.2478', img:['art_tr_5.jpg']},
                     {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['art_tr_6.jpg']}
                 ],
                 pablo: [
                     {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REG 1775', m:'44.0645,12.5735', img:['pab_tr_1.jpg']},
-                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['pab_tr_2.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['pab_tr_2.jpg']},
                     {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALO 8954', m:'43.7765,11.2478', img:['pab_tr_3.jpg']},
                     {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['pab_tr_4.jpg']}
                 ],
                 daniel: [
                     {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REG 1775', m:'44.0645,12.5735', img:['dan_tr_1.jpg']},
-                    {f:'12/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['dan_tr_2.jpg']},
-                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALO 8954', m:'43.7765,11.2478', img:['dan_tr_3.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['dan_tr_2.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'Asiento Traspasado', comp:'ITALO 8954', m:'43.7765,11.2478', img:['dan_tr_3.jpg']},
                     {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['dan_tr_4.jpg']}
                 ]
             },
@@ -314,12 +329,16 @@
                     }
                     btns += `<a href="${img}" target="_blank" class="btn-action btn-blue">🎫 ${label}</a>`;
                 });
+                
+                // Aplicamos la clase de centrado condicionalmente si es un alojamiento (isH)
+                let centerClass = isH ? 'txt-center' : '';
+
                 h += `<div class="card">
                     <div class="card-header"><span class="t-info">🗓️ ${i.f} • ⏰ ${i.h}</span><span class="t-matricula">${i.comp}</span></div>
-                    <strong class="t-title">${i.t}</strong>
-                    ${i.d ? `<div class="t-detalles">${i.d}</div>` : ''}
-                    ${isH ? `<a href="tel:${i.tel}" class="t-tel">📞 ${i.tel}</a>` : ''}
-                    <div class="acciones">${btns}<a href="https://www.google.com/maps/search/?api=1&query=${i.m}" target="_blank" class="btn-action btn-green">📍 MAPA</a></div>
+                    <strong class="t-title ${centerClass}">${i.t}</strong>
+                    ${i.d ? `<div class="t-detalles ${centerClass}">${i.d}</div>` : ''}
+                    ${isH ? `<a href="tel:${i.tel}" class="t-tel ${centerClass}">📞 ${i.tel}</a>` : ''}
+                    <div class="acciones">${btns}<a href="https://maps.google.com/?q=${i.m}" target="_blank" class="btn-action btn-green">📍 MAPA</a></div>
                 </div>`;
             });
             document.getElementById('lista').innerHTML = h;
