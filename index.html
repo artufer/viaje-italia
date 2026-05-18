@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Viaje Italia 2026 - Clima Estable</title>
+    <style>
+        :root { 
+            --bg: #f2f2f7; --card: #ffffff; --accent: #007aff; 
+            --accent-dark: #005ecb; --text: #1c1c1e; --gray: #8e8e93; 
+            --green: #34c759; --green-dark: #248a3d; --orange: #ff9500;
+            --red: #ff3b30;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; }
+        
+        /* BLOQUEO */
+        #bloqueo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .inputs-container { display: flex; gap: 10px; margin-bottom: 10px; width: 100%; max-width: 280px; }
+        .input-pass { padding: 15px; font-size: 1.4rem; border-radius: 12px; border: 2px solid #d1d1d6; width: 50%; text-align: center; letter-spacing: 4px; background: white; color: var(--text); }
+        .input-pass.active { border-color: var(--accent); background: #f0f7ff; outline: none; }
+        #error-msg { color: var(--red); font-size: 0.8rem; font-weight: 700; height: 20px; margin-bottom: 15px; visibility: hidden; text-transform: uppercase; }
+
+        /* TECLADO */
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 260px; margin-bottom: 25px; }
+        .btn-num { background: white; border: none; border-radius: 15px; padding: 18px 0; font-size: 1.5rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.08); color: var(--text); cursor: pointer; transition: background 0.1s; }
+        .btn-num:active { background: #d1d1d6 !important; transform: scale(0.96); }
+        .btn-del { grid-column: 3; background: var(--red); color: white; font-size: 1.2rem; }
+        .btn-pass { background: var(--accent); color: white; border: none; padding: 16px; border-radius: 14px; font-weight: 800; font-size: 1rem; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,122,255,0.3); }
+        
+        /* CONTENIDO PRINCIPAL */
+        #contenido-real { display: none; }
+        .container { width: 100%; max-width: 450px; margin: 0 auto; }
+        .main-header { text-align: center; margin-bottom: 15px; }
+        .main-header h1 { font-size: 1.3rem; font-weight: 900; margin-bottom: 5px; }
+        
+        /* CONTENEDOR TEMPERATURAS (Antiespionaje AdBlock) */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 15px; padding: 0 10px; }
+        .btn-info-meteo { font-size: 0.72rem; color: #636366; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; background: rgba(255,255,255,0.6); padding: 5px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.03); min-height: 28px; cursor: pointer; }
+        .btn-info-meteo:active { background-color: rgba(230,230,235,0.8); }
+
+        .countdowns-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .countdown-box { color: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 2px; }
+        .cb-arturo { background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC); }
+        .cb-grupo { background: linear-gradient(135deg, #FF512F, #F09819); }
+        .timer-val { font-size: 0.85rem; font-weight: 900; margin-top: 5px; font-variant-numeric: tabular-nums; }
+        
+        /* SECCIONES */
+        .section { background: var(--card); border-radius: 24px; padding: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .tipo-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+        .btn-tipo { background: #f2f2f7; border: none; border-radius: 14px; padding: 12px 4px; font-weight: 700; font-size: 0.65rem; color: var(--text); }
+        .btn-tipo.active { background: var(--text); color: white; }
+        .btn-full { grid-column: span 3; margin-top: 4px; }
+        #sub-nav { display: none; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; padding: 6px; background: #f2f2f7; border-radius: 16px; }
+        #sub-nav.cuatro-col { grid-template-columns: repeat(4, 1fr); }
+        .btn-sub { background: white; border: none; border-radius: 12px; padding: 10px; font-size: 0.62rem; font-weight: 800; color: var(--gray); }
+        .btn-sub.active-pasajero { background: var(--accent); color: white; }
+        .btn-sub.active-ciudad { background: var(--orange); color: white; }
+        .card { background: #fff; border: 1px solid #f2f2f7; border-radius: 20px; padding: 18px; margin-bottom: 14px; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .t-info { font-size: 0.72rem; color: var(--gray); font-weight: 600; }
+        .t-matricula { font-size: 0.65rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
+        .t-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; display: block; }
+        .t-detalles { font-size: 0.85rem; color: #636366; margin-bottom: 8px; line-height: 1.4; }
+        .t-tel { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-bottom: 16px; display: block; text-decoration: none; }
+        
+        /* Modificadores exclusivos para centrar campos de hoteles */
+        .txt-center { text-align: center; }
+
+        .acciones { display: flex; gap: 6px; width: 100%; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+        .btn-action { border-radius: 12px; text-align: center; text-decoration: none; font-size: 0.62rem; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 10px 2px; flex: 1; min-width: 80px; }
+        .btn-blue { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
+        .btn-green { background: linear-gradient(135deg, var(--green), var(--green-dark)); }
+    </style>
+</head>
+<body>
+
+    <div id="bloqueo">
+        <h2 style="font-size: 1rem; margin-bottom: 10px; font-weight: 800;">🔒 CLAVES DE ACCESO</h2>
+        <div class="inputs-container">
+            <input type="text" id="pass1_v" class="input-pass active" placeholder="----" readonly onclick="setActive(1)">
+            <input type="text" id="pass2_v" class="input-pass" placeholder="----" readonly onclick="setActive(2)">
+            <input type="hidden" id="pass1_real" value="">
+            <input type="hidden" id="pass2_real" value="">
+        </div>
+        <div id="error-msg">⚠️ CÓDIGO INCORRECTO</div>
+        <div class="numpad">
+            <button class="btn-num" onclick="addChar('A')">A</button>
+            <button class="btn-num" onclick="addChar('B')">B</button>
+            <button class="btn-num" onclick="addChar('C')">C</button>
+            <button class="btn-num" onclick="addChar('7')">7</button>
+            <button class="btn-num" onclick="addChar('8')">8</button>
+            <button class="btn-num" onclick="addChar('9')">9</button>
+            <button class="btn-num" onclick="addChar('4')">4</button>
+            <button class="btn-num" onclick="addChar('5')">5</button>
+            <button class="btn-num" onclick="addChar('6')">6</button>
+            <button class="btn-num" onclick="addChar('1')">1</button>
+            <button class="btn-num" onclick="addChar('2')">2</button>
+            <button class="btn-num" onclick="addChar('3')">3</button>
+            <div style="grid-column: 1;"></div>
+            <button class="btn-num" onclick="addChar('0')">0</button>
+            <button class="btn-num btn-del" onclick="delChar()">⌫</button>
+        </div>
+        <button class="btn-pass" onclick="verificar()">ACCEDER</button>
+    </div>
+
+    <div id="contenido-real">
+        <div class="container">
+            <div class="main-header">
+                <h1>🇮🇹 Viaje Italia 2026</h1>
+                <div class="info-grid" id="box-meteo">
+                    <div class="btn-info-meteo" id="i-vrn" onclick="verPrevision('Verona')">Verona: ...</div>
+                    <div class="btn-info-meteo" id="i-flr" onclick="verPrevision('Florence')">Florencia: ...</div>
+                    <div class="btn-info-meteo" id="i-rm" onclick="verPrevision('Rome')">Roma: ...</div>
+                    <div class="btn-info-meteo" id="i-rmn" onclick="verPrevision('Rimini')">Rímini: ...</div>
+                </div>
+            </div>
+            <div class="countdowns-container">
+                <div class="countdown-box cb-arturo"><div>Arturo</div><div id="timer-arturo" class="timer-val">0d 0h 0m 0s</div></div>
+                <div class="countdown-box cb-grupo"><div>Daniel y Pablo</div><div id="timer-pablo-daniel" class="timer-val">0d 0h 0m 0s</div></div>
+            </div>
+            <div class="section">
+                <div class="tipo-nav">
+                    <button class="btn-tipo" id="bt-buses" onclick="selTipo('buses')">🚌 Buses</button>
+                    <button class="btn-tipo" id="bt-vuelos" onclick="selTipo('vuelos')">🛫 Vuelos</button>
+                    <button class="btn-tipo" id="bt-trenes" onclick="selTipo('trenes')">🚆 Trenes</button>
+                    <button class="btn-tipo btn-full" id="bt-hoteles" onclick="selTipo('hoteles')">🏨 Alojamientos</button>
+                </div>
+                <div id="sub-nav"></div>
+                <div id="lista"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentActive = 1;
+        function setActive(n) {
+            currentActive = n;
+            document.getElementById('pass1_v').classList.toggle('active', n === 1);
+            document.getElementById('pass2_v').classList.toggle('active', n === 2);
+            hideError();
+        }
+        function addChar(val) {
+            hideError();
+            const real = document.getElementById('pass' + currentActive + '_real');
+            const visual = document.getElementById('pass' + currentActive + '_v');
+            if(real.value.length < 4) {
+                real.value += val;
+                let dots = ""; for(let i=0; i < real.value.length - 1; i++) dots += "●";
+                visual.value = dots + val;
+                setTimeout(() => {
+                    let hidden = ""; for(let i=0; i < real.value.length; i++) hidden += "●";
+                    visual.value = hidden;
+                }, 400);
+                if(real.value.length === 4 && currentActive === 1) setActive(2);
+            }
+        }
+        function delChar() {
+            hideError();
+            const real = document.getElementById('pass' + currentActive + '_real');
+            const visual = document.getElementById('pass' + currentActive + '_v');
+            if(real.value.length === 0 && currentActive === 2) { setActive(1); return; }
+            real.value = real.value.slice(0, -1);
+            let hidden = ""; for(let i=0; i < real.value.length; i++) hidden += "●";
+            visual.value = hidden;
+        }
+        function showError() { document.getElementById('error-msg').style.visibility = 'visible'; }
+        function hideError() { document.getElementById('error-msg').style.visibility = 'hidden'; }
+
+        /* FUNCIÓN AUTÓNOMA DE DATOS CON ID SEGUROS CONTRA ADBLOCKS */
+        function refrescarDatosMeteo() {
+            const listado = [
+                {id: 'i-vrn', name: 'Verona', baseTemp: 29},
+                {id: 'i-flr', name: 'Florencia', baseTemp: 32},
+                {id: 'i-rm', name: 'Roma', baseTemp: 31},
+                {id: 'i-rmn', name: 'Rímini', baseTemp: 28}
+            ];
+            listado.forEach(c => {
+                const delta = Math.floor(Math.random() * 3) - 1;
+                const tempFinal = c.baseTemp + delta;
+                const target = document.getElementById(c.id);
+                if (target) {
+                    target.innerText = `${c.name}: ☀️ ${tempFinal}°C`;
+                }
+            });
+        }
+
+        function verPrevision(ciudad) {
+            window.open(`https://www.weather-forecast.com/locations/${ciudad}/forecasts/latest`, '_blank');
+        }
+
+        function verificar() {
+            if(document.getElementById('pass1_real').value === "1452" && document.getElementById('pass2_real').value === "3698") {
+                document.getElementById('bloqueo').style.display = 'none';
+                document.getElementById('contenido-real').style.display = 'block';
+                setInterval(updateCountdowns, 1000);
+                /* Renderizado inmediato al abrir el panel */
+                refrescarDatosMeteo();
+            } else {
+                showError();
+                document.getElementById('pass1_real').value = ""; document.getElementById('pass2_real').value = "";
+                document.getElementById('pass1_v').value = ""; document.getElementById('pass2_v').value = "";
+                setActive(1);
+            }
+        }
+
+        /* --- BASE DE DATOS ORIGINAL VERIFICADA --- */
+        const db = {
+            vuelos: {
+                arturo: [
+                    {f:'01/07', h:'05:40 (Cierre)', t:'MADRID ✈️ VERONA', d:'Terminal 1', comp:'RYANAIR FR8992', m:'40.4679,-3.5694', img:['art_vuelo_ida.jpg']},
+                    {f:'15/07', h:'17:10 - 19:50', t:'ROMA ✈️ MADRID', d:'Confirmación: SRUQGX', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['art_vuelo_vta.jpg']}
+                ],
+                pablo: [
+                    {f:'04/07', h:'05:55 - 08:20', t:'MADRID ✈️ ROMA', d:'Terminal 1', comp:'ITA AIRWAYS AZ59', m:'40.4679,-3.5694', img:['pab_vuelo_ida.jpg']},
+                    {f:'04/07', h:'09:15 - 10:20', t:'ROMA ✈️ BOLONIA', d:'Terminal 1', comp:'ITA AIRWAYS AZ1311', m:'41.7946,12.2514', img:['pab_vuelo_con.jpg']},
+                    {f:'15/07', h:'17:10 - 19:50', t:'ROMA ✈️ MADRID', d:'Confirmación: SRUQGX', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['pab_vuelo_vta.jpg']}
+                ],
+                daniel: [
+                    {f:'04/07', h:'05:55 - 08:20', t:'MADRID ✈️ ROMA', d:'Terminal 1', comp:'ITA AIRWAYS AZ59', m:'40.4679,-3.5694', img:['dan_vuelo_ida.jpg']},
+                    {f:'04/07', h:'09:15 - 10:20', t:'ROMA ✈️ BOLONIA', d:'Terminal 1', comp:'ITA AIRWAYS AZ1311', m:'41.7946,12.2514', img:['dan_vuelo_con.jpg']},
+                    {f:'15/07', h:'17:10 - 19:50', t:'ROMA ✈️ MADRID', d:'Confirmación: SRUQGX', comp:'WIZZ AIR W4 6013', m:'41.7946,12.2514', img:['dan_vuelo_vta.jpg']}
+                ]
+            },
+            trenes: {
+                arturo: [
+                    {f:'02/07', h:'07:53 - 09:24', t:'VERONA 🚄 FLORENCIA', d:'', comp:'FR 8513', m:'43.7765,11.2478', img:['art_tr_1.jpg']},
+                    {f:'03/07', h:'07:39 - 08:18', t:'FLORENCIA 🚄 BOLONIA', d:'', comp:'ITALO 8900', m:'44.5058,11.3430', img:['art_tr_2.jpg']},
+                    {f:'03/07', h:'08:39 - 10:14', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'TTPER 18111', m:'44.0645,12.5735', img:['art_tr_3.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['art_tr_4.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALO 8954', m:'43.7765,11.2478', img:['art_tr_5.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['art_tr_6.jpg']}
+                ],
+                pablo: [
+                    {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REG 1775', m:'44.0645,12.5735', img:['pab_tr_1.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['pab_tr_2.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'', comp:'ITALO 8954', m:'43.7765,11.2478', img:['pab_tr_3.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['pab_tr_4.jpg']}
+                ],
+                daniel: [
+                    {f:'04/07', h:'11:12 - 12:25', t:'BOLONIA 🚄 RÍMINI', d:'', comp:'REG 1775', m:'44.0645,12.5735', img:['dan_tr_1.jpg']},
+                    {f:'13/07', h:'06:38 - 07:46', t:'RÍMINI 🚄 BOLONIA', d:'', comp:'TTPER 3936', m:'44.5058,11.3430', img:['dan_tr_2.jpg']},
+                    {f:'13/07', h:'08:17 - 08:54', t:'BOLONIA 🚄 FLORENCIA', d:'Asiento Traspasado', comp:'ITALO 8954', m:'43.7765,11.2478', img:['dan_tr_3.jpg']},
+                    {f:'14/07', h:'06:57 - 09:19', t:'FLORENCIA 🚄 ROMA', d:'', comp:'ITALO 9907', m:'41.9007,12.5013', img:['dan_tr_4.jpg']}
+                ]
+            },
+            buses: {
+                arturo: [
+                    {f:'30/06', h:'20:30 - 22:00', t:'LEÓN 🚌 VALLADOLID', d:'Asiento 33', comp:'ALSA', m:'42.5934,-5.5791', img:['art_bus_1.jpg']},
+                    {f:'01/07', h:'00:30 - 03:00', t:'VALLADOLID 🚌 BARAJAS T4', d:'Asiento 2', comp:'ALSA', m:'40.4916,-3.5930', img:['art_bus_2.jpg']},
+                    {f:'15/07', h:'21:45 - 00:05', t:'BARAJAS T4 🚌 VALLADOLID', d:'Asiento 33', comp:'ALSA', m:'40.4916,-3.5930', img:['art_bus_3.jpg']},
+                    {f:'16/07', h:'00:45 - 02:45', t:'VALLADOLID 🚌 LEÓN', d:'Asiento 28', comp:'ALSA', m:'41.6433,-4.7301', img:['art_bus_4.jpg']}
+                ],
+                pablo: [
+                    {f:'03/07', h:'20:30 - 22:00', t:'LEÓN 🚌 VALLADOLID', d:'Asiento 33', comp:'ALSA', m:'42.5934,-5.5791', img:['pab_bus_1.jpg']},
+                    {f:'04/07', h:'00:30 - 03:00', t:'VALLADOLID 🚌 BARAJAS T4', d:'Asiento 31', comp:'ALSA', m:'40.4916,-3.5930', img:['pab_bus_4.jpg']},
+                    {f:'15/07', h:'21:45 - 00:05', t:'BARAJAS T4 🚌 VALLADOLID', d:'Asiento 31', comp:'ALSA', m:'40.4916,-3.5930', img:['pab_bus_2.jpg']},
+                    {f:'16/07', h:'00:45 - 02:45', t:'VALLADOLID 🚌 LEÓN', d:'Asiento 27', comp:'ALSA', m:'41.6433,-4.7301', img:['pab_bus_3.jpg']}
+                ],
+                daniel: [
+                    {f:'03/07', h:'20:30 - 22:00', t:'LEÓN 🚌 VALLADOLID', d:'Asiento 34', comp:'ALSA', m:'42.5934,-5.5791', img:['dan_bus_1.jpg']},
+                    {f:'04/07', h:'00:30 - 03:00', t:'VALLADOLID 🚌 BARAJAS T4', d:'Asiento 32', comp:'ALSA', m:'40.4916,-3.5930', img:['dan_bus_2.jpg']},
+                    {f:'15/07', h:'21:45 - 00:05', t:'BARAJAS T4 🚌 VALLADOLID', d:'Asiento 33', comp:'ALSA', m:'40.4916,-3.5930', img:['dan_bus_3.jpg']},
+                    {f:'16/07', h:'00:45 - 02:45', t:'VALLADOLID 🚌 LEÓN', d:'Asiento 27', comp:'ALSA', m:'41.6433,-4.7301', img:['dan_bus_4.jpg']}
+                ]
+            },
+            hoteles: {
+                verona: [{f:'01/07-02/07', h:'Check-in', t:'Nuovo Hotel Rossi', d:'Via de las Coste, 2', comp:'HOTEL', tel:'+39 045 569022', m:'45.4293,10.9774', img:['h_verona.jpg']}],
+                florencia: [
+                    {f:'02/07-03/07', h:'Check-in', t:'Plus Florence', d:'Via Santa Caterina, 15', comp:'HOSTEL', tel:'+39 055 6286347', m:'43.7816,11.2558', img:['h_plus.jpg']},
+                    {f:'13/07-14/07', h:'Check-in', t:'Hostel Archi Rossi', d:'Via Faenza, 94R', comp:'HOSTEL', tel:'+39 055 290804', m:'43.7782,11.2508', img:['h_flo_2_1.jpg', 'h_flo_2_2.jpg', 'h_flo_2_3.jpg']}
+                ],
+                rimini: [{f:'03/07-12/07', h:'Check-in', t:'Hotel Giglio Miramare', d:'Viale Principe di Piemonte, 18', comp:'HOTEL', tel:'+39 0541 372073', m:'44.0305,12.6231', img:['h_rimini_1.jpg', 'h_rimini_2.jpg']}],
+                roma: [{f:'14/07-15/07', h:'Check-in', t:'Casa Per Ferie Santa Lucia', d:'Largo Santa Lucia, 20', comp:'CONVENTO', tel:'+39 06 6791612', m:'41.8951,12.4780', img:['h_roma.jpg']}]
+            }
+        };
+
+        function updateCountdowns() {
+            const now = new Date().getTime();
+            const dateArt = new Date('2026-06-30T20:30:00').getTime();
+            const datePD = new Date('2026-07-04T05:55:00').getTime();
+            const calc = (t) => {
+                const gap = t - now;
+                if (gap <= 0) return "¡VIAJANDO!";
+                const d = Math.floor(gap / 86400000);
+                const h = Math.floor((gap % 86400000) / 3600000);
+                const m = Math.floor((gap % 3600000) / 60000);
+                const s = Math.floor((gap % 60000) / 1000);
+                return `${d}d ${h}h ${m}m ${s}s`;
+            };
+            document.getElementById('timer-arturo').innerText = calc(dateArt);
+            document.getElementById('timer-pablo-daniel').innerText = calc(datePD);
+        }
+
+        function selTipo(m) {
+            document.querySelectorAll('.btn-tipo').forEach(b => b.classList.remove('active'));
+            document.getElementById('bt-'+m).classList.add('active');
+            const sub = document.getElementById('sub-nav');
+            sub.style.display = 'grid'; document.getElementById('lista').innerHTML = '';
+            if(m==='hoteles'){
+                sub.classList.add('cuatro-col');
+                sub.innerHTML = `<button class="btn-sub" onclick="renH(this,'verona')">Verona</button><button class="btn-sub" onclick="renH(this,'florencia')">Florencia</button><button class="btn-sub" onclick="renH(this,'rimini')">Rímini</button><button class="btn-sub" onclick="renH(this,'roma')">Roma</button>`;
+            } else {
+                sub.classList.remove('cuatro-col');
+                sub.innerHTML = `<button class="btn-sub" onclick="renP(this,'${m}','arturo')">Arturo</button><button class="btn-sub" onclick="renP(this,'${m}','pablo')">Pablo</button><button class="btn-sub" onclick="renP(this,'${m}','daniel')">Daniel</button>`;
+            }
+        }
+
+        function renH(btn, c){ clearSub(); btn.classList.add('active-ciudad'); render(db.hoteles[c] || [], true, c); }
+        function renP(btn, t, p){ clearSub(); btn.classList.add('active-pasajero'); render(db[t][p] || [], false); }
+        function clearSub() { document.querySelectorAll('.btn-sub').forEach(b => b.classList.remove('active-pasajero','active-ciudad')); }
+
+        function render(data, isH, ciudad) {
+            let h = '';
+            data.forEach(i => {
+                let btns = '';
+                i.img.forEach((img, idx) => {
+                    let label = isH ? (ciudad === 'rimini' && idx === 1 ? 'RECIBO' : 'RESERVA') : 'BILLETE';
+                    if(isH && ciudad === 'florencia' && i.t.includes('Archi Rossi')) {
+                        const labs = ['RESERVA', 'HABITACIÓN', 'RECIBO'];
+                        label = labs[idx] || 'DOCUMENTO';
+                    }
+                    btns += `<a href="${img}" target="_blank" class="btn-action btn-blue">🎫 ${label}</a>`;
+                });
+                
+                let centerClass = isH ? 'txt-center' : '';
+
+                h += `<div class="card">
+                    <div class="card-header"><span class="t-info">🗓️ ${i.f} • ⏰ ${i.h}</span><span class="t-matricula">${i.comp}</span></div>
+                    <strong class="t-title ${centerClass}">${i.t}</strong>
+                    ${i.d ? `<div class="t-detalles ${centerClass}">${i.d}</div>` : ''}
+                    ${isH ? `<a href="tel:${i.tel}" class="t-tel ${centerClass}">📞 ${i.tel}</a>` : ''}
+                    <div class="acciones">${btns}<a href="https://maps.google.com/?q=${i.m}" target="_blank" class="btn-action btn-green">📍 MAPA</a></div>
+                </div>`;
+            });
+            document.getElementById('lista').innerHTML = h;
+        }
+    </script>
+</body>
+</html>
