@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acceso Viaje 2026</title>
+    <style>
+        body { font-family: sans-serif; background: #f2f2f7; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .input-box { width: 220px; padding: 15px; border-radius: 12px; border: 2px solid #007aff; text-align: center; background: white; font-size: 1.5rem; margin: 20px; letter-spacing: 5px; }
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 320px; }
+        .btn { padding: 20px; border-radius: 12px; border: none; background: white; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .borrar { background: #ff3b30; color: white; }
+        .ok { background: #007aff; color: white; }
+    </style>
+</head>
+<body>
+
+    <h2>🔒 CLAVE DE 8 DÍGITOS</h2>
+    <input type="text" id="pass" class="input-box" readonly placeholder="--------">
+
+    <div class="numpad">
+        <button class="btn" onclick="add('A')">A</button><button class="btn" onclick="add('B')">B</button><button class="btn" onclick="add('C')">C</button>
+        <button class="btn" onclick="add('7')">7</button><button class="btn" onclick="add('8')">8</button><button class="btn" onclick="add('9')">9</button>
+        <button class="btn" onclick="add('4')">4</button><button class="btn" onclick="add('5')">5</button><button class="btn" onclick="add('6')">6</button>
+        <button class="btn" onclick="add('1')">1</button><button class="btn" onclick="add('2')">2</button><button class="btn" onclick="add('3')">3</button>
+        <button class="btn borrar" onclick="del()">⌫</button>
+        <button class="btn" onclick="add('0')">0</button>
+        <button class="btn ok" onclick="check()">OK</button>
+    </div>
+
+    <script>
+        let codigo = "";
+        const inputEl = document.getElementById('pass');
+
+        function add(char) {
+            if (codigo.length < 8) {
+                codigo += char;
+                inputEl.value = "●".repeat(codigo.length);
+            }
+        }
+
+        function del() {
+            codigo = codigo.slice(0, -1);
+            inputEl.value = "●".repeat(codigo.length);
+        }
+
+        function check() {
+            if (codigo === "14523698") {
+                window.location.href = "menu.html";
+            } else {
+                alert("Código incorrecto");
+                codigo = "";
+                inputEl.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

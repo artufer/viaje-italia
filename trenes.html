@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trenes - Italia 2026</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .main-container { background: #ffffff; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.8rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        
+        .btn-volver { display: block; text-align: center; margin-bottom: 20px; font-size: 0.8rem; color: #7f8c8d; text-decoration: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; width: fit-content; margin-left: auto; margin-right: auto; }
+        
+        .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .btn { padding: 10px 15px; background-color: #95a5a6; border-radius: 8px; font-weight: 600; color: #ffffff; text-decoration: none; cursor: pointer; border: none; flex: 1; text-align: center; transition: background 0.3s; }
+        .btn.seleccionado { background-color: #2980b9 !important; }
+        
+        .tarjeta { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .info-tren { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 5px; }
+        .ruta { font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+        .acciones { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-accion { padding: 8px; border-radius: 5px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <a href="menu.html" class="btn-volver">⬅ VOLVER AL MENÚ</a>
+    <h1>TRENES</h1>
+    
+    <div class="btn-group">
+        <button id="btn-arturo" class="btn" onclick="mostrarInfo('arturo')">ARTURO</button>
+        <button id="btn-daniel" class="btn" onclick="mostrarInfo('daniel')">DANIEL</button>
+        <button id="btn-pablo" class="btn" onclick="mostrarInfo('pablo')">PABLO</button>
+    </div>
+
+    <div id="info-trenes"></div>
+</div>
+
+<script>
+    const datosTrenes = {
+        arturo: [
+            { fecha: "02/07", hora: "07:53 - 09:24", info: "FR 8513", ruta: "VERONA 🚄 FLORENCIA", lugar: "Stazione di Verona Porta Nuova", billete: "art_tr_1.jpg", mapa: "https://www.google.com/maps/place/Verona+Porta+Nuova/@45.4290202,10.979923,17z/data=!3m1!4b1!4m6!3m5!1s0x477f5f664a2f09fd:0x558f7661f12a33b9!8m2!3d45.4290202!4d10.9824979!16s%2Fm%2F0b6k9nt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "03/07", hora: "07:39 - 08:18", info: "ITALO 8900", ruta: "FLORENCIA 🚄 BOLONIA", lugar: "Stazione di Firenze Santa Maria Novella", billete: "art_tr_2.jpg", mapa: "https://www.google.com/maps/place/Firenze+Santa+Maria+Novella/@43.7766715,11.245341,17z/data=!3m1!4b1!4m6!3m5!1s0x132a56a5110a5089:0x1958e826bdc6c329!8m2!3d43.7766715!4d11.2479159!16zL20vMDZ3aDZ5?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "03/07", hora: "08:39 - 10:14", info: "TTPER 18111", ruta: "BOLONIA 🚄 RÍMINI", lugar: "Stazione di Bologna Centrale", billete: "art_tr_3.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "06:38 - 07:46", info: "TTPER 3936", ruta: "RÍMINI 🚄 BOLONIA", lugar: "Stazione di Rimini", billete: "art_tr_4.jpg", mapa: "https://www.google.com/maps/place/Rimini/@44.0639836,12.5712358,17z/data=!3m1!4b1!4m6!3m5!1s0x132cc39e3616b18b:0xba6600cf8dd166eb!8m2!3d44.0639836!4d12.5738107!16s%2Fm%2F0g9_df7?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "08:17 - 08:54", info: "ITALO 8954", ruta: "BOLONIA 🚄 FLORENCIA", lugar: "Stazione di Bologna Centrale", billete: "art_tr_5.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "14/07", hora: "06:57 - 09:19", info: "ITALO 9907", ruta: "FLORENCIA 🚄 ROMA", lugar: "Stazione di Firenze Santa Maria Novella", billete: "art_tr_6.jpg", mapa: "https://www.google.com/maps/place/Firenze+Santa+Maria+Novella/@43.7766715,11.245341,17z/data=!3m1!4b1!4m6!3m5!1s0x132a56a5110a5089:0x1958e826bdc6c329!8m2!3d43.7766715!4d11.2479159!16zL20vMDZ3aDZ5?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        pablo: [
+            { fecha: "04/07", hora: "10:40 - 10:47", info: "MARCONI EXPRESS", ruta: "AEROPUERTO ➔ BOLONIA", lugar: "Aeropuerto de Bolonia", billete: null, mapa: "https://www.google.com/maps/dir/Aeropuerto+de+Bolonia,+Via+del+Triumvirato,+84,+40132+Bologna+BO,+Italia/Marconi+Express+-+Stazione+Aeroporto,+Via+del+Triumvirato,+40132+Bologna+BO,+Italia/@44.5309421,11.2864835,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x477fd3fac047a1cb:0x5653430165f8d67b!2m2!1d11.2878488!2d44.5345288!1m5!1m1!1s0x477fd33f19808d4d:0xa824287b8be57e3b!2m2!1d11.294353!2d44.5286383!3e2?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "04/07", hora: "11:12 - 12:25", info: "REG 1775", ruta: "BOLONIA 🚄 RÍMINI", lugar: "Stazione di Bologna Centrale", billete: "pab_tr_1.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "06:38 - 07:46", info: "TTPER 3936", ruta: "RÍMINI 🚄 BOLONIA", lugar: "Stazione di Rimini", billete: "pab_tr_2.jpg", mapa: "https://www.google.com/maps/place/Rimini/@44.0639836,12.5712358,17z/data=!3m1!4b1!4m6!3m5!1s0x132cc39e3616b18b:0xba6600cf8dd166eb!8m2!3d44.0639836!4d12.5738107!16s%2Fm%2F0g9_df7?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "08:17 - 08:54", info: "ITALO 8954", ruta: "BOLONIA 🚄 FLORENCIA", lugar: "Stazione di Bologna Centrale", billete: "pab_tr_3.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "14/07", hora: "06:57 - 09:19", info: "ITALO 9907", ruta: "FLORENCIA 🚄 ROMA", lugar: "Stazione di Firenze Santa Maria Novella", billete: "pab_tr_4.jpg", mapa: "https://www.google.com/maps/place/Firenze+Santa+Maria+Novella/@43.7766715,11.245341,17z/data=!3m1!4b1!4m6!3m5!1s0x132a56a5110a5089:0x1958e826bdc6c329!8m2!3d43.7766715!4d11.2479159!16zL20vMDZ3aDZ5?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        daniel: [
+            { fecha: "04/07", hora: "10:40 - 10:47", info: "MARCONI EXPRESS", ruta: "AEROPUERTO ➔ BOLONIA", lugar: "Aeropuerto de Bolonia", billete: null, mapa: "https://www.google.com/maps/dir/Aeropuerto+de+Bolonia,+Via+del+Triumvirato,+84,+40132+Bologna+BO,+Italia/Marconi+Express+-+Stazione+Aeroporto,+Via+del+Triumvirato,+40132+Bologna+BO,+Italia/@44.5309421,11.2864835,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x477fd3fac047a1cb:0x5653430165f8d67b!2m2!1d11.2878488!2d44.5345288!1m5!1m1!1s0x477fd33f19808d4d:0xa824287b8be57e3b!2m2!1d11.294353!2d44.5286383!3e2?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "04/07", hora: "11:12 - 12:25", info: "REG 1775", ruta: "BOLONIA 🚄 RÍMINI", lugar: "Stazione di Bologna Centrale", billete: "dan_tr_1.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "06:38 - 07:46", info: "TTPER 3936", ruta: "RÍMINI 🚄 BOLONIA", lugar: "Stazione di Rimini", billete: "dan_tr_2.jpg", mapa: "https://www.google.com/maps/place/Rimini/@44.0639836,12.5712358,17z/data=!3m1!4b1!4m6!3m5!1s0x132cc39e3616b18b:0xba6600cf8dd166eb!8m2!3d44.0639836!4d12.5738107!16s%2Fm%2F0g9_df7?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "13/07", hora: "08:17 - 08:54", info: "ITALO 8954", ruta: "BOLONIA 🚄 FLORENCIA", lugar: "Stazione di Bologna Centrale", billete: "dan_tr_3.jpg", mapa: "https://www.google.com/maps/place/Stazione+di+Bologna+Centrale/@44.5058344,11.3407887,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd49eb7c85feb:0x6df82172198a4747!8m2!3d44.5058344!4d11.3433636!16zL20vMDRkODdt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "14/07", hora: "06:57 - 09:19", info: "ITALO 9907", ruta: "FLORENCIA 🚄 ROMA", lugar: "Stazione di Firenze Santa Maria Novella", billete: "dan_tr_4.jpg", mapa: "https://www.google.com/maps/place/Firenze+Santa+Maria+Novella/@43.7766715,11.245341,17z/data=!3m1!4b1!4m6!3m5!1s0x132a56a5110a5089:0x1958e826bdc6c329!8m2!3d43.7766715!4d11.2479159!16zL20vMDZ3aDZ5?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ]
+    };
+
+    function mostrarInfo(usuario) {
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('seleccionado'));
+        document.getElementById('btn-' + usuario).classList.add('seleccionado');
+        const contenedor = document.getElementById('info-trenes');
+        contenedor.innerHTML = "";
+        
+        datosTrenes[usuario].forEach(v => {
+            let esMarconi = v.info === "MARCONI EXPRESS";
+            let htmlAcciones = esMarconi 
+                ? `<a href="${v.mapa}" target="_blank" class="btn-accion" style="background:#27ae60; width:100%; display:block;">📍 MAPA</a>`
+                : `<a href="${v.billete}" target="_blank" class="btn-accion" style="background:#007aff; flex:1;">🎫 BILLETE</a>
+                   <a href="${v.mapa}" target="_blank" class="btn-accion" style="background:#27ae60; flex:1;">📍 MAPA</a>`;
+
+            contenedor.innerHTML += `
+                <div class="tarjeta">
+                    <div class="info-tren"><span>🗓️ ${v.fecha}</span> <span>⏰ ${v.hora}</span></div>
+                    <div style="font-weight:bold; color:#2980b9">${v.info}</div>
+                    <div class="ruta">${v.ruta}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px;">${v.lugar}</div>
+                    <div class="acciones">${htmlAcciones}</div>
+                </div>
+            `;
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Aviones - Italia 2026</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .main-container { background: #ffffff; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.8rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        
+        .btn-volver { display: block; text-align: center; margin-bottom: 20px; font-size: 0.8rem; color: #7f8c8d; text-decoration: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; width: fit-content; margin-left: auto; margin-right: auto; }
+        
+        .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .btn { padding: 10px 15px; background-color: #95a5a6; border-radius: 8px; font-weight: 600; color: #ffffff; text-decoration: none; cursor: pointer; border: none; flex: 1; text-align: center; transition: background 0.3s; }
+        /* Clase para resaltar el seleccionado */
+        .btn.seleccionado { background-color: #2980b9 !important; }
+        
+        .tarjeta { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .info-vuelo { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 5px; }
+        .ruta { font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+        .acciones { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-accion { flex: 1; padding: 8px; border-radius: 5px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <a href="menu.html" class="btn-volver">⬅ VOLVER AL MENÚ</a>
+    <h1>AVIONES</h1>
+    
+    <div class="btn-group">
+        <button id="btn-arturo" class="btn" onclick="mostrarInfo('arturo')">ARTURO</button>
+        <button id="btn-pablo" class="btn" onclick="mostrarInfo('pablo')">PABLO</button>
+        <button id="btn-daniel" class="btn" onclick="mostrarInfo('daniel')">DANIEL</button>
+    </div>
+
+    <div id="info-vuelos"></div>
+</div>
+
+<script>
+    const datosVuelos = {
+        arturo: [
+            { fecha: "01/07", hora: "05:40 (Cierre)", info: "RYANAIR FR8992", ruta: "MADRID ✈️ VERONA", lugar: "Aeropuerto de Madrid-Barajas Terminal 1", billete: "art_vuelo_ida.jpg", mapa: "https://www.google.com/maps/place/Aeropuerto+T2+-+Salidas/@40.468,-3.5725949,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c55fa1f7f1:0x6297d3361ec21f37!8m2!3d40.468!4d-3.57002!16s%2Fg%2F1tdvr13g?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "17:10 - 19:50", info: "WIZZ AIR W4 6013", ruta: "ROMA ✈️ MADRID", lugar: "Aeropuerto de Roma-Fiumicino", billete: "art_vuelo_vta.jpg", mapa: "https://www.google.com/maps/place/Rome+Fiumicino+Airport+Terminal+3/@41.7945045,12.2475642,17z/data=!3m1!4b1!4m6!3m5!1s0x1325fa7491f862f9:0x64d5de105eb204d7!8m2!3d41.7945045!4d12.2501391!16s%2Fg%2F11tcqt6ldb?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        pablo: [
+            { fecha: "04/07", hora: "05:55 - 08:20", info: "ITA AIRWAYS AZ59", ruta: "MADRID ✈️ ROMA", lugar: "Aeropuerto de Madrid-Barajas Terminal 1", billete: "pab_vuelo_ida.jpg", mapa: "https://www.google.com/maps/place/Aeropuerto+T1-T2-T3/@40.4682662,-3.5736754,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c568951ad1:0x5bb8fa46230661ce!8m2!3d40.4682662!4d-3.5711005!16s%2Fm%2F04_0yqt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "04/07", hora: "09:15 - 10:20", info: "ITA AIRWAYS AZ1311", ruta: "ROMA ✈️ BOLONIA", lugar: "Aeropuerto de Roma-Fiumicino Terminal 1", billete: "pab_vuelo_con.jpg", mapa: "https://www.google.com/maps/place/Rome+Fiumicino+Airport+Terminal+3/@41.7945045,12.2475642,17z/data=!3m1!4b1!4m6!3m5!1s0x1325fa7491f862f9:0x64d5de105eb204d7!8m2!3d41.7945045!4d12.2501391!16s%2Fg%2F11tcqt6ldb?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "17:10 - 19:50", info: "WIZZ AIR W4 6013", ruta: "ROMA ✈️ MADRID", lugar: "Aeropuerto de Roma-Fiumicino", billete: "pab_vuelo_vta.jpg", mapa: "https://www.google.com/maps/place/Rome+Fiumicino+Airport+Terminal+3/@41.7945045,12.2475642,17z/data=!3m1!4b1!4m6!3m5!1s0x1325fa7491f862f9:0x64d5de105eb204d7!8m2!3d41.7945045!4d12.2501391!16s%2Fg%2F11tcqt6ldb?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        daniel: [
+            { fecha: "04/07", hora: "05:55 - 08:20", info: "ITA AIRWAYS AZ59", ruta: "MADRID ✈️ ROMA", lugar: "Aeropuerto de Madrid-Barajas Terminal 1", billete: "dan_vuelo_ida.jpg", mapa: "https://www.google.com/maps/place/Aeropuerto+T1-T2-T3/@40.4682662,-3.5736754,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c568951ad1:0x5bb8fa46230661ce!8m2!3d40.4682662!4d-3.5711005!16s%2Fm%2F04_0yqt?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "04/07", hora: "09:15 - 10:20", info: "ITA AIRWAYS AZ1311", ruta: "ROMA ✈️ BOLONIA", lugar: "Aeropuerto de Roma-Fiumicino Terminal 1", billete: "dan_vuelo_con.jpg", mapa: "https://www.google.com/maps/place/Rome+Fiumicino+Airport+Terminal+3/@41.7945045,12.2475642,17z/data=!3m1!4b1!4m6!3m5!1s0x1325fa7491f862f9:0x64d5de105eb204d7!8m2!3d41.7945045!4d12.2501391!16s%2Fg%2F11tcqt6ldb?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "17:10 - 19:50", info: "WIZZ AIR W4 6013", ruta: "ROMA ✈️ MADRID", lugar: "Aeropuerto de Roma-Fiumicino", billete: "dan_vuelo_vta.jpg", mapa: "https://www.google.com/maps/place/Rome+Fiumicino+Airport+Terminal+3/@41.7945045,12.2475642,17z/data=!3m1!4b1!4m6!3m5!1s0x1325fa7491f862f9:0x64d5de105eb204d7!8m2!3d41.7945045!4d12.2501391!16s%2Fg%2F11tcqt6ldb?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ]
+    };
+
+    function mostrarInfo(usuario) {
+        // Limpiar botones y aplicar clase
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('seleccionado'));
+        document.getElementById('btn-' + usuario).classList.add('seleccionado');
+
+        const contenedor = document.getElementById('info-vuelos');
+        contenedor.innerHTML = "";
+        
+        datosVuelos[usuario].forEach(v => {
+            contenedor.innerHTML += `
+                <div class="tarjeta">
+                    <div class="info-vuelo"><span>🗓️ ${v.fecha}</span> <span>⏰ ${v.hora}</span></div>
+                    <div style="font-weight:bold; color:#2980b9">${v.info}</div>
+                    <div class="ruta">${v.ruta}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px;">${v.lugar}</div>
+                    <div class="acciones">
+                        <a href="${v.billete}" target="_blank" class="btn-accion" style="background:#007aff">🎫 BILLETE</a>
+                        <a href="${v.mapa}" target="_blank" class="btn-accion" style="background:#27ae60">📍 MAPA</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>

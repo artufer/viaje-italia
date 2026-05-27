@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Autobuses - Italia 2026</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .main-container { background: #ffffff; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.8rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        
+        /* Botón Volver */
+        .btn-volver { display: block; text-align: center; margin-bottom: 20px; font-size: 0.8rem; color: #7f8c8d; text-decoration: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; width: fit-content; margin-left: auto; margin-right: auto; }
+        
+        .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .btn { padding: 10px 15px; background-color: #95a5a6; border-radius: 8px; font-weight: 600; color: #ffffff; text-decoration: none; cursor: pointer; border: none; flex: 1; text-align: center; transition: background 0.3s; }
+        
+        /* Clase para resaltar el seleccionado */
+        .btn.seleccionado { background-color: #2980b9 !important; }
+        
+        .tarjeta { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .info-bus { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 5px; }
+        .ruta { font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+        .acciones { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-accion { flex: 1; padding: 8px; border-radius: 5px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <a href="menu.html" class="btn-volver">⬅ VOLVER AL MENÚ</a>
+    <h1>AUTOBUSES</h1>
+    
+    <div class="btn-group">
+        <button id="btn-arturo" class="btn" onclick="mostrarInfo('arturo')">ARTURO</button>
+        <button id="btn-daniel" class="btn" onclick="mostrarInfo('daniel')">DANIEL</button>
+        <button id="btn-pablo" class="btn" onclick="mostrarInfo('pablo')">PABLO</button>
+    </div>
+
+    <div id="info-viajes"></div>
+</div>
+
+<script>
+    const datosViajes = {
+        arturo: [
+            { fecha: "30/06", hora: "20:30 - 22:00", info: "ALSA bus... asiento 33", ruta: "LEÓN 🚌 VALLADOLID", lugar: "Estación de Autobuses de León", billete: "art_bus_1.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+autobuses+de+Le%C3%B3n+-+Reina+Urraca/@42.5934825,-5.5817212,17z/data=!3m1!4b1!4m6!3m5!1s0xd379b3043d25ce1:0xc6771db2967c4d3b!8m2!3d42.5934825!4d-5.5791463!16s%2Fg%2F11h9mlm1yn?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "01/07", hora: "00:30 - 03:00", info: "ALSA bus... asiento 2", ruta: "VALLADOLID 🚌 BARAJAS T2", lugar: "Estación de Autobuses de Valladolid", billete: "art_bus_2.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "21:45 - 00:05", info: "ALSA bus... asiento 33", ruta: "BARAJAS T2 🚌 VALLADOLID", lugar: "Aeropuerto Madrid-Barajas T2 (Bus ALSA)", billete: "art_bus_3.jpg", mapa: "https://www.google.com/maps/place/Terminal+T2+Llegadas,+Barajas,+28042+Madrid/@40.4698467,-3.5728348,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c53b49b981:0x37c33632a169929a!8m2!3d40.4698467!4d-3.5702599!16s%2Fg%2F11rjqrpb2s?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "16/07", hora: "00:45 - 02:45", info: "ALSA bus... asiento 28", ruta: "VALLADOLID 🚌 LEÓN", lugar: "Estación de Autobuses de Valladolid", billete: "art_bus_4.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        daniel: [
+            { fecha: "30/06", hora: "20:30 - 22:00", info: "ALSA bus... asiento 34", ruta: "LEÓN 🚌 VALLADOLID", lugar: "Estación de Autobuses de León", billete: "dan_bus_1.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+autobuses+de+Le%C3%B3n+-+Reina+Urraca/@42.5934825,-5.5817212,17z/data=!3m1!4b1!4m6!3m5!1s0xd379b3043d25ce1:0xc6771db2967c4d3b!8m2!3d42.5934825!4d-5.5791463!16s%2Fg%2F11h9mlm1yn?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "01/07", hora: "00:30 - 03:00", info: "ALSA bus... asiento 32", ruta: "VALLADOLID 🚌 BARAJAS T2", lugar: "Estación de Autobuses de Valladolid", billete: "dan_bus_2.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "21:45 - 00:05", info: "ALSA bus... asiento 33", ruta: "BARAJAS T2 🚌 VALLADOLID", lugar: "Aeropuerto Madrid-Barajas T2 (Bus ALSA)", billete: "dan_bus_3.jpg", mapa: "https://www.google.com/maps/place/Terminal+T2+Llegadas,+Barajas,+28042+Madrid/@40.4698467,-3.5728348,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c53b49b981:0x37c33632a169929a!8m2!3d40.4698467!4d-3.5702599!16s%2Fg%2F11rjqrpb2s?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "16/07", hora: "00:45 - 02:45", info: "ALSA bus... asiento 27", ruta: "VALLADOLID 🚌 LEÓN", lugar: "Estación de Autobuses de Valladolid", billete: "dan_bus_4.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ],
+        pablo: [
+            { fecha: "30/06", hora: "20:30 - 22:00", info: "ALSA bus... asiento 33", ruta: "LEÓN 🚌 VALLADOLID", lugar: "Estación de Autobuses de León", billete: "pab_bus_1.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+autobuses+de+Le%C3%B3n+-+Reina+Urraca/@42.5934825,-5.5817212,17z/data=!3m1!4b1!4m6!3m5!1s0xd379b3043d25ce1:0xc6771db2967c4d3b!8m2!3d42.5934825!4d-5.5791463!16s%2Fg%2F11h9mlm1yn?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "01/07", hora: "00:30 - 03:00", info: "ALSA bus... asiento 31", ruta: "VALLADOLID 🚌 BARAJAS T2", lugar: "Estación de Autobuses de Valladolid", billete: "pab_bus_2.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "15/07", hora: "21:45 - 00:05", info: "ALSA bus... asiento 27", ruta: "BARAJAS T2 🚌 VALLADOLID", lugar: "Aeropuerto Madrid-Barajas T2 (Bus ALSA)", billete: "pab_bus_3.jpg", mapa: "https://www.google.com/maps/place/Terminal+T2+Llegadas,+Barajas,+28042+Madrid/@40.4698467,-3.5728348,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c53b49b981:0x37c33632a169929a!8m2!3d40.4698467!4d-3.5702599!16s%2Fg%2F11rjqrpb2s?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
+            { fecha: "16/07", hora: "00:45 - 02:45", info: "ALSA bus... asiento 31", ruta: "VALLADOLID 🚌 LEÓN", lugar: "Estación de Autobuses de Valladolid", billete: "pab_bus_4.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,17z/data=!3m1!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" }
+        ]
+    };
+
+    function mostrarInfo(usuario) {
+        // Limpiar botones y aplicar clase al seleccionado
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('seleccionado'));
+        document.getElementById('btn-' + usuario).classList.add('seleccionado');
+
+        const contenedor = document.getElementById('info-viajes');
+        contenedor.innerHTML = "";
+        datosViajes[usuario].forEach(v => {
+            contenedor.innerHTML += `
+                <div class="tarjeta">
+                    <div class="info-bus"><span>🗓️ ${v.fecha}</span> <span>⏰ ${v.hora}</span></div>
+                    <div style="font-weight:bold; color:#2980b9">${v.info}</div>
+                    <div class="ruta">${v.ruta}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px;">${v.lugar}</div>
+                    <div class="acciones">
+                        <a href="${v.billete}" target="_blank" class="btn-accion" style="background:#007aff">🎫 BILLETE</a>
+                        <a href="${v.mapa}" target="_blank" class="btn-accion" style="background:#27ae60">📍 MAPA</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>

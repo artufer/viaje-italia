@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacaciones Italia 2026</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; padding: 10px; margin: 0; }
+        .main-container { background: #fff; padding: 15px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header { text-align: center; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+        
+        .btn-container { background: #ffffff; padding: 10px; border-radius: 15px; border: 1px solid #f0f0f0; margin-bottom: 10px; }
+        .temp-title { font-weight: bold; font-size: 0.7rem; margin: 5px 0; color: #777; text-align: center; }
+        .temp-grid { display: grid; gap: 6px; margin-bottom: 10px; }
+        .row-3 { grid-template-columns: repeat(3, 1fr); }
+        .row-4 { grid-template-columns: repeat(4, 1fr); }
+        .temp-box { background: #f9f9f9; padding: 6px; border-radius: 8px; text-align: center; font-size: 0.6rem; border: 1px solid #eee; }
+        
+        .countdown-section { background: #f9f9f9; padding: 10px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #eee; text-align: center; font-size: 0.75rem; }
+        .btn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 5px; }
+        .nav-container { background: #f8f9fa; padding: 10px; border-radius: 15px; margin-top: 5px; }
+        .btn-grid-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        
+        .btn { padding: 8px 2px; border-radius: 8px; color: white; font-weight: bold; font-size: 0.5rem; text-align: center; border: none; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .sos-btn { width: 100%; padding: 12px; background: #e63946; color: white; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem; margin-top: 5px; }
+        
+        .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 20px; width: 90%; max-width: 350px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="header">🇮🇹 Vacaciones Italia 2026</div>
+
+    <div class="btn-container">
+        <div class="temp-title">ESPAÑA</div>
+        <div class="temp-grid row-3">
+            <div class="temp-box">León<br>☀️19°C</div>
+            <div class="temp-box">Vallad.<br>☀️17°C</div>
+            <div class="temp-box">Madrid<br>🌤️19°C</div>
+        </div>
+        <div class="temp-title">ITALIA</div>
+        <div class="temp-grid row-4">
+            <div class="temp-box">Verona<br>🌤️25°C</div>
+            <div class="temp-box">Flor.<br>☀️23°C</div>
+            <div class="temp-box">Roma<br>🌤️22°C</div>
+            <div class="temp-box">Rímini<br>🌤️25°C</div>
+        </div>
+    </div>
+
+    <div class="countdown-section">
+        <b>TIEMPO RESTANTE:</b>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top:5px;">
+            <div style="text-align: left;">Arturo:<br><b id="count-arturo">--</b></div>
+            <div style="font-size: 1.5rem;">🏖️</div>
+            <div style="text-align: right;">Pablo/Dani:<br><b id="count-otros">--</b></div>
+        </div>
+    </div>
+
+    <div class="btn-grid">
+        <a href="https://www.skylinewebcams.com/es/webcam/italia/emilia-romagna/rimini/miramare-di-rimini.html" target="_blank" class="btn" style="background:#5c56d0;">CÁMARA</a>
+        <a href="https://music.amazon.es/" target="_blank" class="btn" style="background:#f39c12;">MÚSICA</a>
+        <button class="btn" style="background:#27ae60;" onclick="document.getElementById('modal-maleta').style.display='flex'">MALETA</button>
+        <button class="btn" style="background:#007aff;" onclick="document.getElementById('modal-frases').style.display='flex'">FRASES</button>
+    </div>
+    
+    <button class="sos-btn">☎️ TELÉFONOS SOS URGENCIAS</button>
+
+    <div class="nav-container">
+        <div class="btn-grid-nav">
+            <a href="autobuses.html" class="btn" style="background:#e84393;">BUS</a>
+            <a href="aviones.html" class="btn" style="background:#0984e3;">AVIÓN</a>
+            <a href="trenes.html" class="btn" style="background:#6c5ce7;">TREN</a>
+            <a href="alojamientos.html" class="btn" style="background:#00b894;">HOTEL</a>
+            <a href="entradas.html" class="btn" style="background:#fdcb6e; color:#333;">TICKET</a>
+        </div>
+    </div>
+</div>
+
+<div id="modal-maleta" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">✕</span>
+        <h3>🧳 MALETA DE MANO (14 DÍAS)</h3>
+        <p><b>🔹 Documentación y Finanzas</b><br>DNI / PASAPORTE (en vigor).<br>Tarjetas de crédito / débito.<br>Tarjeta Sanitaria Europea.</p>
+        <p><b>🔹 Ropa (Modular)</b><br>3 Bañadores.<br>Pantalón largo de lino.<br>Chaqueta de verano (ligera).<br>6 Camisetas / Polos.<br>2 Pantalones shorts.<br>7 Mudas de ropa interior.</p>
+        <p><b>🔹 Calzado</b><br>Zapatillas cómodas (puestas).<br>Náuticos (para salir).<br>Chanclas de playa.</p>
+        <p><b>🔹 Aseo (Bolsa zip max 100ml)</b><br>Colonia / Perfume.<br>Cepillo y pasta de dientes.<br>Cortaúñas.</p>
+        <p><b>🔹 Electrónica</b><br>Cargador y Powerbank.</p>
+        <p><b>🔹 Playa y Accesorios</b><br>Mochila de cordones.<br>Gafas de sol y gorra.<br>Toalla de microfibra.</p>
+    </div>
+</div>
+
+<div id="modal-frases" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">✕</span>
+        <h3>🇮🇹 DICCIONARIO</h3>
+        <div id="contenedor-frases"></div>
+    </div>
+</div>
+
+<script>
+    // Configuración de fechas objetivo (puedes ajustarlas)
+    const fechaArturo = new Date("2026-06-30T00:00:00").getTime();
+    const fechaOtros = new Date("2026-07-03T00:00:00").getTime();
+
+    function actualizarContadores() {
+        const ahora = new Date().getTime();
+        
+        function calcular(objetivo) {
+            const diff = objetivo - ahora;
+            if (diff < 0) return "¡Ya es hora!";
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            return `${d}d ${h}h ${m}m ${s}s`;
+        }
+
+        document.getElementById('count-arturo').innerText = calcular(fechaArturo);
+        document.getElementById('count-otros').innerText = calcular(fechaOtros);
+    }
+
+    setInterval(actualizarContadores, 1000);
+    actualizarContadores();
+
+    // Diccionario
+    const frases = [
+        {it: "Buongiorno", es: "Buenos días."}, {it: "Buonasera", es: "Buenas noches."}, {it: "Grazie mille", es: "Muchas gracias."}, {it: "Prego", es: "De nada."}, {it: "Mi scusi", es: "Disculpe."}, {it: "Parli spagnolo?", es: "¿Habla español?"}, {it: "Piacere di conoscerti", es: "Encantado de conocerte."}, {it: "A presto", es: "Hasta pronto."}, {it: "Come stai?", es: "¿Cómo estás?"}, {it: "Tutto bene", es: "Todo bien."}, {it: "Scusa il ritardo", es: "Perdón por el retraso."}, {it: "Buona giornata", es: "Que tengas buen día."}, {it: "Molto gentile", es: "Muy amable."}, {it: "Che ore sono?", es: "¿Qué hora es?"}, {it: "Dove si trova la piazza?", es: "¿Dónde está la plaza?"}, {it: "Vorrei tre birre", es: "Quisiera tres cervezas."}, {it: "Il conto per favore", es: "La cuenta, por favor."}, {it: "Dov'è il bagno?", es: "¿Dónde está el baño?"}, {it: "Un caffè", es: "Un café."}, {it: "Vorrei ordinare", es: "Quisiera pedir."}, {it: "Acqua naturale", es: "Agua sin gas."}, {it: "Acqua frizzante", es: "Agua con gas."}, {it: "Vino rosso", es: "Vino tinto."}, {it: "Menu del giorno", es: "Menú del día."}, {it: "È buono", es: "Está bueno."}, {it: "Grazie", es: "Gracias."}, {it: "Un tavolo per due", es: "Una mesa para dos."}, {it: "Il menu per favore", es: "La carta, por favor."}, {it: "Siete aperti?", es: "¿Están abiertos?"}, {it: "Posso pagare con carta?", es: "¿Puedo pagar con tarjeta?"}, {it: "Aiuto!", es: "¡Ayuda!"}, {it: "Ho bisogno di un medico", es: "Necesito un médico."}, {it: "Dov'è l'ospedale?", es: "¿Dónde está el hospital?"}, {it: "Chiami la polizia", es: "Llame a la policía."}, {it: "Ho perso il portafoglio", es: "He perdido la cartera."}, {it: "Dov'è l'ambasciata?", es: "¿Dónde está la embajada?"}, {it: "Sono in pericolo", es: "Estoy en peligro."}, {it: "Ho un'allergia", es: "Tengo alergia."}, {it: "Dov'è la stazione?", es: "¿Dónde está la estación?"}, {it: "Da quale binario parte il treno?", es: "¿De qué vía sale el tren?"}, {it: "Ho sbagliato treno, il mio era...", es: "Me he equivocado de tren, el mío era..."}, {it: "È un'emergenza", es: "Es una emergencia."}
+    ];
+    const contenedor = document.getElementById('contenedor-frases');
+    frases.forEach((f, i) => {
+        const d = document.createElement('div');
+        d.style.cssText = "background:#f9f9f9; padding:10px; border-radius:10px; margin-bottom:8px; border:1px solid #eee; cursor:pointer;";
+        d.innerHTML = `<b>${i+1}. ${f.it} 🔊</b><br><span style="font-size:0.8rem">${f.es}</span>`;
+        d.onclick = () => window.speechSynthesis.speak(new SpeechSynthesisUtterance(f.it));
+        contenedor.appendChild(d);
+    });
+</script>
+
+</body>
+</html>

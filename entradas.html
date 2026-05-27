@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Entradas - Italia 2026</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .main-container { background: #ffffff; padding: 30px; border-radius: 30px; width: 100%; max-width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.6rem; color: #34495e; text-align: center; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; }
+        
+        .btn-ciudad { width: 100%; padding: 20px; background: #ffffff; color: #34495e; border: 2px solid #34495e; border-radius: 15px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-bottom: 15px; transition: all 0.3s ease; text-transform: uppercase; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .btn-ciudad:hover { background: #34495e; color: #ffffff; transform: translateY(-2px); }
+        
+        .desplegable-ciudad { display: none; padding-bottom: 15px; }
+        
+        .btn-monumento, .btn-recorrido { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: 600; font-size: 0.85rem; cursor: pointer; margin-bottom: 8px; text-transform: uppercase; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        .btn-monumento { background-color: #e67e22; color: white; }
+        .btn-recorrido { background: #2c3e50; color: white; }
+        
+        .contenido-monumento { display: none; background: #fcfcfc; padding: 15px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #edf2f7; }
+        .descripcion { font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 15px; text-align: justify; }
+        
+        /* Estilos tabla para alinear botones */
+        .tabla-entradas { width: 100%; border-collapse: separate; border-spacing: 5px; margin-top: 10px; }
+        .tabla-entradas td { vertical-align: middle; }
+        .btn-persona { display: block; width: 100%; padding: 10px 0; background-color: #3498db; color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; }
+        
+        .btn-lugar { display: block; width: 100%; padding: 10px; background-color: #9b59b6; color: white; text-align: center; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 0.85rem; margin-top: 5px; }
+        .btn-mapa-link { display: block; width: 100%; padding: 12px; background-color: #27ae60; color: white; text-align: center; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 0.85rem; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>ENTRADAS</h1>
+
+    <!-- Ciudad: RÁVENA -->
+    <button class="btn-ciudad" onclick="gestionarCiudad('ciudad-ravena')">Rávena</button>
+    <div id="ciudad-ravena" class="desplegable-ciudad">
+        <button class="btn-monumento" onclick="toggleSolo('r1', 'ciudad-ravena')">San Vitale</button>
+        <div id="r1" class="contenido-monumento">
+            <p class="descripcion">La Basílica de San Vitale es, indiscutiblemente, la joya más brillante del arte bizantino en Italia. Construida en el siglo VI, su estructura octogonal esconde un interior deslumbrante donde los mosaicos son los verdaderos protagonistas. Destacan especialmente los paneles del ábside que retratan al emperador Justiniano y a la emperatriz Teodora, quienes nunca visitaron Rávena pero aparecen aquí con una dignidad divina. La luz que entra por las ventanas se refleja en las piezas de vidrio y oro, creando una atmósfera de espiritualidad inigualable que parece desafiar el paso de los siglos y la realidad física del edificio.</p>
+            <a href="https://www.google.com/maps/place/San+Vital+de+Ravena/@44.4205557,12.1938115,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df9556ff99bbd:0x6e4bf4c86a07ee28!8m2!3d44.4205557!4d12.1963864!16zL20vMDd2eWM2?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('r2', 'ciudad-ravena')">Mausoleo Galla Placidia</button>
+        <div id="r2" class="contenido-monumento">
+            <p class="descripcion">Este pequeño oratorio en forma de cruz es un tesoro escondido que encierra algunos de los mosaicos más antiguos y bellos de la cristiandad. Aunque fue construido originalmente como mausoleo para la emperatriz Gala Placidia, su interior sumerge al visitante en una cúpula que recrea un cielo estrellado nocturno, profundo y fascinante. Los tonos azules y dorados se funden con figuras bíblicas y símbolos cristianos primigenios. Es un espacio íntimo, donde la oscuridad relativa resalta la intensidad cromática de las teselas, logrando que el tiempo parezca detenerse por completo al contemplar la maestría técnica de los artesanos del siglo V.</p>
+            <a href="https://www.google.com/maps/place/Mausoleo+de+Gala+Placidia/@44.4209827,12.1945279,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477dfbfe2c91d6d9:0xf8cc7a227c27f684!8m2!3d44.4209827!4d12.1971028!16zL20vMDVfMGJm?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('r3', 'ciudad-ravena')">Baptisterio Neoniano</button>
+        <div id="r3" class="contenido-monumento">
+            <p class="descripcion">Considerado el baptisterio más antiguo y mejor conservado de toda la cristiandad, este edificio octogonal es una muestra perfecta de la arquitectura paleocristiana. Al levantar la mirada hacia su cúpula, los visitantes son recibidos por una representación monumental del Bautismo de Cristo, realizada con una precisión técnica asombrosa. Las figuras de los apóstoles y los elementos arquitectónicos pintados en mosaico crean una ilusión de profundidad que envuelve todo el espacio. La riqueza de los detalles y la vibrante paleta de colores empleada en las teselas reflejan la importancia capital que el sacramento del bautismo tenía en la Rávena de finales del siglo IV.</p>
+            <a href="https://www.google.com/maps/place/Baptisterio+neoniano/@44.4156103,12.1947686,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df953f2b3539d:0xc5cdfffba92cc403!8m2!3d44.4156103!4d12.1973435!16zL20vMDdya2Zx?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('r4', 'ciudad-ravena')">San Apolinar Nuevo</button>
+        <div id="r4" class="contenido-monumento">
+            <p class="descripcion">Esta basílica, que originalmente sirvió como iglesia palatina para el rey ostrogodo Teodorico, es un testimonio fundamental de la transición entre la cultura aria y la católica. Lo que realmente fascina al visitante son sus inmensos frisos laterales, donde largas procesiones de mártires y vírgenes avanzan con una elegancia estilizada sobre fondos dorados. Estos mosaicos son una de las mejores fuentes visuales para entender la vestimenta y los rituales de la corte bizantina en Rávena. El edificio destaca no solo por su valor histórico, sino por la capacidad de sus artistas para integrar el arte clásico con una nueva estética cristiana.</p>
+            <a href="https://www.google.com/maps/place/Iglesia+de+San+Apolinar+el+Nuevo/@44.41671,12.2020843,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df95b6c9c8295:0x876ba4425256e8f!8m2!3d44.41671!4d12.2046592!16zL20vMDdyazlo?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('r5', 'ciudad-ravena')">San Giovanni Evangelista</button>
+        <div id="r5" class="contenido-monumento">
+            <p class="descripcion">San Giovanni Evangelista es una construcción llena de historia y leyenda, fundada por la propia emperatriz Gala Placidia para cumplir un voto tras sobrevivir a una tormenta en el mar. Aunque la iglesia ha sufrido múltiples modificaciones y daños, especialmente durante los bombardeos de la Segunda Guerra Mundial, todavía conserva fragmentos de mosaicos medievales y una atmósfera de sobriedad que invita a la reflexión. Su arquitectura sencilla y su claustro tranquilo ofrecen un contraste necesario con el esplendor ostentoso de otros monumentos de la ciudad, permitiendo al viajero conectar con una dimensión más humana y personal de la historia de Rávena.</p>
+            <a href="https://www.google.com/maps/place/San+Giovanni+Evangelista,+Ravenna/@44.4182841,12.2027964,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df9583079cea1:0x3b8f839e257e7d26!8m2!3d44.4182841!4d12.2053713!16s%2Fm%2F02rgsr4?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('r6', 'ciudad-ravena')">Tumba de Dante</button>
+        <div id="r6" class="contenido-monumento">
+            <p class="descripcion">La Tumba de Dante es el lugar de peregrinación por excelencia para todo amante de la literatura universal. Este pequeño pero digno mausoleo neoclásico protege los restos del "Padre de la Lengua Italiana", quien pasó sus últimos años exiliado en Rávena tras ser expulsado de Florencia. El espacio respira un aire de melancolía y respeto, custodiado por una lámpara votiva que se mantiene siempre encendida con aceite de los olivares de la Toscana, simbolizando el vínculo inquebrantable entre el poeta y su patria. Es una parada obligatoria que cierra el círculo de la historia entre la grandeza del Imperio y el poder de la palabra escrita.</p>
+            <a href="https://www.google.com/maps/place/Tumba+de+Dante/@44.4161585,12.1983619,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df9500c672bc1:0xde7bba0a1ff0cd06!8m2!3d44.4161585!4d12.2009368!16s%2Fg%2F1213tjxv?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+        <a href="https://www.google.com/maps/dir/San+Giovanni+Evangelista,+Ravenna,+V.le+Luigi+Carlo+Farini,+48121+Ravenna+RA,+Italia/Mausoleo+de+Gala+Placidia,+Via+San+Vitale,+17,+48121+Ravenna+RA,+Italia/San+Vital+de+Ravena,+Via+San+Vitale,+17,+48121+Ravenna+RA,+Italia/Baptisterio+neoniano,+P.za+Arcivescovado,+1,+48121+Ravenna+RA,+Italia/Tumba+de+Dante,+Via+Dante+Alighieri,+48121+Ravenna+RA,+Italia/Iglesia+de+San+Apolinar+el+Nuevo,+Via+di+Roma,+53,+48121+Ravenna+RA,+Italia/@44.4181774,12.1949134,1244m/data=!3m2!1e3!4b1!4m38!4m37!1m5!1m1!1s0x477df9583079cea1:0x3b8f839e257e7d26!2m2!1d12.2053713!2d44.4182841!1m5!1m1!1s0x477dfbfe2c91d6d9:0xf8cc7a227c27f684!2m2!1d12.1971028!2d44.4209827!1m5!1m1!1s0x477df9556ff99bbd:0x6e4bf4c86a07ee28!2m2!1d12.1963864!2d44.4205557!1m5!1m1!1s0x477df953f2b3539d:0xc5cdfffba92cc403!2m2!1d12.1973435!2d44.4156103!1m5!1m1!1s0x477df9500c672bc1:0xde7bba0a1ff0cd06!2m2!1d12.2009368!2d44.4161585!1m5!1m1!1s0x477df95b6c9c8295:0x876ba4425256e8f!2m2!1d12.2046592!2d44.41671!3e2?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-recorrido" target="_blank">RECORRIDO EN RÁVENA</a>
+    </div>
+
+    <!-- Ciudad: FLORENCIA -->
+    <button class="btn-ciudad" onclick="gestionarCiudad('ciudad-florencia')">Florencia</button>
+    <div id="ciudad-florencia" class="desplegable-ciudad">
+        <button class="btn-monumento" onclick="toggleSolo('f1', 'ciudad-florencia')">Brunelleschi Pass</button>
+        <div id="f1" class="contenido-monumento">
+            <p class="descripcion">Entradas para el pase completo:</p>
+            <table class="tabla-entradas">
+                <tr>
+                    <td><strong>Arturo:</strong></td>
+                    <td><a href="brunelleschi_pass_1_Arturo.jpg" class="btn-persona" target="_blank">Entrada</a></td>
+                    <td><a href="qr_arturo.jpg" class="btn-persona" target="_blank">QR</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Pablo:</strong></td>
+                    <td><a href="brunelleschi_pass_1_Pablo.jpg" class="btn-persona" target="_blank">Entrada</a></td>
+                    <td><a href="qr_pablo.jpg" class="btn-persona" target="_blank">QR</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Daniel:</strong></td>
+                    <td><a href="brunelleschi_pass_1_Daniel.jpg" class="btn-persona" target="_blank">Entrada</a></td>
+                    <td><a href="qr_daniel.jpg" class="btn-persona" target="_blank">QR</a></td>
+                </tr>
+            </table>
+            <p class="descripcion" style="margin-top:20px;">Cómo llegar a:</p>
+            <a href="https://www.google.com/maps/place/Piazza+del+Duomo,+10,+50122+Firenze+FI,+Italia/@43.7733361,11.2567151,314m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a5403f3cd863d:0xaec3a54bf2df3816!8m2!3d43.7733361!4d11.2574806!16s%2Fg%2F11vk__7w2r?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-lugar" target="_blank">Cúpula</a>
+            <a href="https://www.google.com/maps/place/Campanario+de+Giotto/@43.7731629,11.2566455,187m/data=!3m1!1e3!4m6!3m5!1s0x132a5403bfe22ff5:0x9c4b8131377e75b8!8m2!3d43.7728578!4d11.2557822!16zL20vMDk5eHJx?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-lugar" target="_blank">Campanile y Santa Reparata</a>
+            <a href="https://www.google.com/maps/place/Museo+dell'Opera+del+Duomo/@43.7731706,11.2555371,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a5403bfe22ff5:0xa0f3290bee9d8051!8m2!3d43.7731706!4d11.258112!16s%2Fm%2F0b6ksng?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-lugar" target="_blank">Museo dell'Opera</a>
+        </div>
+        <button class="btn-monumento" onclick="toggleSolo('f2', 'ciudad-florencia')">Santa Croce</button>
+        <div id="f2" class="contenido-monumento">
+            <p class="descripcion">La Basílica de Santa Croce es una de las iglesias franciscanas más importantes y bellas de toda Italia, consolidándose como un verdadero panteón de glorias italianas. Este majestuoso templo gótico no solo deslumbra por su imponente fachada de mármol policromado y sus hermosos frescos firmados por artistas como Giotto, sino que también es un lugar cargado de historia y emoción. Al recorrer sus naves, el visitante se encuentra frente a las tumbas monumentales de figuras universales como Miguel Ángel, Galileo Galilei, Maquiavelo y Rossini, quienes descansan en este entorno sagrado que celebra el genio humano en todas sus facetas artísticas y científicas.</p>
+            <a href="https://www.google.com/maps/place/Bas%C3%ADlica+de+la+Santa+Cruz/@43.7685683,11.2596928,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a540723ccc331:0x8f8279649c131255!8m2!3d43.7685683!4d11.2622677!16zL20vMDM0NW1y?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-mapa-link" target="_blank">CÓMO LLEGAR</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function gestionarCiudad(id) {
+        document.querySelectorAll('.desplegable-ciudad').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+    function toggleSolo(id, contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        contenedor.querySelectorAll('.contenido-monumento').forEach(el => { if (el.id !== id) el.style.display = 'none'; });
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>
