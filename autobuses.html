@@ -2,19 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Autobuses - Italia 2026</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .main-container { background: #ffffff; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.8rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 10px; margin: 0; box-sizing: border-box; }
+        .main-container { background: #ffffff; padding: 20px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); box-sizing: border-box; }
+        h1 { font-size: 1.5rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         
-        /* Botón Volver */
         .btn-volver { display: block; text-align: center; margin-bottom: 20px; font-size: 0.8rem; color: #7f8c8d; text-decoration: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; width: fit-content; margin-left: auto; margin-right: auto; }
         
         .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
         .btn { padding: 10px 15px; background-color: #95a5a6; border-radius: 8px; font-weight: 600; color: #ffffff; text-decoration: none; cursor: pointer; border: none; flex: 1; text-align: center; transition: background 0.3s; }
         
-        /* Clase para resaltar el seleccionado */
         .btn.seleccionado { background-color: #2980b9 !important; }
         
         .tarjeta { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -40,6 +39,11 @@
 </div>
 
 <script>
+    // Validación de acceso desde index.html[cite: 5]
+    if (sessionStorage.getItem("accesoPermitido") !== "true") {
+        window.location.href = "index.html";
+    }
+
     const datosViajes = {
         arturo: [
             { fecha: "30/06", hora: "20:30 - 22:00", info: "ALSA bus... asiento 33", ruta: "LEÓN 🚌 VALLADOLID", lugar: "Estación de Autobuses de León", billete: "art_bus_1.jpg", mapa: "https://www.google.com/maps/place/Estaci%C3%B3n+de+autobuses+de+Le%C3%B3n+-+Reina+Urraca/@42.5934825,-5.5817212,17z/data=!3m1!4b1!4m6!3m5!1s0xd379b3043d25ce1:0xc6771db2967c4d3b!8m2!3d42.5934825!4d-5.5791463!16s%2Fg%2F11h9mlm1yn?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
@@ -62,7 +66,6 @@
     };
 
     function mostrarInfo(usuario) {
-        // Limpiar botones y aplicar clase al seleccionado
         document.querySelectorAll('.btn').forEach(b => b.classList.remove('seleccionado'));
         document.getElementById('btn-' + usuario).classList.add('seleccionado');
 
