@@ -19,7 +19,9 @@
         .sombrilla { font-size: 1.8rem; line-height: 1; }
         .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 15px; border-radius: 15px; width: 90%; max-width: 350px; max-height: 85vh; overflow-y: auto; position: relative; }
-        .close-btn { cursor: pointer; position: absolute; top: 5px; right: 10px; font-size: 1.2rem; }
+        .close-btn { cursor: pointer; position: absolute; top: 5px; right: 10px; font-size: 1.5rem; font-weight: bold; }
+        .seccion-titulo { color: #0056b3; font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
+        .frase-item { padding: 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -32,6 +34,7 @@
         <div style="font-weight:bold; font-size:0.6rem; margin-top:2px;">ITALIA</div>
         <div class="temp-grid italy"><div class="box">Verona<br>🌤️25°C</div><div class="box">Flor.<br>☀️23°C</div><div class="box">Roma<br>🌤️22°C</div><div class="box">Rímini<br>🌤️25°C</div></div>
     </div>
+    
     <div class="data-box" style="padding: 4px; font-size: 0.7rem;">
         <div>TIEMPO RESTANTE:</div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -40,55 +43,102 @@
             <div>Pablo/Dani:<br><b id="count-otros">--</b></div>
         </div>
     </div>
+
     <div class="btn-group-container">
         <div class="grid-buttons">
-            <a href="#" class="btn-3d" style="background:#5c56d0;">CÁMARA</a>
-            <a href="#" class="btn-3d" style="background:#f39c12;">MÚSICA</a>
+            <a href="https://www.skylinewebcams.com/es/webcam/italia/emilia-romagna/rimini/miramare-di-rimini.html" target="_blank" class="btn-3d" style="background:#5c56d0;">CÁMARA</a>
+            <a href="https://music.amazon.es/my/playlists/4843512a-c601-4308-9be2-e8b06ea40abd" target="_blank" class="btn-3d" style="background:#f39c12;">MÚSICA</a>
             <button class="btn-3d" style="background:#27ae60;" onclick="abrirModal('modal-maleta')">MALETA</button>
             <button class="btn-3d" style="background:#007aff;" onclick="abrirModal('modal-frases')">FRASES</button>
         </div>
     </div>
-    <button class="sos-btn">☎️ TELÉFONOS SOS URGENCIAS</button>
+    <button class="sos-btn" onclick="alert('Llamando a emergencias...')">☎️ TELÉFONOS SOS URGENCIAS</button>
     <div class="btn-group-container">
         <div class="grid-buttons">
-            <a href="#" class="btn-3d" style="background:#e84393;">BUS</a>
-            <a href="#" class="btn-3d" style="background:#0984e3;">AVIÓN</a>
-            <a href="#" class="btn-3d" style="background:#6c5ce7;">TREN</a>
-            <a href="#" class="btn-3d" style="background:#00b894;">HOTEL</a>
-            <a href="#" class="btn-3d" style="background:#fdcb6e; color:#333; grid-column: span 2;">TICKET</a>
+            <a href="autobuses.html" class="btn-3d" style="background:#e84393;">BUS</a>
+            <a href="aviones.html" class="btn-3d" style="background:#0984e3;">AVIÓN</a>
+            <a href="trenes.html" class="btn-3d" style="background:#6c5ce7;">TREN</a>
+            <a href="alojamientos.html" class="btn-3d" style="background:#00b894;">HOTEL</a>
+            <a href="entradas.html" class="btn-3d" style="background:#fdcb6e; color:#333; grid-column: span 2;">ENTRADAS</a>
         </div>
     </div>
 </div>
 
-<div id="modal-maleta" class="modal"><div class="modal-content"><span class="close-btn" onclick="cerrarModal('modal-maleta')">✕</span>
-<h3>🧳 MALETA</h3><p style="font-size:0.8rem;">DNI, Tarjetas, Seg. Europea. Bañadores, Lino, Chaqueta, 6 Camisetas, 2 Shorts, 7 Mudas. Zapatillas, Náuticos, Chanclas. Aseo, Cargador, Powerbank. Mochila, Gafas, Toalla.</p>
+<div id="modal-maleta" class="modal"><div class="modal-content">
+    <span class="close-btn" onclick="cerrarModal('modal-maleta')">✕</span>
+    <h3>🧳 MALETA DE MANO (14 DÍAS)</h3>
+    <div class="seccion-titulo">🔹 Documentación y Finanzas</div>
+    <p>DNI / PASAPORTE (en vigor).<br>Tarjetas de crédito / débito.<br>Tarjeta Sanitaria Europea.</p>
+    <div class="seccion-titulo">🔹 Ropa (Modular)</div>
+    <p>3 Bañadores.<br>Pantalón largo de lino.<br>Chaqueta de verano (ligera).<br>6 Camisetas / Polos.<br>2 Pantalones shorts.<br>7 Mudas de ropa interior.</p>
+    <div class="seccion-titulo">🔹 Calzado</div>
+    <p>Zapatillas cómodas (puestas).<br>Náuticos (para salir).<br>Chanclas de playa.</p>
+    <div class="seccion-titulo">🔹 Aseo (Bolsa zip max 100ml)</div>
+    <p>Colonia / Perfume.<br>Cepillo y pasta de dientes.<br>Cortaúñas.</p>
+    <div class="seccion-titulo">🔹 Electrónica</div>
+    <p>Cargador y Powerbank.</p>
+    <div class="seccion-titulo">🔹 Playa y Accesorios</div>
+    <p>Mochila de cordones.<br>Gafas de sol y gorra.<br>Toalla de microfibra.</p>
 </div></div>
-<div id="modal-frases" class="modal"><div class="modal-content"><span class="close-btn" onclick="cerrarModal('modal-frases')">✕</span>
-<h3>🇮🇹 DICCIONARIO</h3><div id="contenedor-frases"></div></div></div>
+
+<div id="modal-frases" class="modal"><div class="modal-content">
+    <span class="close-btn" onclick="cerrarModal('modal-frases')">✕</span>
+    <h3>🇮🇹 DICCIONARIO</h3>
+    <div id="contenedor-frases"></div>
+</div></div>
 
 <script>
     function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
     function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     
-    document.addEventListener("DOMContentLoaded", function() {
-        function act() {
-            const ahora = new Date().getTime();
-            const fA = new Date("2026-06-30T00:00:00").getTime();
-            const fO = new Date("2026-07-03T00:00:00").getTime();
-            const calc = (obj) => {
-                const diff = obj - ahora;
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                return `${d}d ${h}h ${m}m ${s}s`;
-            };
-            document.getElementById('count-arturo').innerText = calc(fA);
-            document.getElementById('count-otros').innerText = calc(fO);
-        }
-        setInterval(act, 1000);
-        act();
+    function leer(texto) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(texto);
+        msg.lang = 'it-IT';
+        window.speechSynthesis.speak(msg);
+    }
+
+    const frases = [
+        "Tre birre alla spina per favore - 3 cañas de cerveza por favor",
+        "Ho sbagliato treno, il mio era... - Me equivoqué de tren, el mío era...",
+        "Può indicarmi da quale binario parte il treno... - ¿Puede indicarme de qué vía sale el tren...?",
+        "Buongiorno - Buenos días", "Buonasera - Buenas tardes", "Per favore - Por favor", "Grazie - Gracias",
+        "Prego - De nada", "Mi scusi - Disculpe", "Dov'è il bagno? - ¿Dónde está el baño?",
+        "Quanto costa? - ¿Cuánto cuesta?", "Vorrei un caffè - Quisiera un café",
+        "Il conto, per favore - La cuenta, por favor", "Parla inglese? - ¿Habla inglés?",
+        "Non capisco - No entiendo", "Aiuto! - ¡Ayuda!", "A che ora parte il treno? - ¿A qué hora sale el tren?",
+        "Un biglietto - Un billete", "Dov'è la stazione? - ¿Dónde está la estación?",
+        "È lontano? - ¿Está lejos?", "A destra - A la derecha", "A sinistra - A la izquierda",
+        "Dritto - Recto", "Acqua - Agua", "Vino - Vino", "Birra - Cerveza", "Pane - Pan",
+        "Buono - Bueno", "Caldo - Caliente", "Freddo - Frío", "Oggi - Hoy",
+        "Domani - Mañana", "Adesso - Ahora", "Molto - Mucho", "Poco - Poco",
+        "Sì - Sí", "No - No", "Ciao - Hola", "Arrivederci - Adiós",
+        "Piacere - Gusto", "Come stai? - ¿Cómo estás?", "Bene - Bien", "Male - Mal"
+    ];
+
+    const cont = document.getElementById('contenedor-frases');
+    frases.forEach((f, i) => {
+        const italiano = f.split(' - ')[0];
+        cont.innerHTML += `<div class="frase-item"><span><b>${i+1}. ${f}</b></span><span style="font-size:1.5rem; cursor:pointer;" onclick="leer('${italiano}')">🔊</span></div>`;
     });
+
+    function act() {
+        const ahora = new Date().getTime();
+        const fA = new Date("2026-06-30T00:00:00").getTime();
+        const fO = new Date("2026-07-03T00:00:00").getTime();
+        const calc = (obj) => {
+            const diff = obj - ahora;
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            return `${d}d ${h}h ${m}m ${s}s`;
+        };
+        document.getElementById('count-arturo').innerText = calc(fA);
+        document.getElementById('count-otros').innerText = calc(fO);
+    }
+    setInterval(act, 1000);
+    act();
 </script>
 </body>
 </html>
