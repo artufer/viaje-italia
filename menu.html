@@ -101,6 +101,11 @@
 </div>
 
 <script>
+    // Validación de seguridad mediante sessionStorage[cite: 3]
+    if (sessionStorage.getItem("accesoPermitido") !== "true") {
+        window.location.href = "index.html";
+    }
+
     const fechaArturo = new Date("2026-06-30T00:00:00").getTime();
     const fechaOtros = new Date("2026-07-03T00:00:00").getTime();
 

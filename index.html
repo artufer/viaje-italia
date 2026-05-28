@@ -46,6 +46,8 @@
 
         function check() {
             if (codigo === "14523698") {
+                // Guardamos el permiso en la sesión y redirigimos
+                sessionStorage.setItem("accesoPermitido", "true");
                 window.location.href = "menu.html";
             } else {
                 alert("Código incorrecto");
