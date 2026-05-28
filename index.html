@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Acceso Viaje 2026</title>
     <style>
-        body { font-family: sans-serif; background: #f2f2f7; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .input-box { width: 220px; padding: 15px; border-radius: 12px; border: 2px solid #007aff; text-align: center; background: white; font-size: 1.5rem; margin: 20px; letter-spacing: 5px; }
-        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 320px; }
-        .btn { padding: 20px; border-radius: 12px; border: none; background: white; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .borrar { background: #ff3b30; color: white; }
-        .ok { background: #007aff; color: white; }
+        body { font-family: 'Arial Black', sans-serif; background: #0f172a; display: flex; flex-direction: column; align-items: center; padding: 20px; color: white; }
+        h2 { margin-bottom: 5px; color: #38bdf8; text-transform: uppercase; }
+        #step-label { margin-bottom: 20px; font-size: 1.2rem; color: #fbbf24; }
+        
+        .input-box { width: 220px; padding: 20px; border-radius: 15px; border: 4px solid #38bdf8; text-align: center; background: #1e293b; font-size: 2rem; color: white; margin-bottom: 30px; letter-spacing: 10px; }
+        
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; max-width: 350px; }
+        .btn { padding: 25px; border-radius: 20px; border: none; background: #334155; color: white; font-weight: 900; font-size: 1.5rem; cursor: pointer; transition: transform 0.1s, background 0.2s; box-shadow: 0 6px 0 #1e293b; }
+        .btn:active { transform: translateY(4px); box-shadow: none; }
+        
+        .borrar { background: #ef4444; box-shadow: 0 6px 0 #991b1b; }
+        .ok { background: #22c55e; box-shadow: 0 6px 0 #166534; }
     </style>
 </head>
 <body>
 
-    <h2>🔒 CLAVE DE 8 DÍGITOS</h2>
-    <input type="text" id="pass" class="input-box" readonly placeholder="--------">
+    <h2>🔒 CLAVE DE ACCESO</h2>
+    <div id="step-label">PARTE 1: Ingresa los 4 dígitos</div>
+    <input type="text" id="pass" class="input-box" readonly placeholder="----">
 
     <div class="numpad">
         <button class="btn" onclick="add('A')">A</button><button class="btn" onclick="add('B')">B</button><button class="btn" onclick="add('C')">C</button>
@@ -30,10 +37,12 @@
 
     <script>
         let codigo = "";
+        let etapa = 1; // 1 = esperando 1452, 2 = esperando 3698
         const inputEl = document.getElementById('pass');
+        const labelEl = document.getElementById('step-label');
 
         function add(char) {
-            if (codigo.length < 8) {
+            if (codigo.length < 4) {
                 codigo += char;
                 inputEl.value = "●".repeat(codigo.length);
             }
@@ -45,14 +54,29 @@
         }
 
         function check() {
-            if (codigo === "14523698") {
-                // Guardamos el permiso en la sesión y redirigimos
-                sessionStorage.setItem("accesoPermitido", "true");
-                window.location.href = "menu.html";
-            } else {
-                alert("Código incorrecto");
-                codigo = "";
-                inputEl.value = "";
+            if (etapa === 1) {
+                if (codigo === "1452") {
+                    etapa = 2;
+                    codigo = "";
+                    inputEl.value = "";
+                    labelEl.innerText = "PARTE 2: Ingresa los siguientes 4";
+                } else {
+                    alert("Error en la primera parte");
+                    codigo = "";
+                    inputEl.value = "";
+                }
+            } else if (etapa === 2) {
+                if (codigo === "3698") {
+                    sessionStorage.setItem("accesoPermitido", "true");
+                    window.location.href = "menu.html";
+                } else {
+                    alert("Error en la segunda parte");
+                    // Reiniciar proceso completo
+                    etapa = 1;
+                    codigo = "";
+                    inputEl.value = "";
+                    labelEl.innerText = "PARTE 1: Ingresa los 4 dígitos";
+                }
             }
         }
     </script>
