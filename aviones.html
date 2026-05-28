@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aviones - Italia 2026</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .main-container { background: #ffffff; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.8rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 10px; margin: 0; box-sizing: border-box; }
+        .main-container { background: #ffffff; padding: 20px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); box-sizing: border-box; }
+        h1 { font-size: 1.5rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         
         .btn-volver { display: block; text-align: center; margin-bottom: 20px; font-size: 0.8rem; color: #7f8c8d; text-decoration: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; width: fit-content; margin-left: auto; margin-right: auto; }
         
@@ -38,6 +39,11 @@
 </div>
 
 <script>
+    // Validar acceso desde index.html
+    if (sessionStorage.getItem("accesoPermitido") !== "true") {
+        window.location.href = "index.html";
+    }
+
     const datosVuelos = {
         arturo: [
             { fecha: "01/07", hora: "05:40 (Cierre)", info: "RYANAIR FR8992", ruta: "MADRID ✈️ VERONA", lugar: "Aeropuerto de Madrid-Barajas Terminal 1", billete: "art_vuelo_ida.jpg", mapa: "https://www.google.com/maps/place/Aeropuerto+T2+-+Salidas/@40.468,-3.5725949,17z/data=!3m1!4b1!4m6!3m5!1s0xd4231c55fa1f7f1:0x6297d3361ec21f37!8m2!3d40.468!4d-3.57002!16s%2Fg%2F1tdvr13g?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" },
@@ -56,7 +62,6 @@
     };
 
     function mostrarInfo(usuario) {
-        // Limpiar botones y aplicar clase
         document.querySelectorAll('.btn').forEach(b => b.classList.remove('seleccionado'));
         document.getElementById('btn-' + usuario).classList.add('seleccionado');
 
