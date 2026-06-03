@@ -20,8 +20,11 @@
         .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 15px; border-radius: 15px; width: 90%; max-width: 350px; max-height: 85vh; overflow-y: auto; position: relative; }
         .close-btn { cursor: pointer; position: absolute; top: 5px; right: 10px; font-size: 1.5rem; font-weight: bold; }
-        .seccion-titulo { color: #0056b3; font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
-        .frase-item { padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 0.85rem; }
+        .seccion-titulo { color: #0056b3; font-weight: bold; margin-top: 10px; font-size: 0.9rem; border-bottom: 2px solid #0056b3; padding-bottom: 2px; }
+        .frase-item { padding: 8px 4px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 0.8rem; }
+        .frase-item:hover { background-color: #f0f8ff; }
+        .frase-esp { color: #333; }
+        .frase-ita { color: #666; font-style: italic; font-size: 0.75rem; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -31,25 +34,25 @@
     <div class="data-box">
         <div style="font-weight:bold; font-size:0.6rem;">ESPAÑA</div>
         <div class="temp-grid">
-            <div class="box">León<br><span id="t-leon">23</span>°C</div>
-            <div class="box">Vallad.<br><span id="t-valladolid">24</span>°C</div>
-            <div class="box">Madrid<br><span id="t-madrid">26</span>°C</div>
+            <div class="box">León<br><span id="t-leon">22</span>°C</div>
+            <div class="box">Vallad.<br><span id="t-valladolid">25</span>°C</div>
+            <div class="box">Madrid<br><span id="t-madrid">28</span>°C</div>
         </div>
         <div style="font-weight:bold; font-size:0.6rem; margin-top:2px;">ITALIA</div>
         <div class="temp-grid italy">
-            <div class="box">Verona<br><span id="t-verona">22</span>°C</div>
-            <div class="box">Flor.<br><span id="t-florencia">25</span>°C</div>
-            <div class="box">Roma<br><span id="t-roma">27</span>°C</div>
-            <div class="box">Rímini<br><span id="t-rimini">24</span>°C</div>
+            <div class="box">Verona<br><span id="t-verona">29</span>°C</div>
+            <div class="box">Flor.<br><span id="t-florencia">31</span>°C</div>
+            <div class="box">Roma<br><span id="t-roma">32</span>°C</div>
+            <div class="box">Rímini<br><span id="t-rimini">28</span>°C</div>
         </div>
     </div>
     
     <div class="data-box" style="padding: 4px; font-size: 0.7rem;">
         <div>TIEMPO RESTANTE:</div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div>Arturo:<br><b id="count-arturo">--</b></div>
+            <div>Arturo:<br><b id="count-arturo">--d --h --m --s</b></div>
             <div class="sombrilla">🏖️</div>
-            <div>Pablo/Dani:<br><b id="count-otros">--</b></div>
+            <div>Pablo/Dani:<br><b id="count-otros">--d --h --m --s</b></div>
         </div>
     </div>
 
@@ -90,58 +93,19 @@
 
 <div id="modal-sos" class="modal"><div class="modal-content">
     <span class="close-btn" onclick="cerrarModal('modal-sos')">✕</span>
-    <h3>☎️ EMERGENCIAS</h3>
-    <p>Bolonia: +39 051 234 567<br>Roma: +39 06 684 0401</p>
+    <h3 style="color: #e63946; text-align: center;">☎️ EMERGENCIAS</h3>
+    <p style="font-size: 0.9rem; text-align: center;"><b>Consulado de España (Bolonia):</b><br><a href="tel:+39051234567" style="color: #0056b3; font-weight: bold;">+39 051 234 567</a></p>
+    <p style="font-size: 0.9rem; text-align: center;"><b>Embajada de España (Roma):</b><br><a href="tel:+39066840401" style="color: #0056b3; font-weight: bold;">+39 06 684 0401</a></p>
+    <hr>
+    <p style="font-size: 0.85rem; text-align: center; color: #555;">Número Único de Emergencias Europeo: <b>112</b></p>
 </div></div>
 
 <div id="modal-frases" class="modal"><div class="modal-content">
     <span class="close-btn" onclick="cerrarModal('modal-frases')">✕</span>
-    <h3>🇮🇹 45 FRASES</h3>
-    <div onclick="hablar('Ho sbagliato treno, il mio era...')"><div class="frase-item">Me equivoqué de tren... 🔊</div></div>
-    <div onclick="hablar('Potrebbe dirmi su quale binario si trova il treno?')"><div class="frase-item">¿En qué vía está el tren...? 🔊</div></div>
-    <div onclick="hablar('Vorrei tre birre alla spina, per favore.')"><div class="frase-item">3 cañas de cerveza, por favor 🔊</div></div>
-    <div onclick="hablar('Dov\'è la stazione?')"><div class="frase-item">¿Dónde está la estación? 🔊</div></div>
-    <div onclick="hablar('Un biglietto per Roma, per favore.')"><div class="frase-item">Un billete para Roma, por favor 🔊</div></div>
-    <div onclick="hablar('A che ora parte il treno?')"><div class="frase-item">¿A qué hora sale el tren? 🔊</div></div>
-    <div onclick="hablar('Questo treno ferma a Firenze?')"><div class="frase-item">¿Este tren para en Florencia? 🔊</div></div>
-    <div onclick="hablar('Scusi, questo posto è libero?')"><div class="frase-item">Perdone, ¿está libre este asiento? 🔊</div></div>
-    <div onclick="hablar('Dove posso convalidare il biglietto?')"><div class="frase-item">¿Dónde puedo validar el billete? 🔊</div></div>
-    <div onclick="hablar('Vorrei prenotare un tavolo per due.')"><div class="frase-item">Mesa para dos, por favor 🔊</div></div>
-    <div onclick="hablar('Il conto, per favore.')"><div class="frase-item">La cuenta, por favor 🔊</div></div>
-    <div onclick="hablar('Ha opzioni vegetariane?')"><div class="frase-item">¿Tiene opciones vegetarianas? 🔊</div></div>
-    <div onclick="hablar('Mi può portare dell\'acqua?')"><div class="frase-item">¿Me trae un poco de agua? 🔊</div></div>
-    <div onclick="hablar('Dov\'è il bagno?')"><div class="frase-item">¿Dónde está el baño? 🔊</div></div>
-    <div onclick="hablar('Quanto costa?')"><div class="frase-item">¿Cuánto cuesta? 🔊</div></div>
-    <div onclick="hablar('Accettate carta di credito?')"><div class="frase-item">¿Aceptan tarjeta? 🔊</div></div>
-    <div onclick="hablar('Parla spagnolo?')"><div class="frase-item">¿Habla español? 🔊</div></div>
-    <div onclick="hablar('Non capisco.')"><div class="frase-item">No entiendo 🔊</div></div>
-    <div onclick="hablar('Può parlare più lentamente?')"><div class="frase-item">¿Puede hablar despacio? 🔊</div></div>
-    <div onclick="hablar('Ho bisogno di aiuto.')"><div class="frase-item">Necesito ayuda 🔊</div></div>
-    <div onclick="hablar('Dov\'è una farmacia?')"><div class="frase-item">¿Dónde hay una farmacia? 🔊</div></div>
-    <div onclick="hablar('Mi fa male la testa.')"><div class="frase-item">Me duele la cabeza 🔊</div></div>
-    <div onclick="hablar('Ha un cerotto?')"><div class="frase-item">¿Tiene una tirita? 🔊</div></div>
-    <div onclick="hablar('Aiuto!')"><div class="frase-item">¡Socorro! 🔊</div></div>
-    <div onclick="hablar('Dov\'è l\'hotel?')"><div class="frase-item">¿Dónde está el hotel? 🔊</div></div>
-    <div onclick="hablar('A che ora è la colazione?')"><div class="frase-item">¿Hora del desayuno? 🔊</div></div>
-    <div onclick="hablar('La chiave della camera, per favore.')"><div class="frase-item">Llave de la habitación 🔊</div></div>
-    <div onclick="hablar('C\'è il Wi-Fi?')"><div class="frase-item">¿Hay WiFi? 🔊</div></div>
-    <div onclick="hablar('Cosa mi consiglia?')"><div class="frase-item">¿Qué me recomienda? 🔊</div></div>
-    <div onclick="hablar('È troppo caro.')"><div class="frase-item">Es demasiado caro 🔊</div></div>
-    <div onclick="hablar('Dov\'è l\'uscita?')"><div class="frase-item">¿Dónde está la salida? 🔊</div></div>
-    <div onclick="hablar('Grazie mille.')"><div class="frase-item">Muchas gracias 🔊</div></div>
-    <div onclick="hablar('Prego.')"><div class="frase-item">De nada 🔊</div></div>
-    <div onclick="hablar('Buongiorno.')"><div class="frase-item">Buenos días 🔊</div></div>
-    <div onclick="hablar('Buon pomeriggio.')"><div class="frase-item">Buenas tardes 🔊</div></div>
-    <div onclick="hablar('Buonasera.')"><div class="frase-item">Buenas noches 🔊</div></div>
-    <div onclick="hablar('Ciao.')"><div class="frase-item">Hola / Adiós 🔊</div></div>
-    <div onclick="hablar('Arrivederci.')"><div class="frase-item">Adiós (formal) 🔊</div></div>
-    <div onclick="hablar('Come sta?')"><div class="frase-item">¿Cómo está? 🔊</div></div>
-    <div onclick="hablar('Molto bene, grazie.')"><div class="frase-item">Muy bien, gracias 🔊</div></div>
-    <div onclick="hablar('Mi chiamo...')"><div class="frase-item">Me llamo... 🔊</div></div>
-    <div onclick="hablar('Piacere.')"><div class="frase-item">Encantado 🔊</div></div>
-    <div onclick="hablar('Mi scusi.')"><div class="frase-item">Perdone 🔊</div></div>
-    <div onclick="hablar('Dov\'è il centro?')"><div class="frase-item">¿Dónde está el centro? 🔊</div></div>
-    <div onclick="hablar('Andiamo.')"><div class="frase-item">Vamos 🔊</div></div>
+    <h3 style="color: #007aff; text-align: center; margin-bottom: 5px;">🇮🇹 45 FRASES ÚTILES</h3>
+    <p style="font-size: 0.7rem; text-align: center; color: #777; margin: 0 0 10px 0;">Toca cualquier frase para escuchar su pronunciación</p>
+    
+    <div id="contenedor-frases"></div>
 </div></div>
 
 <script>
@@ -152,22 +116,138 @@
         window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(texto);
         msg.lang = 'it-IT';
-        msg.rate = 0.9;
+        msg.rate = 0.85;
         window.speechSynthesis.speak(msg);
     }
 
-    function actualizarContadores() {
-        const fechaViaje = new Date("2026-06-25T00:00:00");
-        const diff = fechaViaje - new Date();
-        const d = Math.floor(diff / (1000*60*60*24));
-        const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-        const t = d + "d " + h + "h " + m + "m";
-        document.getElementById('count-arturo').innerText = t;
-        document.getElementById('count-otros').innerText = t;
+    const bancoFrases = [
+        { cat: "En los Transportes", esp: "Me equivoqué de tren...", ita: "Ho sbagliato treno..." },
+        { cat: "En los Transportes", esp: "¿En qué vía está el tren...?", ita: "Su quale binario si trova il treno...?" },
+        { cat: "En los Transportes", esp: "¿Dónde está la estación?", ita: "Dove si trova la stazione?" },
+        { cat: "En los Transportes", esp: "Un billete para Roma, por favor", ita: "Un biglietto per Roma, per favore" },
+        { cat: "En los Transportes", esp: "¿A qué hora sale el tren?", ita: "A che ora parte il treno?" },
+        { cat: "En los Transportes", esp: "¿Este tren para en Florencia?", ita: "Questo treno ferma a Firenze?" },
+        { cat: "En los Transportes", esp: "Perdone, ¿está libre este asiento?", ita: "Scusi, è libero questo posto?" },
+        { cat: "En los Transportes", esp: "¿Dónde puedo validar el billete?", ita: "Dove posso convalidare il biglietto?" },
+        
+        { cat: "Bares y Restaurantes", esp: "3 cañas de cerveza, por favor", ita: "Tre birre alla spina, per favore" },
+        { cat: "Bares y Restaurantes", esp: "Mesa para dos, por favor", ita: "Un tavolo per due, per favore" },
+        { cat: "Bares y Restaurantes", esp: "La cuenta, por favor", ita: "Il conto, per favore" },
+        { cat: "Bares y Restaurantes", esp: "¿Tiene opciones vegetarianas?", ita: "Ha opzioni vegetariane?" },
+        { cat: "Bares y Restaurantes", esp: "¿Me trae un poco de agua?", ita: "Mi porta un po' d'acqua?" },
+        { cat: "Bares y Restaurantes", esp: "¿Dónde está el baño?", ita: "Dov'è il bagno?" },
+        
+        { cat: "Compras y Dinero", esp: "¿Cuánto cuesta?", ita: "Quanto costa?" },
+        { cat: "Compras y Dinero", esp: "¿Aceptan tarjeta?", ita: "Accettate carte?" },
+        { cat: "Compras y Dinero", esp: "Es demasiado caro", ita: "È troppo caro" },
+        
+        { cat: "Comunicación", esp: "¿Habla español?", ita: "Parla spagnolo?" },
+        { cat: "Comunicación", esp: "No entiendo", ita: "Non capisco" },
+        { cat: "Comunicación", esp: "¿Puede hablar despacio?", ita: "Può parlare lentamente?" },
+        { cat: "Comunicación", esp: "Me llamo...", ita: "Mi chiamo..." },
+        
+        { cat: "Salud y Urgencias", esp: "Necesito ayuda", ita: "Ho bisogno di aiuto" },
+        { cat: "Salud y Urgencias", esp: "¿Dónde hay una farmacia?", ita: "Dove c'è una farmacia?" },
+        { cat: "Salud y Urgencias", esp: "Me duele la cabeza", ita: "Mi fa male la testa" },
+        { cat: "Salud y Urgencias", esp: "¿Tiene una tirita?", ita: "Ha un cerotto?" },
+        { cat: "Salud y Urgencias", esp: "¡Socorro!", ita: "Aiuto!" },
+        
+        { cat: "Hotel y Alojamiento", esp: "¿Dónde está el hotel?", ita: "Dov'è l'hotel?" },
+        { cat: "Hotel y Alojamiento", esp: "¿Hora del desayuno?", ita: "A che ora è la colazione?" },
+        { cat: "Hotel y Alojamiento", esp: "Llave de la habitación", ita: "La chiave della camera" },
+        { cat: "Hotel y Alojamiento", esp: "¿Hay WiFi?", ita: "C'è il WiFi?" },
+        
+        { cat: "Turismo y Ciudad", esp: "¿Qué me recomienda?", ita: "Cosa mi consiglia?" },
+        { cat: "Turismo y Ciudad", esp: "¿Dónde está la salida?", ita: "Dov'è l'uscita?" },
+        { cat: "Turismo y Ciudad", esp: "¿Dónde está el centro?", ita: "Dov'è il centro?" },
+        { cat: "Turismo y Ciudad", esp: "Vamos", ita: "Andiamo" },
+        
+        { cat: "Cortesía y Saludos", esp: "Muchas gracias", ita: "Grazie mille" },
+        { cat: "Cortesía y Saludos", esp: "De nada", ita: "Prego" },
+        { cat: "Cortesía y Saludos", esp: "Buenos días", ita: "Buongiorno" },
+        { cat: "Cortesía y Saludos", esp: "Buenas tardes", ita: "Buon pomeriggio" },
+        { cat: "Cortesía y Saludos", esp: "Buenas noches", ita: "Buonasera / Buonanotte" },
+        { cat: "Cortesía y Saludos", esp: "Hola / Adiós", ita: "Ciao" },
+        { cat: "Cortesía y Saludos", esp: "Adiós (formal)", ita: "Arrivederci" },
+        { cat: "Cortesía y Saludos", esp: "¿Como está?", ita: "Come sta?" },
+        { cat: "Cortesía y Saludos", esp: "Muy bien, gracias", ita: "Molto bene, grazie" },
+        { cat: "Cortesía y Saludos", esp: "Encantado", ita: "Piacere" },
+        { cat: "Cortesía y Saludos", esp: "Perdone", ita: "Mi scusi" }
+    ];
+
+    function renderizarFrases() {
+        const contenedor = document.getElementById('contenedor-frases');
+        let ultimaCat = "";
+        
+        bancoFrases.forEach(frase => {
+            if (frase.cat !== ultimaCat) {
+                ultimaCat = frase.cat;
+                const titulo = document.createElement('div');
+                titulo.className = 'seccion-titulo';
+                titulo.innerText = `🔹 ${ultimaCat}`;
+                contenedor.appendChild(titulo);
+            }
+            
+            const item = document.createElement('div');
+            item.className = 'frase-item';
+            item.onclick = () => hablar(frase.ita);
+            item.innerHTML = `
+                <div>
+                    <div class="frase-esp">${frase.esp}</div>
+                    <div class="frase-ita">${frase.ita}</div>
+                </div>
+                <div style="font-size:1.1rem; color:#007aff;">🔊</div>
+            `;
+            contenedor.appendChild(item);
+        });
     }
-    setInterval(actualizarContadores, 60000);
+
+    async function actualizarTemperaturas() {
+        const apiKey = 'TU_API_KEY_AQUI'; 
+        // Si no has cambiado la clave, el script no se romperá y mantendrá los valores por defecto del HTML.
+        if (apiKey === 'TU_API_KEY_AQUI') return;
+
+        const ciudades = {
+            'leon': 'Leon,ES', 'valladolid': 'Valladolid,ES', 'madrid': 'Madrid,ES',
+            'verona': 'Verona,IT', 'florencia': 'Florence,IT', 'roma': 'Rome,IT', 'rimini': 'Rimini,IT'
+        };
+
+        for (const [id, city] of Object.entries(ciudades)) {
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+                const data = await response.json();
+                if(data.main && data.main.temp !== undefined) {
+                    document.getElementById(`t-${id}`).innerText = Math.round(data.main.temp);
+                }
+            } catch (e) { console.error("Error obteniendo el clima de " + city); }
+        }
+    }
+
+    function actualizarContadores() {
+        const ahora = new Date();
+        const arturoFecha = new Date("2026-06-30T20:30:00");
+        const otrosFecha = new Date("2026-07-03T20:30:00");
+
+        function calcular(objetivo) {
+            const diff = objetivo - ahora;
+            if (diff <= 0) return "¡Ya!";
+            const d = Math.floor(diff / (1000*60*60*24));
+            const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+            const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+            const s = Math.floor((diff % (1000*60)) / 1000);
+            return `${d}d ${h}h ${m}m ${s}s`;
+        }
+
+        document.getElementById('count-arturo').innerText = calcular(arturoFecha);
+        document.getElementById('count-otros').innerText = calcular(otrosFecha);
+    }
+
+    // Inicializaciones
+    renderizarFrases();
+    // Cambiado a 1000ms (1 segundo) para que la cuenta atrás funcione en tiempo real continuo
+    setInterval(actualizarContadores, 1000);
     actualizarContadores();
+    actualizarTemperaturas();
 </script>
 </body>
 </html>
