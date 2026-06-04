@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacaciones Italia 2026</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; padding: 5px; margin: 0; }
+        .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 15px; border-radius: 15px; width: 90%; max-width: 350px; max-height: 85vh; overflow-y: auto; }
+        .frase-item { padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .close-btn { cursor: pointer; float: right; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+<div id="modal-frases" class="modal" style="display:flex;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="document.getElementById('modal-frases').style.display='none'">✕</span>
+        <h3>🇮🇹 45 Frases Imprescindibles</h3>
+        
+    <div class="frase-item" onclick="hablar('Ho sbagliato treno, il mio era...')">
+        <div><strong>Me equivoqué de tren, el mío era...</strong><br><small style="color:gray;">Ho sbagliato treno, il mio era...</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Potrebbe dirmi su quale binario si trova il treno...?')">
+        <div><strong>¿Podría decirme en qué vía está el tren...?</strong><br><small style="color:gray;">Potrebbe dirmi su quale binario si trova il treno...?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Vorrei tre birre alla spina, per favore.')">
+        <div><strong>Quiero tres cañas de cerveza, por favor.</strong><br><small style="color:gray;">Vorrei tre birre alla spina, per favore.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è la stazione?')">
+        <div><strong>¿Dónde está la estación?</strong><br><small style="color:gray;">Dov'è la stazione?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Un biglietto per Roma, per favore.')">
+        <div><strong>Un billete para Roma, por favor.</strong><br><small style="color:gray;">Un biglietto per Roma, per favore.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('A che ora parte il treno?')">
+        <div><strong>¿A qué hora sale el tren?</strong><br><small style="color:gray;">A che ora parte il treno?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Questo treno ferma a Firenze?')">
+        <div><strong>¿Este tren para en Florencia?</strong><br><small style="color:gray;">Questo treno ferma a Firenze?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Scusi, questo posto è libero?')">
+        <div><strong>Perdone, ¿está libre este asiento?</strong><br><small style="color:gray;">Scusi, questo posto è libero?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dove posso convalidare il biglietto?')">
+        <div><strong>¿Dónde puedo validar el billete?</strong><br><small style="color:gray;">Dove posso convalidare il biglietto?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Vorrei prenotare un tavolo per due.')">
+        <div><strong>Me gustaría reservar una mesa para dos.</strong><br><small style="color:gray;">Vorrei prenotare un tavolo per due.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Il conto, per favore.')">
+        <div><strong>La cuenta, por favor.</strong><br><small style="color:gray;">Il conto, per favore.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Ha opzioni vegetariane?')">
+        <div><strong>¿Tiene opciones vegetarianas?</strong><br><small style="color:gray;">Ha opzioni vegetariane?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Mi può portare dell'acqua?')">
+        <div><strong>¿Me puede traer un poco de agua?</strong><br><small style="color:gray;">Mi può portare dell'acqua?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è il bagno?')">
+        <div><strong>¿Dónde está el baño?</strong><br><small style="color:gray;">Dov'è il bagno?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Quanto costa?')">
+        <div><strong>¿Cuánto cuesta?</strong><br><small style="color:gray;">Quanto costa?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Accettate carta di credito?')">
+        <div><strong>¿Aceptan tarjeta de crédito?</strong><br><small style="color:gray;">Accettate carta di credito?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Parla spagnolo?')">
+        <div><strong>¿Habla español?</strong><br><small style="color:gray;">Parla spagnolo?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Non capisco.')">
+        <div><strong>No entiendo.</strong><br><small style="color:gray;">Non capisco.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Può parlare più lentamente?')">
+        <div><strong>¿Puede hablar más despacio?</strong><br><small style="color:gray;">Può parlare più lentamente?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Ho bisogno di aiuto.')">
+        <div><strong>Necesito ayuda.</strong><br><small style="color:gray;">Ho bisogno di aiuto.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è una farmacia?')">
+        <div><strong>¿Dónde hay una farmacia?</strong><br><small style="color:gray;">Dov'è una farmacia?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Mi fa male la testa.')">
+        <div><strong>Me duele la cabeza.</strong><br><small style="color:gray;">Mi fa male la testa.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Ha un cerotto?')">
+        <div><strong>¿Tiene una tirita?</strong><br><small style="color:gray;">Ha un cerotto?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Aiuto!')">
+        <div><strong>¡Socorro!</strong><br><small style="color:gray;">Aiuto!</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è l'hotel?')">
+        <div><strong>¿Dónde está el hotel?</strong><br><small style="color:gray;">Dov'è l'hotel?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('A che ora è la colazione?')">
+        <div><strong>¿A qué hora es el desayuno?</strong><br><small style="color:gray;">A che ora è la colazione?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('La chiave della camera, per favore.')">
+        <div><strong>La llave de la habitación, por favor.</strong><br><small style="color:gray;">La chiave della camera, per favore.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('C'è il Wi-Fi?')">
+        <div><strong>¿Hay WiFi?</strong><br><small style="color:gray;">C'è il Wi-Fi?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Cosa mi consiglia?')">
+        <div><strong>¿Qué me recomienda?</strong><br><small style="color:gray;">Cosa mi consiglia?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('È troppo caro.')">
+        <div><strong>Es demasiado caro.</strong><br><small style="color:gray;">È troppo caro.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è l'uscita?')">
+        <div><strong>¿Dónde está la salida?</strong><br><small style="color:gray;">Dov'è l'uscita?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Grazie mille.')">
+        <div><strong>Muchas gracias.</strong><br><small style="color:gray;">Grazie mille.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Prego.')">
+        <div><strong>De nada.</strong><br><small style="color:gray;">Prego.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Buongiorno.')">
+        <div><strong>Buenos días.</strong><br><small style="color:gray;">Buongiorno.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Buon pomeriggio.')">
+        <div><strong>Buenas tardes.</strong><br><small style="color:gray;">Buon pomeriggio.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Buonasera.')">
+        <div><strong>Buenas noches.</strong><br><small style="color:gray;">Buonasera.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Ciao.')">
+        <div><strong>Hola.</strong><br><small style="color:gray;">Ciao.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Arrivederci.')">
+        <div><strong>Adiós.</strong><br><small style="color:gray;">Arrivederci.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Come sta?')">
+        <div><strong>¿Cómo está?</strong><br><small style="color:gray;">Come sta?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Molto bene, grazie.')">
+        <div><strong>Muy bien, gracias.</strong><br><small style="color:gray;">Molto bene, grazie.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Mi chiamo...')">
+        <div><strong>Me llamo...</strong><br><small style="color:gray;">Mi chiamo...</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Piacere.')">
+        <div><strong>Encantado.</strong><br><small style="color:gray;">Piacere.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Mi scusi.')">
+        <div><strong>Perdone.</strong><br><small style="color:gray;">Mi scusi.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Dov'è il centro?')">
+        <div><strong>¿Dónde está el centro?</strong><br><small style="color:gray;">Dov'è il centro?</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    <div class="frase-item" onclick="hablar('Andiamo.')">
+        <div><strong>Vamos.</strong><br><small style="color:gray;">Andiamo.</small></div>
+        <div style="font-size:1.2rem;">🔊</div>
+    </div>
+    </div>
+</div>
+
+<script>
+    function hablar(texto) {
+        const msg = new SpeechSynthesisUtterance(texto);
+        msg.lang = 'it-IT';
+        window.speechSynthesis.speak(msg);
+    }
+</script>
+</body>
+</html>

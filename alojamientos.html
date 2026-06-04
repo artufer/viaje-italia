@@ -20,6 +20,8 @@
         .detalles { font-size: 0.9rem; color: #666; margin-bottom: 10px; }
         .acciones { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn-accion { padding: 10px; border-radius: 8px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; flex: 1; min-width: 80px; }
+        /* Estilo estricto para el nuevo botón de guardado automático */
+        .btn-descargar-alo { padding: 10px; border-radius: 8px; text-align: center; font-size: 0.8rem; color: white; font-weight: bold; border: none; cursor: pointer; background-color: #1a5276; }
     </style>
 </head>
 <body>
@@ -39,7 +41,7 @@
 </div>
 
 <script>
-    // Validación de acceso desde index.html[cite: 5]
+    // Validación de acceso desde index.html
     if (sessionStorage.getItem("accesoPermitido") !== "true") {
         window.location.href = "index.html";
     }
@@ -84,9 +86,32 @@
         const contenedor = document.getElementById('info-alojamientos');
         contenedor.innerHTML = "";
         datosAlojamientos[ciudad].forEach(a => {
-            let botonesHTML = a.botones.map(b => `<a href="${b.url}" target="_blank" class="btn-accion" style="background:${b.color}">${b.texto}</a>`).join('');
+            let botonesHTML = a.botones.map(b => {
+                let htmlTemp = `<a href="${b.url}" target="_blank" class="btn-accion" style="background:${b.color}">${b.texto}</a>`;
+                if (!b.url.startsWith('http')) {
+                    htmlTemp += `<button onclick="forzarDescarga('${b.url}')" class="btn-descargar-alo">💾</button>`;
+                }
+                return htmlTemp;
+            }).join('');
             contenedor.innerHTML += `<div class="tarjeta"><div class="info-alo">${a.nombre}</div><div class="detalles">📍 ${a.direccion}</div><div class="acciones">${botonesHTML}</div></div>`;
         });
+    }
+
+    async function forzarDescarga(urlNombre) {
+        try {
+            const respuesta = await fetch(urlNombre);
+            const blob = await respuesta.blob();
+            const urlBlob = window.URL.createObjectURL(blob);
+            const enlaceFalso = document.createElement('a');
+            enlaceFalso.href = urlBlob;
+            enlaceFalso.download = urlNombre;
+            document.body.appendChild(enlaceFalso);
+            enlaceFalso.click();
+            document.body.removeChild(enlaceFalso);
+            window.URL.revokeObjectURL(urlBlob);
+        } catch (error) {
+            window.open(urlNombre, '_blank');
+        }
     }
 </script>
 </body>

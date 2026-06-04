@@ -20,7 +20,7 @@
         .info-vuelo { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-bottom: 5px; }
         .ruta { font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
         .acciones { display: flex; gap: 10px; margin-top: 10px; }
-        .btn-accion { flex: 1; padding: 8px; border-radius: 5px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; }
+        .btn-accion { flex: 1; padding: 8px; border-radius: 5px; text-align: center; font-size: 0.8rem; text-decoration: none; color: white; font-weight: bold; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -77,11 +77,29 @@
                     <div style="font-size:0.85rem; margin-bottom:10px;">${v.lugar}</div>
                     <div class="acciones">
                         <a href="${v.billete}" target="_blank" class="btn-accion" style="background:#007aff">🎫 BILLETE</a>
+                        <button onclick="forzarDescarga('${v.billete}')" class="btn-accion" style="background:#1a5276">💾 DESCARGAR</button>
                         <a href="${v.mapa}" target="_blank" class="btn-accion" style="background:#27ae60">📍 MAPA</a>
                     </div>
                 </div>
             `;
         });
+    }
+
+    async function forzarDescarga(urlNombre) {
+        try {
+            const respuesta = await fetch(urlNombre);
+            const blob = await respuesta.blob();
+            const urlBlob = window.URL.createObjectURL(blob);
+            const enlaceFalso = document.createElement('a');
+            enlaceFalso.href = urlBlob;
+            enlaceFalso.download = urlNombre;
+            document.body.appendChild(enlaceFalso);
+            enlaceFalso.click();
+            document.body.removeChild(enlaceFalso);
+            window.URL.revokeObjectURL(urlBlob);
+        } catch (error) {
+            window.open(urlNombre, '_blank');
+        }
     }
 </script>
 

@@ -20,8 +20,6 @@
         .btn-mapa-verde { background-color: #27ae60; }
         .tabla-entradas { width: 100%; border-collapse: separate; border-spacing: 5px; margin-bottom: 10px; }
         .btn-persona { display: block; width: 100%; padding: 8px 0; background-color: #3498db; color: white; text-align: center; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.75rem; }
-        /* Estilo estricto para el botón de descarga */
-        .btn-descargar { background-color: #1a5276; cursor: pointer; border: none; width: 100%; display: block; padding: 8px 0; color: white; text-align: center; border-radius: 6px; font-weight: bold; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -31,6 +29,7 @@
     
     <h1>ENTRADAS</h1>
 
+    <!-- RÁVENA -->
     <button class="btn-ciudad" onclick="gestionarCiudad('ciudad-ravena')">Rávena</button>
     <div id="ciudad-ravena" class="desplegable-ciudad">
         <button class="btn-monumento" onclick="toggleSolo('r1', 'ciudad-ravena')">San Vitale</button>
@@ -55,7 +54,7 @@
         </div>
         <button class="btn-monumento" onclick="toggleSolo('r5', 'ciudad-ravena')">San Giovanni Evangelista</button>
         <div id="r5" class="contenido-monumento">
-            <p class="descripcion">Esta basílica, con una historia ligada a promesas imperiales, offers una experiencia única de serenidad y solemnidad. Aunque gran parte de su decoración original sufrió los embates de la historia y las guerras, su arquitectura mantiene esa elegancia sobria que caracteriza a las construcciones ravenatas. Al entrar, el ambiente invita a la reflexión, rodeado de restos arqueológicos que cuentan siglos de devoción. Es un sitio fascinante donde la sencillez del diseño actual permite apreciar mejor la grandiosidad del pasado. Sus columnas y capiteles, muchos de ellos reaprovechados de templos más antiguos, narran por sí solos el paso del tiempo sobre este emblemático monumento.</p>
+            <p class="descripcion">Esta basílica, con una historia ligada a promesas imperiales, ofrece una experiencia única de serenidad y solemnidad. Aunque gran parte de su decoración original sufrió los embates de la historia y las guerras, su arquitectura mantiene esa elegancia sobria que caracteriza a las construcciones ravenatas. Al entrar, el ambiente invita a la reflexión, rodeado de restos arqueológicos que cuentan siglos de devoción. Es un sitio fascinante donde la sencillez del diseño actual permite apreciar mejor la grandiosidad del pasado. Sus columnas y capiteles, muchos de ellos reaprovechados de templos más antiguos, narran por sí solos el paso del tiempo sobre este emblemático monumento.</p>
             <a href="https://www.google.com/maps/place/San+Giovanni+Evangelista,+Ravenna/@44.4182841,12.2027964,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df9583079cea1:0x3b8f839e257e7d26!8m2!3d44.4182841!4d12.2053713!16s%2Fm%2F02rgsr4?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-mapa-link btn-mapa-verde">CÓMO LLEGAR</a>
         </div>
         <button class="btn-monumento" onclick="toggleSolo('r6', 'ciudad-ravena')">Tumba de Dante</button>
@@ -71,33 +70,16 @@
 
     </div>
 
+    <!-- FLORENCIA -->
     <button class="btn-ciudad" onclick="gestionarCiudad('ciudad-florencia')">Florencia</button>
     <div id="ciudad-florencia" class="desplegable-ciudad">
         <button class="btn-monumento" onclick="toggleSolo('f1', 'ciudad-florencia')">Brunelleschi Pass</button>
         <div id="f1" class="contenido-monumento">
             <p>Entradas para el pase completo:</p>
             <table class="tabla-entradas">
-                <tr>
-                    <td>Arturo:</td>
-                    <td><a href="brunelleschi_pass_1_Arturo.jpg" target="_blank" class="btn-persona">Entrada</a></td>
-                    <td><button onclick="forzarDescarga('brunelleschi_pass_1_Arturo.jpg')" class="btn-descargar">💾</button></td>
-                    <td><a href="qr_arturo.jpg" target="_blank" class="btn-persona">QR</a></td>
-                    <td><button onclick="forzarDescarga('qr_arturo.jpg')" class="btn-descargar">💾</button></td>
-                </tr>
-                <tr>
-                    <td>Pablo:</td>
-                    <td><a href="brunelleschi_pass_1_Pablo.jpg" target="_blank" class="btn-persona">Entrada</a></td>
-                    <td><button onclick="forzarDescarga('brunelleschi_pass_1_Pablo.jpg')" class="btn-descargar">💾</button></td>
-                    <td><a href="qr_pablo.jpg" target="_blank" class="btn-persona">QR</a></td>
-                    <td><button onclick="forzarDescarga('qr_pablo.jpg')" class="btn-descargar">💾</button></td>
-                </tr>
-                <tr>
-                    <td>Daniel:</td>
-                    <td><a href="brunelleschi_pass_1_Daniel.jpg" target="_blank" class="btn-persona">Entrada</a></td>
-                    <td><button onclick="forzarDescarga('brunelleschi_pass_1_Daniel.jpg')" class="btn-descargar">💾</button></td>
-                    <td><a href="qr_daniel.jpg" target="_blank" class="btn-persona">QR</a></td>
-                    <td><button onclick="forzarDescarga('qr_daniel.jpg')" class="btn-descargar">💾</button></td>
-                </tr>
+                <tr><td>Arturo:</td><td><a href="brunelleschi_pass_1_Arturo.jpg" target="_blank" class="btn-persona">Entrada</a></td><td><a href="qr_arturo.jpg" target="_blank" class="btn-persona">QR</a></td></tr>
+                <tr><td>Pablo:</td><td><a href="brunelleschi_pass_1_Pablo.jpg" target="_blank" class="btn-persona">Entrada</a></td><td><a href="qr_pablo.jpg" target="_blank" class="btn-persona">QR</a></td></tr>
+                <tr><td>Daniel:</td><td><a href="brunelleschi_pass_1_Daniel.jpg" target="_blank" class="btn-persona">Entrada</a></td><td><a href="qr_daniel.jpg" target="_blank" class="btn-persona">QR</a></td></tr>
             </table>
             <p style="text-align: center; font-family: 'Georgia', serif; font-weight: bold; margin-top: 15px;">Cómo llegar a:</p>
             <a href="https://www.google.com/maps/place/Piazza+del+Duomo,+2,+50122+Firenze+FI,+Italia/@43.7734761,11.2566001,3a,75y,187.48h,99.87t/data=!3m7!1e1!3m5!1s42Vzh9mka3qOafkq4O-kfQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-9.868134293965937%26panoid%3D42Vzh9mka3qOafkq4O-kfQ%26yaw%3D187.4796385992011!7i16384!8i8192!4m15!1m8!3m7!1s0x132a5403be363c5b:0xc78649d59eb8932!2sPiazza+del+Duomo,+2,+50122+Firenze+FI,+Italia!3b1!8m2!3d43.7735847!4d11.2565452!16s%2Fg%2F11sk6fwwdx!3m5!1s0x132a5403be363c5b:0xc78649d59eb8932!8m2!3d43.7735847!4d11.2565452!16s%2Fg%2F11sk6fwwdx?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-mapa-link">Cúpula</a>
@@ -121,23 +103,6 @@
         contenedor.querySelectorAll('.contenido-monumento').forEach(el => { if (el.id !== id) el.style.display = 'none'; });
         const el = document.getElementById(id);
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-    }
-
-    async function forzarDescarga(urlNombre) {
-        try {
-            const respuesta = await fetch(urlNombre);
-            const blob = await respuesta.blob();
-            const urlBlob = window.URL.createObjectURL(blob);
-            const enlaceFalso = document.createElement('a');
-            enlaceFalso.href = urlBlob;
-            enlaceFalso.download = urlNombre;
-            document.body.appendChild(enlaceFalso);
-            enlaceFalso.click();
-            document.body.removeChild(enlaceFalso);
-            window.URL.revokeObjectURL(urlBlob);
-        } catch (error) {
-            window.open(urlNombre, '_blank');
-        }
     }
 </script>
 </body>
