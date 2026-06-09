@@ -7,26 +7,53 @@
     <style>
         body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; }
         .main-container { background: #ffffff; padding: 20px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        /* Botón de regreso compacto */
-        .btn-volver { display: block; width: fit-content; text-align: center; margin: 0 auto 20px auto; font-size: 0.8rem; color: white; text-decoration: none; background-color: #7f8c8d; padding: 8px 15px; border-radius: 8px; font-weight: bold; }
+        .nav-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+        .btn-volver { flex: 1; text-align: center; font-size: 0.8rem; color: white; text-decoration: none; background-color: #7f8c8d; padding: 10px; border-radius: 8px; font-weight: bold; }
+        .btn-oficial { flex: 2; text-align: center; font-size: 0.8rem; color: white; text-decoration: none; background-color: #27ae60; padding: 10px; border-radius: 8px; font-weight: bold; }
         .lista-trenes { display: flex; flex-direction: column; gap: 10px; }
-        .btn-tren { padding: 15px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: center; display: flex; justify-content: space-between; align-items: center; }
-        .btn-tren span { font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 5px; }
+        .btn-tren { padding: 15px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: left; display: flex; flex-direction: column; gap: 5px; }
+        .fila-superior { display: flex; justify-content: space-between; align-items: center; }
+        .trayecto { font-size: 0.75rem; color: #dbeafe; font-weight: normal; }
+        .btn-tren span { font-size: 0.7rem; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 5px; }
     </style>
 </head>
 <body>
 
 <div class="main-container">
-    <a href="trenes.html" class="btn-volver">⬅ VOLVER</a>
+    <div class="nav-buttons">
+        <a href="trenes.html" class="btn-volver">⬅ VOLVER</a>
+        <a href="http://www.viaggiatreno.it/infomobilita/index.jsp" class="btn-oficial" target="_blank">🌐 BUSCAR OTROS TRENES</a>
+    </div>
     
     <div class="lista-trenes">
-        <a href="https://www.e656.net/orario/treno/8513.html" class="btn-tren">FR 8513 <span>02/07</span></a>
-        <a href="https://www.e656.net/orario/treno/8900.html" class="btn-tren">ITALO 8900 <span>03/07</span></a>
-        <a href="https://www.e656.net/orario/treno/18111.html" class="btn-tren">REG 18111 <span>03/07</span></a>
-        <a href="https://www.e656.net/orario/treno/1775.html" class="btn-tren">REG 1775 <span>04/07</span></a>
-        <a href="https://www.e656.net/orario/treno/3936.html" class="btn-tren">REG 3936 <span>13/07</span></a>
-        <a href="https://www.e656.net/orario/treno/8951.html" class="btn-tren">ITALO 8951 <span>13/07</span></a>
-        <a href="https://www.e656.net/orario/treno/9907.html" class="btn-tren">ITALO 9907 <span>14/07</span></a>
+        <a href="https://www.e656.net/orario/treno/8513.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">FR 8513 <span>02/07</span></div>
+            <div class="trayecto">VERONA ➔ FIRENZE S.M.N.</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/8900.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">ITALO 8900 <span>03/07</span></div>
+            <div class="trayecto">FIRENZE S.M.N. ➔ BOLOGNA CENTRALE</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/18111.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">REG 18111 <span>03/07</span></div>
+            <div class="trayecto">BOLOGNA CENTRALE ➔ RIMINI MIRAMARE</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/1775.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">REG 1775 <span>04/07</span></div>
+            <div class="trayecto">BOLOGNA CENTRALE ➔ RIMINI</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/3936.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">REG 3936 <span>13/07</span></div>
+            <div class="trayecto">RIMINI ➔ BOLOGNA CENTRALE</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/8951.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">ITALO 8951 <span>13/07</span></div>
+            <div class="trayecto">BRESCIA ➔ BOLOGNA CENTRALE</div>
+        </a>
+        <a href="https://www.e656.net/orario/treno/9907.html" class="btn-tren" target="_blank">
+            <div class="fila-superior">ITALO 9907 <span>14/07</span></div>
+            <div class="trayecto">FIRENZE S.M.N. ➔ ROMA TERMINI</div>
+        </a>
     </div>
 </div>
 
