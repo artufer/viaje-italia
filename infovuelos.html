@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Información Vuelos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; margin: 0; box-sizing: border-box; }
+        .main-container { background: #ffffff; padding: 20px; border-radius: 25px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); box-sizing: border-box; }
+        h1 { font-size: 1.5rem; color: #2c3e50; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        
+        /* Contenedor de vuelos */
+        .info-panel { background: #fff3e0; border: 1px solid #ffcc80; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.85rem; color: #5d4037; }
+        .info-panel div { margin-bottom: 8px; border-bottom: 1px solid #ffe0b2; padding-bottom: 5px; }
+        .info-panel strong { color: #e65100; }
+        .info-panel .naranja { color: #e65100; font-weight: bold; }
+
+        .btn { display: block; width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 12px; font-weight: bold; text-align: center; text-decoration: none; color: white; border: none; cursor: pointer; box-sizing: border-box; font-size: 1rem; }
+        .btn-barajas { background-color: #3498db; }
+        .btn-fiumicino { background-color: #27ae60; }
+        
+        /* Botón volver ajustado */
+        .btn-volver { 
+            display: inline-block; 
+            width: auto; 
+            padding: 8px 16px; 
+            font-size: 0.75rem; 
+            background-color: #95a5a6; 
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+        }
+        .container-volver { text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>INFO VUELOS</h1>
+    
+    <div class="info-panel">
+        <div>BARAJAS - VERONA: consultar <strong>RYR8992</strong></div>
+        <div>BARAJAS - ROMA: consultar <strong>ITY059</strong></div>
+        <div>FIUMICINO - BOLONIA: consultar <strong>AZ1321</strong> <span class="naranja">per BOLOGNA</span></div>
+        <div>FIUMICINO - MADRID: consultar <strong>W46013</strong> <span class="naranja">per MADRID</span></div>
+    </div>
+    
+    <a href="https://www.aena.es/es/infovuelos.html" target="_blank" class="btn btn-barajas">MADRID - BARAJAS</a>
+    <a href="https://wa.me/393489991111" target="_blank" class="btn btn-fiumicino">ROMA - FIUMICINO (CHATBOT)</a>
+    
+    <div class="container-volver">
+        <a href="aviones.html" class="btn btn-volver">⬅ VOLVER AL MENÚ</a>
+    </div>
+</div>
+
+</body>
+</html>
