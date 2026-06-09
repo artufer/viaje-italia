@@ -13,8 +13,10 @@
         .lista-trenes { display: flex; flex-direction: column; gap: 10px; }
         .btn-tren { padding: 15px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: left; display: flex; flex-direction: column; gap: 5px; }
         .fila-superior { display: flex; justify-content: space-between; align-items: center; }
-        .trayecto { font-size: 0.75rem; color: #dbeafe; font-weight: normal; }
-        .btn-tren span { font-size: 0.7rem; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 5px; }
+        .fila-inferior { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; margin-top: 2px; }
+        .trayecto { color: #dbeafe; font-weight: normal; }
+        .destino-label { color: #f1c40f; font-weight: bold; text-align: right; }
+        .info-tiempo { font-size: 0.75rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 5px; white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -27,32 +29,53 @@
     
     <div class="lista-trenes">
         <a href="https://www.e656.net/orario/treno/8513.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">FR 8513 <span>02/07</span></div>
-            <div class="trayecto">VERONA ➔ FIRENZE S.M.N.</div>
+            <div class="fila-superior">FR 8513 <span class="info-tiempo">02/07 - 07:53</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">VERONA ➔ FIRENZE S.M.N.</div>
+                <div class="destino-label">Dest: FIRENZE</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/8900.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">ITALO 8900 <span>03/07</span></div>
-            <div class="trayecto">FIRENZE S.M.N. ➔ BOLOGNA CENTRALE</div>
+            <div class="fila-superior">ITALO 8900 <span class="info-tiempo">03/07 - 07:39</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">FIRENZE ➔ BOLOGNA</div>
+                <div class="destino-label">Dest: VENEZIA S.L.</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/18111.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">REG 18111 <span>03/07</span></div>
-            <div class="trayecto">BOLOGNA CENTRALE ➔ RIMINI MIRAMARE</div>
+            <div class="fila-superior">REG 18111 <span class="info-tiempo">03/07 - 08:39</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">BOLOGNA ➔ RIMINI MIR.</div>
+                <div class="destino-label">Dest: RIMINI</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/1775.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">REG 1775 <span>04/07</span></div>
-            <div class="trayecto">BOLOGNA CENTRALE ➔ RIMINI</div>
+            <div class="fila-superior">REG 1775 <span class="info-tiempo">04/07 - 11:12</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">BOLOGNA ➔ RIMINI</div>
+                <div class="destino-label">Dest: RIMINI</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/3936.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">REG 3936 <span>13/07</span></div>
-            <div class="trayecto">RIMINI ➔ BOLOGNA CENTRALE</div>
+            <div class="fila-superior">REG 3936 <span class="info-tiempo">13/07 - 06:29</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">RIMINI ➔ BOLOGNA</div>
+                <div class="destino-label">Dest: BOLOGNA</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/8951.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">ITALO 8951 <span>13/07</span></div>
-            <div class="trayecto">BRESCIA ➔ BOLOGNA CENTRALE</div>
+            <div class="fila-superior">ITALO 8951 <span class="info-tiempo">13/07 - 08:17</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">BRESCIA ➔ BOLOGNA</div>
+                <div class="destino-label">Dest: NAPOLI</div>
+            </div>
         </a>
         <a href="https://www.e656.net/orario/treno/9907.html" class="btn-tren" target="_blank">
-            <div class="fila-superior">ITALO 9907 <span>14/07</span></div>
-            <div class="trayecto">FIRENZE S.M.N. ➔ ROMA TERMINI</div>
+            <div class="fila-superior">ITALO 9907 <span class="info-tiempo">14/07 - 07:43</span></div>
+            <div class="fila-inferior">
+                <div class="trayecto">FIRENZE ➔ ROMA</div>
+                <div class="destino-label">Dest: ROMA</div>
+            </div>
         </a>
     </div>
 </div>
