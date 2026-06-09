@@ -68,12 +68,6 @@
         const contenedor = document.getElementById('info-trenes');
         contenedor.innerHTML = "";
         
-        // Botón añadido al principio de cada vista de viaje
-        contenedor.innerHTML += `
-            <a href="binarios.html" class="btn-accion" style="background:#e67e22; display:block; margin-bottom:20px; padding:12px; border-radius:10px; text-decoration:none; text-align:center; font-size:1rem; font-weight:bold;">
-                🚉 CONSULTAR BINARIOS (ANDENES)
-            </a>`;
-        
         datosTrenes[usuario].forEach(v => {
             let esMarconi = v.info === "MARCONI EXPRESS";
             let htmlAcciones = esMarconi 
