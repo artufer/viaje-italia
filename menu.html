@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vacaciones Italia 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; padding: 5px; margin: 0; height: 100vh; overflow: hidden; }
+       
+       body { font-family: sans-serif; background-color: #f4f7f9; display: flex; flex-direction: column; align-items: center; padding: 5px; margin: 0; min-height: 100vh; overflow-y: auto; }
+        
+        /* El Reloj y Fecha */
+        .reloj-espectacular { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #ff9800; text-shadow: 0 0 10px #ff9800; background: #fff; padding: 10px; border-radius: 15px; border: 2px solid #ff9800; letter-spacing: 3px; margin-bottom: 5px; text-align: center; width: 90%; max-width: 380px; }
+        .fecha-reloj { font-family: sans-serif; font-size: 0.9rem; color: #555; margin-bottom: 5px; display: block; letter-spacing: normal; text-shadow: none; }
+
         .main-container { background: #fff; padding: 8px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); border: 1px solid #ccc; display: flex; flex-direction: column; gap: 6px; }
         .header { text-align: center; font-weight: 800; font-size: 1.1rem; color: #2c3e50; }
         .data-box { background: #f9f9f9; padding: 5px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
@@ -28,6 +35,12 @@
     </style>
 </head>
 <body>
+
+<div id="reloj-digital" class="reloj-espectacular">
+    <span id="fecha-actual" class="fecha-reloj">Cargando fecha...</span>
+    00:00:00
+</div>
+
 
 <div class="main-container">
     <div class="header">🇮🇹 VACACIONES ITALIA 2026 🇪🇸</div>
@@ -114,6 +127,16 @@
 </div></div>
 
 <script>
+    // --- Lógica del Reloj y Fecha ---
+    function actualizarReloj() {
+        const ahora = new Date();
+        document.getElementById('fecha-actual').innerText = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+        document.getElementById('reloj-digital').lastChild.textContent = ahora.toLocaleTimeString('es-ES', { hour12: false });
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+    // ------------------------
+
     function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
     function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
     
