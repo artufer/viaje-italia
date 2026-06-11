@@ -10,7 +10,7 @@
         .header { text-align: center; font-weight: 800; font-size: 1.1rem; color: #2c3e50; }
         .data-box { background: #f9f9f9; padding: 5px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
         .temp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-        .temp-grid.italy { grid-template-columns: repeat(4, 1fr); }
+        .temp-grid.italy { grid-template-columns: repeat(4, 1fr); margin-top: 2px; }
         .box { background: white; padding: 2px; border-radius: 4px; font-size: 0.6rem; border: 1px solid #ddd; }
         .btn-group-container { background: #f0f0f0; padding: 5px; border-radius: 10px; border: 1px solid #ddd; }
         .grid-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
@@ -34,16 +34,16 @@
     <div class="data-box">
         <div style="font-weight:bold; font-size:0.6rem;">ESPAÑA</div>
         <div class="temp-grid">
-            <div class="box">León<br><span id="t-leon">22</span>°C</div>
-            <div class="box">Vallad.<br><span id="t-valladolid">25</span>°C</div>
-            <div class="box">Madrid<br><span id="t-madrid">28</span>°C</div>
+            <div class="box">León<br><span id="t-leon">-</span>°C</div>
+            <div class="box">Vallad.<br><span id="t-valladolid">-</span>°C</div>
+            <div class="box">Madrid<br><span id="t-madrid">-</span>°C</div>
         </div>
         <div style="font-weight:bold; font-size:0.6rem; margin-top:2px;">ITALIA</div>
         <div class="temp-grid italy">
-            <div class="box">Verona<br><span id="t-verona">29</span>°C</div>
-            <div class="box">Flor.<br><span id="t-florencia">31</span>°C</div>
-            <div class="box">Roma<br><span id="t-roma">32</span>°C</div>
-            <div class="box">Rímini<br><span id="t-rimini">28</span>°C</div>
+            <div class="box">Verona<br><span id="t-verona">-</span>°C</div>
+            <div class="box">Flor.<br><span id="t-florencia">-</span>°C</div>
+            <div class="box">Roma<br><span id="t-roma">-</span>°C</div>
+            <div class="box">Rímini<br><span id="t-rimini">-</span>°C</div>
         </div>
     </div>
     
@@ -88,26 +88,20 @@
     <div class="seccion-titulo">🔹 Aseo (Zip 100ml)</div>
     <ul style="font-size:0.8rem;"><li>Colonia</li></ul>
     <div class="seccion-titulo">🔹 Electrónica y Playa</div>
-    <ul style="font-size:0.8rem;"><li>Cargador de  móvil y Powerbank, Mochila pequeña de cordones, Gafas de sol, Gorra</li></ul>
+    <ul style="font-size:0.8rem;"><li>Cargador de móvil y Powerbank, Mochila pequeña de cordones, Gafas de sol, Gorra</li></ul>
 </div></div>
 
 <div id="modal-sos" class="modal"><div class="modal-content">
     <span class="close-btn" onclick="cerrarModal('modal-sos')">✕</span>
     <h3 style="color: #e63946; text-align: center;">☎️ EMERGENCIAS</h3>
-  <p style="font-size: 1.9rem; text-align: center; text-decoration: underline;">
-    <b>Consulados de España</b>
-</p>
-    <p style="font-size: 0.9rem; text-align: center;"><b>Bolonia:</b> teléfono </b><a href="tel:+39051234567" style="color: #0056b3; font-weight: bold;">+39 051 234 567</a></p>
-     <p style="font-size: 0.9rem; text-align: center;">Dirección:<a href="https://www.google.com/maps/place/Via+Santo+Stefano,+43,+40124+Bologna+BO,+Italia/@44.4895696,11.3477738,17z/data=!3m1!4b1!4m6!3m5!1s0x477fd4c782b330f3:0x192d2bf5292d34a9!8m2!3d44.4895696!4d11.3503487!16s%2Fg%2F11lmlpygrr?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" <a style="color: #e65100; font-weight: bold;"> Via Santo Stefano, 43</a></p><br>
-
-    <p style="font-size: 0.9rem; text-align: center;"><b>Roma</b> teléfono </b><a href="tel:+39066871401" style="color: #0056b3; font-weight: bold;">+39 051 234 567</a></p>
-    <p style="font-size: 0.9rem; text-align: center;">Dirección:<a href="https://www.google.com/maps/place/Via+di+Campo+Marzio,+34,+00186+Roma+RM,+Italia/@41.903091,12.4750812,16z/data=!3m1!4b1!4m6!3m5!1s0x132f605150871383:0x886cc51325d1ad15!8m2!3d41.903091!4d12.4776561!16s%2Fg%2F11nnk_cl5z?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: #e65100; font-weight: bold;"> Via Campo Marzio, 34.</a></p><br>
-
-    <p style="font-size: 1.9rem; text-align: center; text-decoration: underline;">
-    <b>Embajada de España</b>
-
-    <p style="font-size: 0.9rem; text-align: center;"><b>Roma: </b>teléfono </b><a href="tel:+39066840401" style="color: #0056b3; font-weight: bold;">+39 06 684 0401</a></p>
-     <p style="font-size: 0.9rem; text-align: center;">Dirección:<a href="https://www.google.com/maps/place/Piazza+Navona,+106%2F109,+00186+Roma+RM,+Italia/@41.8980883,12.4709129,17z/data=!3m1!4b1!4m5!3m4!1s0x132f604feca33b9b:0xa238d1a73852f476!8m2!3d41.8980883!4d12.4734878?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: #e65100; font-weight: bold;"> Piazza Navona, 106/109</a></p>
+    <p style="font-size: 1.5rem; text-align: center; text-decoration: underline;"><b>Consulados de España</b></p>
+    <p style="font-size: 0.9rem; text-align: center;"><b>Bolonia:</b> teléfono <a href="tel:+39051234567" style="color: #0056b3; font-weight: bold;">+39 051 234 567</a></p>
+    <p style="font-size: 0.9rem; text-align: center;">Dirección: <a href="https://maps.google.com" target="_blank" style="color: #e65100; font-weight: bold;">Via Santo Stefano, 43</a></p><br>
+    <p style="font-size: 0.9rem; text-align: center;"><b>Roma:</b> teléfono <a href="tel:+39066871401" style="color: #0056b3; font-weight: bold;">+39 051 234 567</a></p>
+    <p style="font-size: 0.9rem; text-align: center;">Dirección: <a href="https://maps.google.com" target="_blank" style="color: #e65100; font-weight: bold;">Via Campo Marzio, 34.</a></p><br>
+    <p style="font-size: 1.5rem; text-align: center; text-decoration: underline;"><b>Embajada de España</b></p>
+    <p style="font-size: 0.9rem; text-align: center;"><b>Roma:</b> teléfono <a href="tel:+39066840401" style="color: #0056b3; font-weight: bold;">+39 06 684 0401</a></p>
+    <p style="font-size: 0.9rem; text-align: center;">Dirección: <a href="https://maps.google.com" target="_blank" style="color: #e65100; font-weight: bold;">Piazza Navona, 106/109</a></p>
     <hr>
     <p style="font-size: 0.85rem; text-align: center; color: #555;">Número Único de Emergencias Europeo: <b>112</b></p>
 </div></div>
@@ -116,7 +110,6 @@
     <span class="close-btn" onclick="cerrarModal('modal-frases')">✕</span>
     <h3 style="color: #007aff; text-align: center; margin-bottom: 5px;">🇮🇹 45 FRASES ÚTILES</h3>
     <p style="font-size: 0.7rem; text-align: center; color: #777; margin: 0 0 10px 0;">Toca cualquier frase para escuchar su pronunciación</p>
-    
     <div id="contenedor-frases"></div>
 </div></div>
 
@@ -141,39 +134,32 @@
         { cat: "En los Transportes", esp: "¿Este tren para en Florencia?", ita: "Questo treno ferma a Firenze?" },
         { cat: "En los Transportes", esp: "Perdone, ¿está libre este asiento?", ita: "Scusi, è libero questo posto?" },
         { cat: "En los Transportes", esp: "¿Dónde puedo validar el billete?", ita: "Dove posso convalidare il biglietto?" },
-        
         { cat: "Bares y Restaurantes", esp: "3 cañas de cerveza, por favor", ita: "Tre birre alla spina, per favore" },
         { cat: "Bares y Restaurantes", esp: "Mesa para dos, por favor", ita: "Un tavolo per due, per favore" },
         { cat: "Bares y Restaurantes", esp: "La cuenta, por favor", ita: "Il conto, per favore" },
         { cat: "Bares y Restaurantes", esp: "¿Tiene opciones vegetarianas?", ita: "Ha opzioni vegetariane?" },
         { cat: "Bares y Restaurantes", esp: "¿Me trae un poco de agua?", ita: "Mi porta un po' d'acqua?" },
         { cat: "Bares y Restaurantes", esp: "¿Dónde está el baño?", ita: "Dov'è il bagno?" },
-        
         { cat: "Compras y Dinero", esp: "¿Cuánto cuesta?", ita: "Quanto costa?" },
         { cat: "Compras y Dinero", esp: "¿Aceptan tarjeta?", ita: "Accettate carte?" },
         { cat: "Compras y Dinero", esp: "Es demasiado caro", ita: "È troppo caro" },
-        
         { cat: "Comunicación", esp: "¿Habla español?", ita: "Parla spagnolo?" },
         { cat: "Comunicación", esp: "No entiendo", ita: "Non capisco" },
         { cat: "Comunicación", esp: "¿Puede hablar despacio?", ita: "Può parlare lentamente?" },
         { cat: "Comunicación", esp: "Me llamo...", ita: "Mi chiamo..." },
-        
         { cat: "Salud y Urgencias", esp: "Necesito ayuda", ita: "Ho bisogno di aiuto" },
         { cat: "Salud y Urgencias", esp: "¿Dónde hay una farmacia?", ita: "Dove c'è una farmacia?" },
         { cat: "Salud y Urgencias", esp: "Me duele la cabeza", ita: "Mi fa male la testa" },
         { cat: "Salud y Urgencias", esp: "¿Tiene una tirita?", ita: "Ha un cerotto?" },
         { cat: "Salud y Urgencias", esp: "¡Socorro!", ita: "Aiuto!" },
-        
         { cat: "Hotel y Alojamiento", esp: "¿Dónde está el hotel?", ita: "Dov'è l'hotel?" },
         { cat: "Hotel y Alojamiento", esp: "¿Hora del desayuno?", ita: "A che ora è la colazione?" },
         { cat: "Hotel y Alojamiento", esp: "Llave de la habitación", ita: "La chiave della camera" },
         { cat: "Hotel y Alojamiento", esp: "¿Hay WiFi?", ita: "C'è il WiFi?" },
-        
         { cat: "Turismo y Ciudad", esp: "¿Qué me recomienda?", ita: "Cosa mi consiglia?" },
         { cat: "Turismo y Ciudad", esp: "¿Dónde está la salida?", ita: "Dov'è l'uscita?" },
         { cat: "Turismo y Ciudad", esp: "¿Dónde está el centro?", ita: "Dov'è il centro?" },
         { cat: "Turismo y Ciudad", esp: "Vamos", ita: "Andiamo" },
-        
         { cat: "Cortesía y Saludos", esp: "Muchas gracias", ita: "Grazie mille" },
         { cat: "Cortesía y Saludos", esp: "De nada", ita: "Prego" },
         { cat: "Cortesía y Saludos", esp: "Buenos días", ita: "Buongiorno" },
@@ -190,7 +176,6 @@
     function renderizarFrases() {
         const contenedor = document.getElementById('contenedor-frases');
         let ultimaCat = "";
-        
         bancoFrases.forEach(frase => {
             if (frase.cat !== ultimaCat) {
                 ultimaCat = frase.cat;
@@ -199,31 +184,20 @@
                 titulo.innerText = `🔹 ${ultimaCat}`;
                 contenedor.appendChild(titulo);
             }
-            
             const item = document.createElement('div');
             item.className = 'frase-item';
             item.onclick = () => hablar(frase.ita);
-            item.innerHTML = `
-                <div>
-                    <div class="frase-esp">${frase.esp}</div>
-                    <div class="frase-ita">${frase.ita}</div>
-                </div>
-                <div style="font-size:1.1rem; color:#007aff;">🔊</div>
-            `;
+            item.innerHTML = `<div><div class="frase-esp">${frase.esp}</div><div class="frase-ita">${frase.ita}</div></div><div style="font-size:1.1rem; color:#007aff;">🔊</div>`;
             contenedor.appendChild(item);
         });
     }
 
     async function actualizarTemperaturas() {
-        const apiKey = 'TU_API_KEY_AQUI'; 
-        // Si no has cambiado la clave, el script no se romperá y mantendrá los valores por defecto del HTML.
-        if (apiKey === 'TU_API_KEY_AQUI') return;
-
+        const apiKey = '37150b2133cac72acb7e2da35135ad6a'; 
         const ciudades = {
             'leon': 'Leon,ES', 'valladolid': 'Valladolid,ES', 'madrid': 'Madrid,ES',
             'verona': 'Verona,IT', 'florencia': 'Florence,IT', 'roma': 'Rome,IT', 'rimini': 'Rimini,IT'
         };
-
         for (const [id, city] of Object.entries(ciudades)) {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
@@ -231,7 +205,7 @@
                 if(data.main && data.main.temp !== undefined) {
                     document.getElementById(`t-${id}`).innerText = Math.round(data.main.temp);
                 }
-            } catch (e) { console.error("Error obteniendo el clima de " + city); }
+            } catch (e) { console.error("Error clima: " + city); }
         }
     }
 
@@ -239,7 +213,6 @@
         const ahora = new Date();
         const arturoFecha = new Date("2026-06-30T20:30:00");
         const otrosFecha = new Date("2026-07-03T20:30:00");
-
         function calcular(objetivo) {
             const diff = objetivo - ahora;
             if (diff <= 0) return "¡Ya!";
@@ -249,17 +222,14 @@
             const s = Math.floor((diff % (1000*60)) / 1000);
             return `${d}d ${h}h ${m}m ${s}s`;
         }
-
         document.getElementById('count-arturo').innerText = calcular(arturoFecha);
         document.getElementById('count-otros').innerText = calcular(otrosFecha);
     }
 
-    // Inicializaciones
     renderizarFrases();
-    // Cambiado a 1000ms (1 segundo) para que la cuenta atrás funcione en tiempo real continuo
+    actualizarTemperaturas();
     setInterval(actualizarContadores, 1000);
     actualizarContadores();
-    actualizarTemperaturas();
 </script>
 </body>
 </html>
