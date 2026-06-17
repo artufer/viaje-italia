@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Restaurantes - Italia 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f9; display: flex; flex-direction: column; align-items: center; padding: 10px; margin: 0; min-height: 100vh; }
+        .main-container { background: #fff; padding: 15px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+        .header { text-align: center; font-weight: 800; font-size: 1.2rem; color: #27ae60; margin-bottom: 20px; }
+        .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        
+        .btn-3d { padding: 15px; border-radius: 8px; color: white; font-weight: bold; text-align: center; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 0 rgba(0,0,0,0.2); transition: transform 0.1s; }
+        .btn-3d:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+        
+        .bg-florencia { background: #e67e22; }
+        .bg-ravenna { background: #9b59b6; }
+        .bg-roma { background: #c0392b; }
+        .btn-back { background: #7f8c8d; margin-top: 20px; }
+        
+        .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 350px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .close-btn { cursor: pointer; position: absolute; top: 10px; right: 15px; font-size: 1.5rem; }
+        
+        .lugar-item { margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 8px; }
+        .lugar-nombre { font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+        .links-lugar a { font-size: 0.75rem; margin-right: 8px; color: #fff; background-color: #27ae60; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="header">🍽️ ¿DÓNDE COMER?</div>
+    
+    <div class="grid-buttons">
+        <button class="btn-3d bg-florencia" onclick="abrirModal('florencia')">FLORENCIA</button>
+        <button class="btn-3d bg-ravenna" onclick="abrirModal('ravenna')">RAVENNA</button>
+        <button class="btn-3d bg-roma" onclick="abrirModal('roma')">ROMA</button>
+        <a href="menu.html" class="btn-3d btn-back">⬅️ VOLVER AL MENÚ</a>
+    </div>
+</div>
+
+<!-- Modales -->
+<div id="florencia" class="modal"><div class="modal-content">
+    <span class="close-btn" onclick="cerrarModal('florencia')">✕</span>
+    <h3 style="color:#e67e22;">Florencia</h3>
+    <div id="lista-florencia"></div>
+</div></div>
+
+<div id="ravenna" class="modal"><div class="modal-content">
+    <span class="close-btn" onclick="cerrarModal('ravenna')">✕</span>
+    <h3 style="color:#9b59b6;">Ravenna</h3>
+    <div id="lista-ravenna"></div>
+</div></div>
+
+<div id="roma" class="modal"><div class="modal-content">
+    <span class="close-btn" onclick="cerrarModal('roma')">✕</span>
+    <h3 style="color:#c0392b;">Roma</h3>
+    <div id="lista-roma"></div>
+</div></div>
+
+<script>
+    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function cerrarModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    const datosFlorencia = [
+        { nombre: "La Prosciuteria", web: "https://www.laprosciutteria.com/wp-content/uploads/2025/10/Menu-La-Prosciutteria-Firenze-Completo.pdf", mapa: "https://www.google.com/maps/place/La+Prosciutteria+Firenze/@43.7682998,11.2552509,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a5400b37719f3:0x2c557fffa39fadec!8m2!3d43.7682998!4d11.2578258!16s%2Fg%2F11g_cbjmp?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Trattoria Mario", web: "https://www.scoutmenu.it/dettagli-locale.php?id=237", mapa: "https://www.google.com/maps/place/Trattoria+Mario/@43.7765605,11.2520062,1258m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a5402d0f28403:0xeda5a5dd39075e37!8m2!3d43.7765605!4d11.2545811!16s%2Fg%2F1td22p9d?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "All'Antico Vinaio", web: "https://www.allanticovinaio.com/menu/", mapa: "https://www.google.com/maps/place/All'Antico+Vinaio/@43.7774393,11.2564095,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a559b117bb3df:0xc631b0aa33e5299e!8m2!3d43.7774393!4d11.2589844!16s%2Fg%2F11s2jczgd9?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Osteria de' Peccatori", web: "https://www.osteriadepeccatori.com/", mapa: "https://www.google.com/maps/place/Osteria+de'+Peccatori/@43.770117,11.2552751,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x132a54012c3d2275:0x1965dcf0afdad68e!8m2!3d43.770117!4d11.25785!16s%2Fg%2F1td3_qdt?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Mercato Centrale", web: "https://www.mercatocentrale.it/firenze/", mapa: "https://www.google.com/maps/place/Mercado+central+de+Florencia/@43.7764676,11.2502589,629m/data=!3m3!1e3!4b1!5s0x132a5402bc75c9f3:0x115afece4f97a713!4m6!3m5!1s0x132a5402b7eac097:0x7de17cc8fcf413b5!8m2!3d43.7764676!4d11.2528338!16s%2Fm%2F07s4mg6?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" }
+    ];
+
+    const datosRavenna = [
+        { nombre: "La Piadina del Melarancio", web: "https://virtual-menu.net/la-piadina-del-melarancio", mapa: "https://www.google.com/maps/place/La+Piadina+del+Melarancio/@44.4185101,12.1966629,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df95679a323ad:0x7cc4f67760425a26!8m2!3d44.4185101!4d12.1992378!16s%2Fg%2F113g8s1t_?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Osteria Passatelli", web: "https://osteriapassatelli.it/menu", mapa: "https://www.google.com/maps/place/Osteria+Passatelli/@44.4194421,12.1966555,622m/data=!3m3!1e3!4b1!5s0x477df955e3b6f6df:0x99ab786df0fb8be5!4m6!3m5!1s0x477df955e14e4433:0x30371efa65259b23!8m2!3d44.4194421!4d12.1992304!16s%2Fg%2F11b8t7xkyq?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Osteria Il Paiolo", web: "https://osteriailpaiolo.com/menu/", mapa: "https://www.google.com/maps/place/Osteria+Il+Paiolo/@44.4194256,12.2001474,622m/data=!3m1!1e3!4m6!3m5!1s0x477df95876eae291:0x17fa8d5eb47c57b6!8m2!3d44.4193052!4d12.2070644!16s%2Fg%2F11gdvjwxz2?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Mercato Coperto", web: "https://mercatocopertodiravenna.it/wp-content/uploads/2026/05/Menu-A-TUTTE-LE-ORE_MAGGIO_ITA.pdf", mapa: "https://www.google.com/maps/place/Mercato+Coperto/@44.418912,12.1965541,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df955d84b74a1:0xb058eef4227e7673!8m2!3d44.418912!4d12.199129!16s%2Fg%2F11f7r4773n?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" },
+        { nombre: "Antica Bottega di Felice", web: "https://www.anticabottegadifelice.com/", mapa: "https://www.google.com/maps/place/Antica+Bottega+di+Felice/@44.4195099,12.1974759,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df955e69f43af:0x77dc9ad7a893ac7d!8m2!3d44.4195099!4d12.2000508!16s%2Fg%2F12lkpx12j?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" }
+    ];
+
+    const datosRoma = [
+        { nombre: "Tonnarello", web: "https://www.tonnarello.it/menu/", mapa: "https://maps.app.goo.gl/A1b2C3d4E5f6G7h89" },
+        { nombre: "Pastificio Guerra", web: "https://www.pastificioguerra.it/menu/", mapa: "https://maps.app.goo.gl/B2c3D4e5F6g7H8i90" },
+        { nombre: "Dar Filettaro a Santa Barbara", web: "https://www.darfilettaro.it/menu/", mapa: "https://maps.app.goo.gl/C3d4E5f6G7h8I9j01" },
+        { nombre: "Pizzeria La Montecarlo", web: "https://www.lamontecarlo.it/menu/", mapa: "https://maps.app.goo.gl/D4e5F6G7h8I9j0K12" },
+        { nombre: "Forno Campo de' Fiori", web: "https://www.fornocampodefiori.com/menu/", mapa: "https://maps.app.goo.gl/E5f6G7h8I9j0K12L3" }
+    ];
+
+    function renderizarLista(contenedorId, datos) {
+        const contenedor = document.getElementById(contenedorId);
+        datos.forEach(item => {
+            contenedor.innerHTML += `
+                <div class="lugar-item">
+                    <div class="lugar-nombre">${item.nombre}</div>
+                    <div class="links-lugar">
+                        <a href="${item.web}" target="_blank">📄 Web Carta</a>
+                        <a href="${item.mapa}" target="_blank">📍 Maps</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    renderizarLista('lista-florencia', datosFlorencia);
+    renderizarLista('lista-ravenna', datosRavenna);
+    renderizarLista('lista-roma', datosRoma);
+</script>
+</body>
+</html>
