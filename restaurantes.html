@@ -16,7 +16,6 @@
         
         .bg-florencia { background: #e67e22; }
         .bg-ravenna { background: #9b59b6; }
-        .bg-roma { background: #c0392b; }
         .btn-back { background: #7f8c8d; margin-top: 20px; }
         
         .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
@@ -36,7 +35,6 @@
     <div class="grid-buttons">
         <button class="btn-3d bg-florencia" onclick="abrirModal('florencia')">FLORENCIA</button>
         <button class="btn-3d bg-ravenna" onclick="abrirModal('ravenna')">RAVENNA</button>
-        <button class="btn-3d bg-roma" onclick="abrirModal('roma')">ROMA</button>
         <a href="menu.html" class="btn-3d btn-back">⬅️ VOLVER AL MENÚ</a>
     </div>
 </div>
@@ -52,12 +50,6 @@
     <span class="close-btn" onclick="cerrarModal('ravenna')">✕</span>
     <h3 style="color:#9b59b6;">Ravenna</h3>
     <div id="lista-ravenna"></div>
-</div></div>
-
-<div id="roma" class="modal"><div class="modal-content">
-    <span class="close-btn" onclick="cerrarModal('roma')">✕</span>
-    <h3 style="color:#c0392b;">Roma</h3>
-    <div id="lista-roma"></div>
 </div></div>
 
 <script>
@@ -80,14 +72,6 @@
         { nombre: "Antica Bottega di Felice", web: "https://www.anticabottegadifelice.com/", mapa: "https://www.google.com/maps/place/Antica+Bottega+di+Felice/@44.4195099,12.1974759,622m/data=!3m2!1e3!4b1!4m6!3m5!1s0x477df955e69f43af:0x77dc9ad7a893ac7d!8m2!3d44.4195099!4d12.2000508!16s%2Fg%2F12lkpx12j?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D" }
     ];
 
-    const datosRoma = [
-        { nombre: "Tonnarello", web: "https://www.tonnarello.it/menu/", mapa: "https://maps.app.goo.gl/A1b2C3d4E5f6G7h89" },
-        { nombre: "Pastificio Guerra", web: "https://www.pastificioguerra.it/menu/", mapa: "https://maps.app.goo.gl/B2c3D4e5F6g7H8i90" },
-        { nombre: "Dar Filettaro a Santa Barbara", web: "https://www.darfilettaro.it/menu/", mapa: "https://maps.app.goo.gl/C3d4E5f6G7h8I9j01" },
-        { nombre: "Pizzeria La Montecarlo", web: "https://www.lamontecarlo.it/menu/", mapa: "https://maps.app.goo.gl/D4e5F6G7h8I9j0K12" },
-        { nombre: "Forno Campo de' Fiori", web: "https://www.fornocampodefiori.com/menu/", mapa: "https://maps.app.goo.gl/E5f6G7h8I9j0K12L3" }
-    ];
-
     function renderizarLista(contenedorId, datos) {
         const contenedor = document.getElementById(contenedorId);
         datos.forEach(item => {
@@ -105,7 +89,6 @@
 
     renderizarLista('lista-florencia', datosFlorencia);
     renderizarLista('lista-ravenna', datosRavenna);
-    renderizarLista('lista-roma', datosRoma);
 </script>
 </body>
 </html>
